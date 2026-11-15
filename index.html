@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
   <title>SICIBINAGA • Bento SuperApp Dashboard — SMPN 3 Bangil</title>
-  <meta name="description" content="Dashboard Portal Resmi Aplikasi SICIBINAGA (TKA Ready) SMP Negeri 3 Bangil. Akses Kelas 7, Kelas 8, dan Kelas 9 dengan UI Bento Modern, Kuis HOTS AI, Cek Kesiapan CBT, dan Asisten Suara AI." />
+  <meta name="description" content="Dashboard Portal Resmi Aplikasi SICIBINAGA (TKA Ready) SMP Negeri 3 Bangil. Akses Kelas 7, Kelas 8, dan Kelas 9 dengan UI Bento Modern, Video Tutorial Terintegrasi, Kuis HOTS AI, Cek Kesiapan CBT, dan Asisten Suara AI." />
   <meta name="theme-color" content="#0d4738" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -12,7 +12,7 @@
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" href="logo-sicibinaga.png" />
 
-  <!-- Google Fonts: Plus Jakarta Sans, Space Grotesk &Righteous/Fredoka for Chunky Brand -->
+  <!-- Google Fonts: Plus Jakarta Sans, Space Grotesk & Fredoka for Chunky Brand -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- DECORATIVE GEOMETRIC OUTER BACKDROP ACCENTS -->
+  <!-- DECORATIVE GEOMETRIC OUTER BACKDROP ACCENTS (DESKTOP ONLY) -->
   <div class="geo-stripe stripe-top-left" aria-hidden="true"></div>
   <div class="geo-stripe stripe-bottom-left" aria-hidden="true"></div>
   <div class="geo-ring ring-right" aria-hidden="true"></div>
@@ -32,10 +32,10 @@
   <!-- MAIN FRAMED BENTO APP SHELL -->
   <div class="bento-app-shell" id="beranda">
 
-    <!-- 1. TOP BARBR-STYLE HEADER -->
+    <!-- 1. TOP BARBR-STYLE HEADER (PROPORTIONAL ON MOBILE & DESKTOP) -->
     <header class="bento-topbar">
       <div class="topbar-left">
-        <a href="#" class="brand-cluster" aria-label="Beranda SICIBINAGA">
+        <a href="#beranda" class="brand-cluster" aria-label="Beranda SICIBINAGA">
           <img src="logo-sicibinaga.png" alt="Logo SICIBINAGA" class="brand-chunky-logo" />
           <div class="brand-chunky-text">
             <div class="brand-chunky-row">
@@ -61,7 +61,7 @@
         </button>
 
         <!-- Squircle Button 2: Deep Emerald Search / Command Palette (Ctrl+K) -->
-        <button type="button" class="squircle-btn btn-squircle-emerald" onclick="openCommandPalette()" title="Cari Cepat Rombel 7A–9H atau Fitur (Ctrl + K)">
+        <button type="button" class="squircle-btn btn-squircle-emerald" onclick="openCommandPalette()" title="Cari Cepat Rombel 7A–9H, Video Tutorial, atau Fitur (Ctrl + K)">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
 
@@ -134,6 +134,10 @@
                 <i class="fa-solid fa-thumbtack" style="color:#f97316;"></i>
                 <span id="pinnedClassLabel">Pin Rombel</span>
               </button>
+              <a href="#video-tutorial" class="pill-dropdown-btn pill-tutorial-shortcut" onclick="playClickSound()" title="Tonton 4 Video Tutorial Penggunaan SICIBINAGA">
+                <i class="fa-brands fa-youtube" style="color:#ef4444;"></i>
+                <span>Tutorial Video</span>
+              </a>
               <div class="pill-dropdown-btn clock-pill-top">
                 <span class="dot-live-green"></span>
                 <span id="liveClockWib">--:-- WIB</span>
@@ -193,13 +197,15 @@
 
             <!-- Right Overview Summary & Description -->
             <div class="overview-summary-col">
-              <div class="summary-head-pill">
-                <span class="summary-icon-orange"><i class="fa-solid fa-chart-simple"></i></span>
-                <span class="summary-head-title">SICIBINAGA Overview</span>
+              <div class="overview-top-meta">
+                <div class="summary-head-pill">
+                  <span class="summary-icon-orange"><i class="fa-solid fa-chart-simple"></i></span>
+                  <span class="summary-head-title">SICIBINAGA Overview</span>
+                </div>
+                <span class="metric-Delta-pill">+100% Ready</span>
               </div>
 
               <div class="summary-big-metric">
-                <span class="metric-Delta-pill">+100% Ready</span>
                 <div class="metric-hero-val" id="heroMainMetric">24 Rombel</div>
               </div>
 
@@ -362,6 +368,160 @@
 
       </div>
 
+      <!-- ================= MIDDLE ROW: INTEGRATED YOUTUBE VIDEO TUTORIAL STUDIO WIDGET ================= -->
+      <section class="bento-card card-video-studio" id="video-tutorial" aria-label="Pusat Video Tutorial Penggunaan Aplikasi SICIBINAGA">
+        <div class="video-studio-header">
+          <div class="vs-title-cluster">
+            <span class="vs-badge-icon"><i class="fa-brands fa-youtube"></i></span>
+            <div>
+              <div class="vs-title-row">
+                <h2 class="bento-title-emerald">Studio Video Tutorial SICIBINAGA</h2>
+                <span class="vs-count-pill">4 Panduan Utuh</span>
+              </div>
+              <p class="vs-sub-desc">Panduan resmi langkah demi langkah cara login akun hingga pengerjaan LMS, Ujian CBT, dan Live Arena Quiz</p>
+            </div>
+          </div>
+
+          <!-- Quick Step Filter Pills (Mobile Horizontal Scrollable) -->
+          <div class="vs-step-pills" role="tablist" aria-label="Pilih Video Tutorial">
+            <button type="button" class="vs-step-chip active" data-vid-index="0" onclick="selectTutorialVideo(0)">
+              <i class="fa-solid fa-key"></i> <span>1. Login Akun</span>
+            </button>
+            <button type="button" class="vs-step-chip" data-vid-index="1" onclick="selectTutorialVideo(1)">
+              <i class="fa-solid fa-book-open-reader"></i> <span>2. Kelas LMS</span>
+            </button>
+            <button type="button" class="vs-step-chip" data-vid-index="2" onclick="selectTutorialVideo(2)">
+              <i class="fa-solid fa-laptop-file"></i> <span>3. Ujian CBT</span>
+            </button>
+            <button type="button" class="vs-step-chip" data-vid-index="3" onclick="selectTutorialVideo(3)">
+              <i class="fa-solid fa-gamepad"></i> <span>4. Live Arena</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Video Studio Split Layout: Left/Top Main Player + Right/Bottom Interactive Playlist -->
+        <div class="video-studio-body">
+          <!-- Main Embedded Player Column -->
+          <div class="vs-player-column">
+            <div class="vs-frame-shell" id="vsFrameShell">
+              <iframe
+                id="tutorialYoutubeIframe"
+                src="https://www.youtube.com/embed/-qMBiGZ7oR4?rel=0&modestbranding=1&playsinline=1"
+                title="TUTORIAL LOGIN AKUN SICIBINAGA (USERNAME + PASSWORD)"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+                loading="lazy"
+              ></iframe>
+            </div>
+
+            <!-- Active Video Info & Action Controls -->
+            <div class="vs-now-playing-bar">
+              <div class="vs-np-meta">
+                <div class="vs-np-badges">
+                  <span class="vs-tag-step" id="activeVideoStepBadge">Langkah 1 dari 4 • YouTube Shorts</span>
+                  <span class="vs-tag-duration" id="activeVideoDurationBadge"><i class="fa-regular fa-clock"></i> Panduan Cepat</span>
+                </div>
+                <h3 class="vs-np-title" id="activeVideoTitle">TUTORIAL LOGIN AKUN SICIBINAGA (USERNAME + PASSWORD)</h3>
+                <p class="vs-np-desc" id="activeVideoDesc">Cara masuk ke portal jenjang kelas SICIBINAGA menggunakan Username dan Password akun siswa dengan benar.</p>
+              </div>
+
+              <div class="vs-np-actions">
+                <div class="vs-nav-prevnext">
+                  <button type="button" class="btn-vs-nav" onclick="prevTutorialVideo()" title="Video Sebelumnya">
+                    <i class="fa-solid fa-backward-step"></i>
+                  </button>
+                  <button type="button" class="btn-vs-nav" onclick="nextTutorialVideo()" title="Video Selanjutnya">
+                    <i class="fa-solid fa-forward-step"></i>
+                  </button>
+                </div>
+                <a
+                  href="https://youtube.com/shorts/-qMBiGZ7oR4"
+                  id="activeVideoExternalBtn"
+                  target="_blank"
+                  rel="noopener"
+                  class="btn-vs-youtube"
+                  onclick="playClickSound()"
+                >
+                  <i class="fa-brands fa-youtube"></i>
+                  <span>Buka di YouTube</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive 4-Video Playlist Column -->
+          <div class="vs-playlist-column" id="tutorialPlaylistContainer">
+            <!-- Video Item 1: Login Akun -->
+            <article class="vs-playlist-card active" data-vid-index="0" onclick="selectTutorialVideo(0)">
+              <div class="vsp-thumb-wrap">
+                <img src="https://i.ytimg.com/vi/-qMBiGZ7oR4/hqdefault.jpg" alt="Thumbnail Tutorial Login Akun SICIBINAGA" loading="lazy" />
+                <span class="vsp-play-overlay"><i class="fa-solid fa-play"></i></span>
+                <span class="vsp-format-badge badge-shorts">SHORTS</span>
+              </div>
+              <div class="vsp-content">
+                <div class="vsp-top-row">
+                  <span class="vsp-step-num">VIDEO 01 • AKSES MASUK</span>
+                  <span class="vsp-playing-indicator"><i class="fa-solid fa-volume-high"></i> Diputar</span>
+                </div>
+                <h4 class="vsp-title">TUTORIAL LOGIN AKUN SICIBINAGA (USERNAME + PASSWORD)</h4>
+                <p class="vsp-sub">Panduan masuk akun siswa di portal kelas dengan Username &amp; Password.</p>
+              </div>
+            </article>
+
+            <!-- Video Item 2: Pengerjaan LMS -->
+            <article class="vs-playlist-card" data-vid-index="1" onclick="selectTutorialVideo(1)">
+              <div class="vsp-thumb-wrap">
+                <img src="https://i.ytimg.com/vi/H8kwynV-aq0/hqdefault.jpg" alt="Thumbnail Tutorial Pengerjaan LMS SICIBINAGA" loading="lazy" />
+                <span class="vsp-play-overlay"><i class="fa-solid fa-play"></i></span>
+                <span class="vsp-format-badge">FULL HD</span>
+              </div>
+              <div class="vsp-content">
+                <div class="vsp-top-row">
+                  <span class="vsp-step-num">VIDEO 02 • KELAS ONLINE</span>
+                  <span class="vsp-playing-indicator"><i class="fa-solid fa-volume-high"></i> Diputar</span>
+                </div>
+                <h4 class="vsp-title">TUTORIAL PENGERJAAN LMS (KELAS ONLINE) APLIKASI SICIBINAGA</h4>
+                <p class="vsp-sub">Alur belajar konstruktif 5 langkah: materi, flashcard 3D, AI Tutor &amp; kuis.</p>
+              </div>
+            </article>
+
+            <!-- Video Item 3: Ujian CBT -->
+            <article class="vs-playlist-card" data-vid-index="2" onclick="selectTutorialVideo(2)">
+              <div class="vsp-thumb-wrap">
+                <img src="https://i.ytimg.com/vi/6OAgxNdDHqI/hqdefault.jpg" alt="Thumbnail Tutorial Pengerjaan Ujian CBT SICIBINAGA" loading="lazy" />
+                <span class="vsp-play-overlay"><i class="fa-solid fa-play"></i></span>
+                <span class="vsp-format-badge">FULL HD</span>
+              </div>
+              <div class="vsp-content">
+                <div class="vsp-top-row">
+                  <span class="vsp-step-num">VIDEO 03 • UJIAN RESMI</span>
+                  <span class="vsp-playing-indicator"><i class="fa-solid fa-volume-high"></i> Diputar</span>
+                </div>
+                <h4 class="vsp-title">TUTORIAL PENGERJAAN UJIAN CBT APLIKASI SICIBINAGA</h4>
+                <p class="vsp-sub">Cara input token ujian, aturan Fullscreen Anti-Cheat &amp; 6 tipe soal TKA.</p>
+              </div>
+            </article>
+
+            <!-- Video Item 4: Live Arena (Game) Quis -->
+            <article class="vs-playlist-card" data-vid-index="3" onclick="selectTutorialVideo(3)">
+              <div class="vsp-thumb-wrap">
+                <img src="https://i.ytimg.com/vi/kvkWpvvrJ3M/hqdefault.jpg" alt="Thumbnail Tutorial Live Arena Game Quis SICIBINAGA" loading="lazy" />
+                <span class="vsp-play-overlay"><i class="fa-solid fa-play"></i></span>
+                <span class="vsp-format-badge">FULL HD</span>
+              </div>
+              <div class="vsp-content">
+                <div class="vsp-top-row">
+                  <span class="vsp-step-num">VIDEO 04 • GAMIFIKASI</span>
+                  <span class="vsp-playing-indicator"><i class="fa-solid fa-volume-high"></i> Diputar</span>
+                </div>
+                <h4 class="vsp-title">TUTORIAL PENGERJAAN LIVE ARENA (GAME) QUIS APLIKASI SICIBINAGA</h4>
+                <p class="vsp-sub">Cara gabung PIN Room turnamen kuis interaktif, raih XP &amp; puncak klasemen.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <!-- ================= BOTTOM ROW (3 BENTO CARDS) ================= -->
       <div class="bento-row-bottom" id="fitur-interaktif">
 
@@ -404,7 +564,7 @@
             <div id="warmupQuizStage" class="warmup-bento-stage"></div>
           </div>
 
-          <!-- PANE 2: PRE-CBT DEVICE SCANNER (STYLED LIKE TOP BARBER'S LIST!) -->
+          <!-- PANE 2: PRE-CBT DEVICE SCANNER -->
           <div class="hub-bento-pane hidden" id="tab-scanner">
             <div class="specialist-list">
               <div class="spec-row">
@@ -469,7 +629,7 @@
           </div>
         </section>
 
-        <!-- BOTTOM-MIDDLE CARD: INDEKS PERFORMA & SKOR XP (STYLED LIKE REVENUE SUMMARY WAVE CHART) -->
+        <!-- BOTTOM-MIDDLE CARD: INDEKS PERFORMA & SKOR XP (WAVE CHART) -->
         <section class="bento-card card-wave-summary" aria-label="Ringkasan Skor XP dan Kesiapan">
           <div class="bento-card-header">
             <h2 class="bento-title-emerald">Indeks Kesiapan &amp; XP</h2>
@@ -501,10 +661,8 @@
                     <stop offset="100%" stop-color="#f97316" stop-opacity="0.0" />
                   </linearGradient>
                 </defs>
-                <!-- Area under curve filled with vertical hatch lines -->
                 <path d="M0,95 C25,65 45,65 70,80 C95,95 115,35 145,45 C170,55 185,30 210,55 C235,80 255,40 285,60 C300,70 310,65 320,75 L320,110 L0,110 Z" fill="url(#waveFade)" />
                 <path d="M0,95 C25,65 45,65 70,80 C95,95 115,35 145,45 C170,55 185,30 210,55 C235,80 255,40 285,60 C300,70 310,65 320,75 L320,110 L0,110 Z" fill="url(#hatchPattern)" />
-                <!-- Smooth Orange Stroke Line -->
                 <path d="M0,95 C25,65 45,65 70,80 C95,95 115,35 145,45 C170,55 185,30 210,55 C235,80 255,40 285,60 C300,70 310,65 320,75" fill="none" stroke="#ea580c" stroke-width="3" stroke-linecap="round" />
               </svg>
               <div class="wave-x-labels">
@@ -519,27 +677,27 @@
           </div>
         </section>
 
-        <!-- BOTTOM-RIGHT CARD: LAYANAN & MODUL INTI (VIBRANT ORANGE CARD LIKE "TOP SERVICES") -->
+        <!-- BOTTOM-RIGHT CARD: LAYANAN & MODUL INTI -->
         <section class="bento-card card-orange-services" aria-label="Layanan Utama Ekosistem SICIBINAGA">
           <h2 class="services-card-title">Layanan &amp; Modul Inti</h2>
 
           <div class="services-pills-stack">
-            <button type="button" class="service-frosted-pill" onclick="toggleAiChat(true); sendQuickPrompt('Bagaimana cara login dan aturan keamanan Anti-Cheat saat ujian CBT?');">
+            <button type="button" class="service-frosted-pill" onclick="selectTutorialVideo(2, true)">
               <span class="srv-icon-circle"><i class="fa-solid fa-shield-halved"></i></span>
               <span class="srv-name">Ujian CBT Anti-Cheat</span>
-              <span class="srv-count-badge"><i class="fa-solid fa-layer-group"></i> 6 Tipe</span>
+              <span class="srv-count-badge"><i class="fa-solid fa-play"></i> Video CBT</span>
             </button>
 
-            <button type="button" class="service-frosted-pill" onclick="toggleAiChat(true); sendQuickPrompt('Jelaskan 5 langkah belajar di LMS Konstruktif SICIBINAGA!');">
+            <button type="button" class="service-frosted-pill" onclick="selectTutorialVideo(1, true)">
               <span class="srv-icon-circle"><i class="fa-solid fa-book-open-reader"></i></span>
               <span class="srv-name">LMS Konstruktif</span>
-              <span class="srv-count-badge"><i class="fa-solid fa-shoe-prints"></i> 5 Tahap</span>
+              <span class="srv-count-badge"><i class="fa-solid fa-play"></i> Video LMS</span>
             </button>
 
-            <button type="button" class="service-frosted-pill" onclick="toggleAiChat(true); sendQuickPrompt('Bagaimana cara mengikuti Live Arena Quiz dan meningkatkan Level/Badge?');">
+            <button type="button" class="service-frosted-pill" onclick="selectTutorialVideo(3, true)">
               <span class="srv-icon-circle"><i class="fa-solid fa-trophy"></i></span>
               <span class="srv-name">Live Arena &amp; Badge</span>
-              <span class="srv-count-badge"><i class="fa-solid fa-medal"></i> 16 Badge</span>
+              <span class="srv-count-badge"><i class="fa-solid fa-play"></i> Video Quiz</span>
             </button>
 
             <button type="button" class="service-frosted-pill" onclick="toggleAiChat(true)">
@@ -568,7 +726,7 @@
 
   </div>
 
-  <!-- FLOATING CAPSULE WIDGET: TANYA AI SICIBINAGA (WITH VOICE & TTS) -->
+  <!-- FLOATING CAPSULE WIDGET: TANYA AI SICIBINAGA (DESKTOP & TABLET) -->
   <button type="button" class="ai-capsule-widget" id="aiCapsuleBtn" onclick="toggleAiChat(true)" aria-label="Buka Asisten Tanya AI SICIBINAGA">
     <span class="ai-capsule-Orb">
       <i class="fa-solid fa-wand-magic-sparkles"></i>
@@ -580,19 +738,23 @@
     </span>
   </button>
 
-  <!-- MOBILE SMARTPHONE BOTTOM NAVIGATION BAR -->
+  <!-- MOBILE SMARTPHONE BOTTOM NAVIGATION BAR (5 PROPORTIONAL ITEMS) -->
   <nav class="mobile-bottom-nav" aria-label="Navigasi Smartphone">
     <a href="#beranda" class="mnav-item active" onclick="setActiveMobileNav(this)">
       <i class="fa-solid fa-table-columns"></i>
-      <span>Dashboard</span>
+      <span>Beranda</span>
     </a>
     <a href="#pilih-jenjang" class="mnav-item" onclick="setActiveMobileNav(this)">
       <i class="fa-solid fa-layer-group"></i>
-      <span>Portal Kelas</span>
+      <span>Kelas</span>
+    </a>
+    <a href="#video-tutorial" class="mnav-item" onclick="setActiveMobileNav(this)">
+      <i class="fa-brands fa-youtube"></i>
+      <span>Tutorial</span>
     </a>
     <a href="#fitur-interaktif" class="mnav-item" onclick="setActiveMobileNav(this); switchInteractiveTab('tab-warmup');">
       <i class="fa-solid fa-brain"></i>
-      <span>HOTS &amp; Cek</span>
+      <span>HOTS</span>
     </a>
     <button type="button" class="mnav-item mnav-ai" onclick="toggleAiChat(true)">
       <div class="mnav-ai-badge">
@@ -636,6 +798,9 @@
         <button type="button" class="ai-chip" onclick="sendQuickPrompt('Apa itu aplikasi SICIBINAGA dan bagaimana pembagian link kelasnya?')">
           ✨ Apa itu SICIBINAGA?
         </button>
+        <button type="button" class="ai-chip" onclick="sendQuickPrompt('Bagaimana cara login akun SICIBINAGA dengan username dan password?')">
+          🔑 Cara Login Akun
+        </button>
         <button type="button" class="ai-chip" onclick="sendQuickPrompt('Bagaimana cara login dan aturan keamanan Anti-Cheat saat ujian CBT?')">
           🛡️ Cara &amp; Aturan Ujian CBT
         </button>
@@ -644,9 +809,6 @@
         </button>
         <button type="button" class="ai-chip" onclick="sendQuickPrompt('Bagaimana cara mengikuti Live Arena Quiz dan meningkatkan Level/Badge?')">
           🏆 Cara Ikut Live Arena
-        </button>
-        <button type="button" class="ai-chip" onclick="sendQuickPrompt('Bagaimana cara Guru mengelola Bank Soal HOTS AI, saklar ujian, dan Live Monitoring?')">
-          👨‍🏫 Panduan Panel Guru
         </button>
       </div>
 
@@ -675,7 +837,7 @@
     <div class="cmd-palette-box">
       <div class="cmd-input-wrap">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="cmdSearchInput" placeholder="Ketik kelas (misal: 8A, 9C), fitur (CBT, HOTS, Ping), atau pertanyaan..." oninput="filterCommandList(this.value)" autocomplete="off" />
+        <input type="text" id="cmdSearchInput" placeholder="Ketik kelas (misal: 8A, 9C), tutorial, fitur (CBT, HOTS), atau pertanyaan..." oninput="filterCommandList(this.value)" autocomplete="off" />
         <button type="button" class="btn-cmd-esc" onclick="closeCommandPalette()">ESC</button>
       </div>
       <div class="cmd-results-list" id="cmdResultsList"></div>
