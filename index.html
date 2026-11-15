@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>SICIBINAGA • Portal Terpadu LMS Konstruktif, CBT Anti-Cheat &amp; AI TKA Ready — SMPN 3 Bangil</title>
+  <meta name="description" content="Portal Resmi Ekosistem Pembelajaran Digital Terpadu SICIBINAGA (TKA Ready) SMP Negeri 3 Bangil. Akses terpisah per jenjang Kelas 7, Kelas 8, dan Kelas 9 dengan arsitektur Multi-Database & Multi-Engine AI." />
+  <meta name="theme-color" content="#064e3b" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <!-- Google Fonts: Plus Jakarta Sans & Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+
+  <!-- FontAwesome 6.5 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- TOP AMBIENT GLOW & BATIK ACCENT -->
+  <div class="ambient-bg-glow glow-emerald"></div>
+  <div class="ambient-bg-glow glow-gold"></div>
+
+  <!-- ANNOUNCEMENT TOP STRIP -->
+  <div class="top-announcement-bar">
+    <div class="container top-announcement-inner">
+      <div class="announcement-left">
+        <span class="pulse-dot-emerald"></span>
+        <span><strong>ARSITEKTUR MULTI-SERVER AKTIF:</strong> Database Spreadsheet, Supabase Realtime &amp; API AI Terisolasi Penuh per Jenjang Kelas (Zero-Bottleneck)</span>
+      </div>
+      <div class="announcement-right">
+        <span id="live-clock-header"><i class="fa-regular fa-clock"></i> Memuat waktu...</span>
+        <span class="divider-dot">•</span>
+        <a href="#panduan-domain" class="top-bar-link"><i class="fa-solid fa-globe"></i> Integrasi Domain <b>sicibinaga.my.id</b></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- STICKY GLASS NAVBAR -->
+  <header class="site-navbar" id="siteNavbar">
+    <div class="container navbar-inner">
+      <a href="#" class="brand-identity" aria-label="Beranda SICIBINAGA">
+        <div class="brand-logo-frame">
+          <img src="assets/logo-sicibinaga.png" alt="Logo Resmi SICIBINAGA TKA Ready" class="brand-logo-img" />
+        </div>
+        <div class="brand-text-wrap">
+          <div class="brand-title-row">
+            <span class="brand-name">SICIBINAGA</span>
+            <span class="brand-tka-pill">TKA READY</span>
+          </div>
+          <span class="brand-subtitle">SMP Negeri 3 Bangil • Smart EdTech Ecosystem</span>
+        </div>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Navigasi Utama">
+        <a href="#pilih-jenjang" class="nav-link active-nav">Portal Kelas 7–9</a>
+        <a href="#fitur-unggulan" class="nav-link">Ekosistem Fitur</a>
+        <a href="#arsitektur-sistem" class="nav-link">Arsitektur 3 Server</a>
+        <a href="#panduan-domain" class="nav-link">Domain sicibinaga.my.id</a>
+        <a href="#faq-panduan" class="nav-link">Panduan &amp; FAQ</a>
+      </nav>
+
+      <div class="navbar-actions">
+        <button type="button" class="btn-theme-toggle" id="btnThemeToggle" onclick="toggleColorTheme()" title="Ubah Mode Terang / Gelap">
+          <i class="fa-solid fa-moon" id="themeToggleIcon"></i>
+        </button>
+        <button type="button" class="btn-quick-finder" onclick="openQuickClassFinderModal()">
+          <i class="fa-solid fa-bolt"></i>
+          <span>Pilih Kelas Cepat</span>
+        </button>
+        <button type="button" class="btn-mobile-menu" id="btnMobileMenu" onclick="toggleMobileDrawer()" aria-label="Buka Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- MOBILE DRAWER -->
+    <div class="mobile-nav-drawer hidden" id="mobileNavDrawer">
+      <a href="#pilih-jenjang" onclick="closeMobileDrawer()"><i class="fa-solid fa-layer-group"></i> Portal Jenjang Kelas 7, 8 &amp; 9</a>
+      <a href="#fitur-unggulan" onclick="closeMobileDrawer()"><i class="fa-solid fa-cubes"></i> Ekosistem LMS, CBT &amp; Live Arena</a>
+      <a href="#arsitektur-sistem" onclick="closeMobileDrawer()"><i class="fa-solid fa-server"></i> Arsitektur Multi-Database &amp; AI</a>
+      <a href="#panduan-domain" onclick="closeMobileDrawer()"><i class="fa-solid fa-network-wired"></i> Konfigurasi Domain sicibinaga.my.id</a>
+      <a href="#faq-panduan" onclick="closeMobileDrawer()"><i class="fa-solid fa-circle-question"></i> Panduan Akses &amp; Bantuan</a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <div class="container hero-grid">
+      <!-- Left Column: Copywriting & Quick Actions -->
+      <div class="hero-content">
+        <div class="hero-eyebrow-pill">
+          <span class="eyebrow-badge">RESMI • SMPN 3 BANGIL</span>
+          <span class="eyebrow-text">Platform Pembelajaran Konstruktif, Live Arena &amp; Asesmen CBT</span>
+        </div>
+
+        <h1 class="hero-headline">
+          Satu Gerbang Cerdas Menuju <span class="text-gradient-gold-emerald">Tiga Ekosistem Digital</span> Jenjang SMP.
+        </h1>
+
+        <p class="hero-description">
+          Selamat datang di portal utama <strong>SICIBINAGA (TKA Ready)</strong>. Untuk menjamin kecepatan akses tinggi dan stabilitas 100% saat ribuan siswa belajar maupun ujian serentak, sistem dibagi ke dalam <strong>3 Klaster Server Mandiri (Kelas 7, Kelas 8, dan Kelas 9)</strong> dengan Database Spreadsheet, Supabase Realtime, dan Engine AI yang terisolasi penuh.
+        </p>
+
+        <!-- Direct Quick Jump Pills -->
+        <div class="hero-cta-group">
+          <a href="#pilih-jenjang" class="btn-hero-primary">
+            <i class="fa-solid fa-rocket"></i>
+            <span>Masuk Sesuai Jenjang Kelas</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+          <button type="button" class="btn-hero-secondary" onclick="openPortalPreviewModal('8')">
+            <i class="fa-solid fa-expand"></i>
+            <span>Buka Portal Dalam Layar Penuh</span>
+          </button>
+        </div>
+
+        <!-- Quick Rombel Selector Bar (7A-9H) -->
+        <div class="quick-rombel-box">
+          <div class="quick-rombel-header">
+            <span><i class="fa-solid fa-compass" style="color:var(--gold-500);"></i> <strong>Pintasan Rombel Cepat:</strong> Pilih kelasmu untuk langsung diarahkan ke server yang tepat</span>
+          </div>
+          <div class="quick-rombel-controls">
+            <select id="quickRombelSelect" class="rombel-select-input" aria-label="Pilih Rombongan Belajar">
+              <option value="">-- Pilih Rombel Kelas Kamu (7A s.d. 9H) --</option>
+              <optgroup label="🌱 Jenjang Kelas 7 (Server 1 - Emerald)">
+                <option value="7|7A">Kelas 7A — Server Kelas 7</option>
+                <option value="7|7B">Kelas 7B — Server Kelas 7</option>
+                <option value="7|7C">Kelas 7C — Server Kelas 7</option>
+                <option value="7|7D">Kelas 7D — Server Kelas 7</option>
+                <option value="7|7E">Kelas 7E — Server Kelas 7</option>
+                <option value="7|7F">Kelas 7F — Server Kelas 7</option>
+                <option value="7|7G">Kelas 7G — Server Kelas 7</option>
+                <option value="7|7H">Kelas 7H — Server Kelas 7</option>
+              </optgroup>
+              <optgroup label="👑 Jenjang Kelas 8 (Server 2 - Royal Amber)">
+                <option value="8|8A">Kelas 8A — Server Kelas 8</option>
+                <option value="8|8B">Kelas 8B — Server Kelas 8</option>
+                <option value="8|8C">Kelas 8C — Server Kelas 8</option>
+                <option value="8|8D">Kelas 8D — Server Kelas 8</option>
+                <option value="8|8E">Kelas 8E — Server Kelas 8</option>
+                <option value="8|8F">Kelas 8F — Server Kelas 8</option>
+                <option value="8|8G">Kelas 8G — Server Kelas 8</option>
+                <option value="8|8H">Kelas 8H — Server Kelas 8</option>
+              </optgroup>
+              <optgroup label="🚀 Jenjang Kelas 9 (Server 3 - Sapphire TKA)">
+                <option value="9|9A">Kelas 9A — Server Kelas 9</option>
+                <option value="9|9B">Kelas 9B — Server Kelas 9</option>
+                <option value="9|9C">Kelas 9C — Server Kelas 9</option>
+                <option value="9|9D">Kelas 9D — Server Kelas 9</option>
+                <option value="9|9E">Kelas 9E — Server Kelas 9</option>
+                <option value="9|9F">Kelas 9F — Server Kelas 9</option>
+                <option value="9|9G">Kelas 9G — Server Kelas 9</option>
+                <option value="9|9H">Kelas 9H — Server Kelas 9</option>
+              </optgroup>
+            </select>
+            <button type="button" class="btn-rombel-go" onclick="launchFromRombelSelect()">
+              <span>Buka Server</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: 3D Emblem Showcase & Live Cluster Telemetry -->
+      <div class="hero-visual-stage">
+        <div class="hero-emblem-card">
+          <div class="emblem-glow-ring"></div>
+          <div class="emblem-top-tag">
+            <span><i class="fa-solid fa-shield-halved"></i> OFFICIAL APPLICATION EMBLEM</span>
+            <span class="status-online-chip"><span class="dot"></span> 3 KLASTER ONLINE</span>
+          </div>
+
+          <div class="emblem-showcase-center">
+            <img src="assets/logo-sicibinaga.png" alt="Logo 3D SICIBINAGA TKA Ready" class="hero-logo-3d-main" />
+          </div>
+
+          <div class="emblem-caption-box">
+            <div class="emblem-caption-title">SICIBINAGA • TKA READY</div>
+            <div class="emblem-caption-sub">Sistem CBT Interaktif, Bina Akademik &amp; Gamifikasi AI</div>
+          </div>
+
+          <!-- Floating Cluster Status Pills -->
+          <div class="cluster-mini-telemetry">
+            <a href="https://sicibinaga7.vercel.app" target="_blank" rel="noopener" class="telemetry-pill pill-k7" title="Buka Server Kelas 7">
+              <span class="t-dot"></span>
+              <div>
+                <div class="t-lbl">KLASTER KELAS 7</div>
+                <div class="t-url">sicibinaga7.vercel.app</div>
+              </div>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+            <a href="https://sicibinaga8.vercel.app" target="_blank" rel="noopener" class="telemetry-pill pill-k8" title="Buka Server Kelas 8">
+              <span class="t-dot"></span>
+              <div>
+                <div class="t-lbl">KLASTER KELAS 8</div>
+                <div class="t-url">sicibinaga8.vercel.app</div>
+              </div>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+            <a href="https://sicibinaga9.vercel.app" target="_blank" rel="noopener" class="telemetry-pill pill-k9" title="Buka Server Kelas 9">
+              <span class="t-dot"></span>
+              <div>
+                <div class="t-lbl">KLASTER KELAS 9</div>
+                <div class="t-url">sicibinaga9.vercel.app</div>
+              </div>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY METRICS STRIP -->
+  <section class="metrics-strip-section">
+    <div class="container">
+      <div class="metrics-grid">
+        <div class="metric-item">
+          <div class="metric-icon"><i class="fa-solid fa-server"></i></div>
+          <div>
+            <div class="metric-value">3 Klaster Mandiri</div>
+            <div class="metric-label">Isolasi Database &amp; API per Jenjang</div>
+          </div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-icon"><i class="fa-solid fa-users-rectangle"></i></div>
+          <div>
+            <div class="metric-value">24 Rombel (7A–9H)</div>
+            <div class="metric-label">Kapasitas Ribuan Siswa Serentak</div>
+          </div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-icon"><i class="fa-solid fa-robot"></i></div>
+          <div>
+            <div class="metric-value">3x Kuota AI Groq</div>
+            <div class="metric-label">Tutor Sokratik &amp; Generator HOTS</div>
+          </div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-icon"><i class="fa-solid fa-shield-check"></i></div>
+          <div>
+            <div class="metric-value">Anti-Cheat Lock</div>
+            <div class="metric-label">Fullscreen CBT &amp; Live Monitoring</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN PORTAL SELECTION: 3 JENJANG KELAS -->
+  <section class="portal-selection-section" id="pilih-jenjang">
+    <div class="container">
+      <div class="section-header-center">
+        <span class="section-eyebrow"><i class="fa-solid fa-compass"></i> PORTAL AKSES UTAMA PER JENJANG</span>
+        <h2 class="section-title">Pilih Jenjang Kelas untuk Masuk ke Aplikasi</h2>
+        <p class="section-desc">
+          Setiap jenjang kelas memiliki server aplikasi, database nilai, dan ruang belajar masing-masing. Klik <strong>"Masuk Portal Kelas"</strong> untuk membuka di tab baru, atau gunakan <strong>"Buka di Layar Ini"</strong> untuk mengerjakan langsung di halaman ini.
+        </p>
+      </div>
+
+      <div class="grade-portals-grid">
+        <!-- CARD KELAS 7 -->
+        <article class="grade-portal-card theme-k7" data-grade="7">
+          <div class="card-top-ribbon">
+            <span class="ribbon-cluster-tag"><i class="fa-solid fa-seedling"></i> KLASTER SERVER 01 • EMERALD</span>
+            <span class="ribbon-status-live"><span class="live-dot"></span> ONLINE</span>
+          </div>
+
+          <div class="card-Hero-head">
+            <div class="grade-badge-box">
+              <img src="assets/logo-sicibinaga.png" alt="Logo Kelas 7" class="card-mini-logo" />
+              <span class="grade-num">7</span>
+            </div>
+            <div>
+              <span class="grade-subtitle">JENJANG FONDASI &amp; EKSPLORASI</span>
+              <h3 class="grade-title">SICIBINAGA Kelas 7</h3>
+              <div class="grade-domain-chip">
+                <i class="fa-solid fa-link"></i>
+                <span>sicibinaga7.vercel.app</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="grade-summary">
+            Dirancang khusus untuk transisi dan penguatan fondasi literasi-numerasi siswa baru Kelas 7 dengan modul 5 langkah konstruktif dan kuis interaktif ramah pengguna.
+          </p>
+
+          <div class="rombel-pills-box">
+            <div class="rombel-pills-title">Cakupan Rombongan Belajar:</div>
+            <div class="rombel-pills-row">
+              <span>7A</span><span>7B</span><span>7C</span><span>7D</span><span>7E</span><span>7F</span><span>7G</span><span>7H</span>
+            </div>
+          </div>
+
+          <ul class="architecture-specs-list">
+            <li>
+              <i class="fa-solid fa-table"></i>
+              <span><strong>Backend &amp; Bank Soal:</strong> Google Spreadsheet Khusus Kelas 7</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-bolt"></i>
+              <span><strong>Realtime Engine:</strong> Supabase PostgreSQL Cluster Kelas 7</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              <span><strong>Integrasi AI:</strong> Dedicated API Key AI Tutor &amp; HOTS Kelas 7</span>
+            </li>
+          </ul>
+
+          <div class="card-actions-stack">
+            <a href="https://sicibinaga7.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-portal-launch btn-k7" onclick="saveLastVisitedGrade('7')">
+              <i class="fa-solid fa-right-to-bracket"></i>
+              <span>Masuk Portal Kelas 7</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+            <div class="card-secondary-actions">
+              <button type="button" class="btn-portal-embed" onclick="openPortalPreviewModal('7')">
+                <i class="fa-solid fa-display"></i> Buka di Layar Ini
+              </button>
+              <button type="button" class="btn-portal-copy" onclick="copyPortalLink('https://sicibinaga7.vercel.app', 'Kelas 7')">
+                <i class="fa-regular fa-copy"></i> Salin Link
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD KELAS 8 -->
+        <article class="grade-portal-card theme-k8 featured-grade-card" data-grade="8">
+          <div class="card-top-ribbon">
+            <span class="ribbon-cluster-tag"><i class="fa-solid fa-crown"></i> KLASTER SERVER 02 • ROYAL AMBER</span>
+            <span class="ribbon-status-live"><span class="live-dot"></span> ONLINE</span>
+          </div>
+
+          <div class="card-Hero-head">
+            <div class="grade-badge-box">
+              <img src="assets/logo-sicibinaga.png" alt="Logo Kelas 8" class="card-mini-logo" />
+              <span class="grade-num">8</span>
+            </div>
+            <div>
+              <span class="grade-subtitle">JENJANG PENALARAN KRITIS &amp; AKM</span>
+              <h3 class="grade-title">SICIBINAGA Kelas 8</h3>
+              <div class="grade-domain-chip">
+                <i class="fa-solid fa-link"></i>
+                <span>sicibinaga8.vercel.app</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="grade-summary">
+            Pusat akselerasi kompetensi analitis, latihan ANBK/AKM Literasi-Numerasi, turnamen sinkron Live Arena, dan asesmen CBT terpadu bagi seluruh siswa Kelas 8.
+          </p>
+
+          <div class="rombel-pills-box">
+            <div class="rombel-pills-title">Cakupan Rombongan Belajar:</div>
+            <div class="rombel-pills-row">
+              <span>8A</span><span>8B</span><span>8C</span><span>8D</span><span>8E</span><span>8F</span><span>8G</span><span>8H</span>
+            </div>
+          </div>
+
+          <ul class="architecture-specs-list">
+            <li>
+              <i class="fa-solid fa-table"></i>
+              <span><strong>Backend &amp; Bank Soal:</strong> Google Spreadsheet Khusus Kelas 8</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-bolt"></i>
+              <span><strong>Realtime Engine:</strong> Supabase PostgreSQL Cluster Kelas 8</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              <span><strong>Integrasi AI:</strong> Dedicated API Key AI Tutor &amp; HOTS Kelas 8</span>
+            </li>
+          </ul>
+
+          <div class="card-actions-stack">
+            <a href="https://sicibinaga8.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-portal-launch btn-k8" onclick="saveLastVisitedGrade('8')">
+              <i class="fa-solid fa-right-to-bracket"></i>
+              <span>Masuk Portal Kelas 8</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+            <div class="card-secondary-actions">
+              <button type="button" class="btn-portal-embed" onclick="openPortalPreviewModal('8')">
+                <i class="fa-solid fa-display"></i> Buka di Layar Ini
+              </button>
+              <button type="button" class="btn-portal-copy" onclick="copyPortalLink('https://sicibinaga8.vercel.app', 'Kelas 8')">
+                <i class="fa-regular fa-copy"></i> Salin Link
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD KELAS 9 -->
+        <article class="grade-portal-card theme-k9" data-grade="9">
+          <div class="card-top-ribbon">
+            <span class="ribbon-cluster-tag"><i class="fa-solid fa-graduation-cap"></i> KLASTER SERVER 03 • TKA READY</span>
+            <span class="ribbon-status-live"><span class="live-dot"></span> ONLINE</span>
+          </div>
+
+          <div class="card-Hero-head">
+            <div class="grade-badge-box">
+              <img src="assets/logo-sicibinaga.png" alt="Logo Kelas 9" class="card-mini-logo" />
+              <span class="grade-num">9</span>
+            </div>
+            <div>
+              <span class="grade-subtitle">JENJANG PERSIAPAN TKA &amp; KELULUSAN</span>
+              <h3 class="grade-title">SICIBINAGA Kelas 9</h3>
+              <div class="grade-domain-chip">
+                <i class="fa-solid fa-link"></i>
+                <span>sicibinaga9.vercel.app</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="grade-summary">
+            Fokus pemantapan materi komprehensif, simulasi Tes Kemampuan Akademik (TKA Ready), Ujian Sekolah berbasis CBT Anti-Cheat, dan pembimbingan AI Sokratik intensif.
+          </p>
+
+          <div class="rombel-pills-box">
+            <div class="rombel-pills-title">Cakupan Rombongan Belajar:</div>
+            <div class="rombel-pills-row">
+              <span>9A</span><span>9B</span><span>9C</span><span>9D</span><span>9E</span><span>9F</span><span>9G</span><span>9H</span>
+            </div>
+          </div>
+
+          <ul class="architecture-specs-list">
+            <li>
+              <i class="fa-solid fa-table"></i>
+              <span><strong>Backend &amp; Bank Soal:</strong> Google Spreadsheet Khusus Kelas 9</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-bolt"></i>
+              <span><strong>Realtime Engine:</strong> Supabase PostgreSQL Cluster Kelas 9</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              <span><strong>Integrasi AI:</strong> Dedicated API Key AI Tutor &amp; HOTS Kelas 9</span>
+            </li>
+          </ul>
+
+          <div class="card-actions-stack">
+            <a href="https://sicibinaga9.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-portal-launch btn-k9" onclick="saveLastVisitedGrade('9')">
+              <i class="fa-solid fa-right-to-bracket"></i>
+              <span>Masuk Portal Kelas 9</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+            <div class="card-secondary-actions">
+              <button type="button" class="btn-portal-embed" onclick="openPortalPreviewModal('9')">
+                <i class="fa-solid fa-display"></i> Buka di Layar Ini
+              </button>
+              <button type="button" class="btn-portal-copy" onclick="copyPortalLink('https://sicibinaga9.vercel.app', 'Kelas 9')">
+                <i class="fa-regular fa-copy"></i> Salin Link
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- EKOSISTEM FITUR UNGGULAN SICIBINAGA -->
+  <section class="features-showcase-section" id="fitur-unggulan">
+    <div class="container">
+      <div class="section-header-center">
+        <span class="section-eyebrow"><i class="fa-solid fa-sparkles"></i> INOVASI PEMBELAJARAN DIGITAL</span>
+        <h2 class="section-title">Empat Pilar Utama di Setiap Jenjang SICIBINAGA</h2>
+        <p class="section-desc">
+          Seluruh klaster Kelas 7, Kelas 8, dan Kelas 9 dilengkapi teknologi pendidikan modern yang memadukan pembelajaran konstruktif, evaluasi berintegritas, dan kecerdasan buatan.
+        </p>
+      </div>
+
+      <div class="features-bento-grid">
+        <div class="bento-card">
+          <div class="bento-icon icon-emerald"><i class="fa-solid fa-book-open-reader"></i></div>
+          <h3>1. Ruang Belajar Konstruktif 5 Langkah (LMS)</h3>
+          <p>
+            Siswa tidak sekadar membaca pasif, melainkan membangun pemahaman melalui 5 tahap: <strong>Pengantar &amp; Video Interaktif</strong>, <strong>Pilar Materi</strong>, <strong>Kartu Pintar 3D (Active Recall)</strong>, <strong>Tantangan Studi Kasus</strong>, dan <strong>Kuis Formatif Berpembahasan</strong>.
+          </p>
+        </div>
+
+        <div class="bento-card">
+          <div class="bento-icon icon-gold"><i class="fa-solid fa-shield-halved"></i></div>
+          <h3>2. Portal Ujian CBT Resmi &amp; Anti-Cheat Ketat</h3>
+          <p>
+            Mendukung 6 tipe soal AKM &amp; TKA (PG, PG Kompleks, Benar-Salah, Menjodohkan, Sebab-Akibat, Isian Singkat) dengan penguncian layar penuh (<em>Fullscreen Lockdown</em>), deteksi pindah tab/aplikasi, Token Mulai/Selesai, dan pantauan kehadiran <em>real-time</em>.
+          </p>
+        </div>
+
+        <div class="bento-card">
+          <div class="bento-icon icon-purple"><i class="fa-solid fa-robot"></i></div>
+          <h3>3. Socratic AI Tutor &amp; Studio Guru Otomatis</h3>
+          <p>
+            Terintegrasi dengan model AI berkecepatan tinggi untuk membimbing siswa memahami konsep secara Sokratik (tanpa membocorkan kunci jawaban) serta membantu Bapak/Ibu Guru merakit modul &amp; soal HOTS dalam satu klik.
+          </p>
+        </div>
+
+        <div class="bento-card">
+          <div class="bento-icon icon-blue"><i class="fa-solid fa-trophy"></i></div>
+          <h3>4. Live Arena &amp; Gamifikasi Lencana Cendekia</h3>
+          <p>
+            Turnamen kuis sinkron bergaya <em>Live Arena</em> dengan papan klasemen langsung (<em>Real-time Leaderboard</em>), sistem 7 Level Cendekia, serta 16 koleksi Bingkai Badge Avatar yang meningkatkan motivasi belajar siswa.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARSITEKTUR MULTI-SERVER & KEUNGGULAN ISOLASI DATABASE -->
+  <section class="architecture-section" id="arsitektur-sistem">
+    <div class="container">
+      <div class="architecture-banner-card">
+        <div class="arch-left">
+          <span class="arch-badge"><i class="fa-solid fa-diagram-project"></i> ARSITEKTUR DISTRIBUTED SHARDING</span>
+          <h2>Mengapa Database &amp; AI Dipisahkan per Jenjang Kelas?</h2>
+          <p>
+            Pada saat pelaksanaan PTS, PAS, maupun simulasi TKA serentak, ratusan siswa dari Kelas 7, 8, dan 9 mengakses sistem pada detik yang bersamaan. Dengan memisahkan <strong>Google Apps Script + Spreadsheet</strong>, <strong>Supabase Realtime Database</strong>, dan <strong>API Key AI</strong> ke dalam 3 jalur independen:
+          </p>
+
+          <div class="arch-benefits-grid">
+            <div class="arch-benefit-item">
+              <i class="fa-solid fa-gauge-high"></i>
+              <div>
+                <strong>3x Kuota Eksekusi &amp; Bebas Limit</strong>
+                <span>Beban baca/tulis Spreadsheet dan batas kuota panggilan API AI terbagi rata ke 3 server terpisah.</span>
+              </div>
+            </div>
+            <div class="arch-benefit-item">
+              <i class="fa-solid fa-lock"></i>
+              <div>
+                <strong>Isolasi Keamanan Data Rapor &amp; Leger</strong>
+                <span>Data nilai, bank soal, dan progres LMS antar jenjang kelas tidak saling tumpang-tindih.</span>
+              </div>
+            </div>
+            <div class="arch-benefit-item">
+              <i class="fa-solid fa-bolt-lightning"></i>
+              <div>
+                <strong>Zero-Downtime Saat Ujian Serentak</strong>
+                <span>Lalu lintas WebSocket Supabase Live Monitoring tetap ringan dan instan di bawah 100ms.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="arch-right-diagram">
+          <div class="diagram-master-node">
+            <img src="assets/logo-sicibinaga.png" alt="Logo" />
+            <div>
+              <div class="node-title">sicibinaga.my.id</div>
+              <div class="node-sub">Smart Landing &amp; Unified Gateway</div>
+            </div>
+          </div>
+
+          <div class="diagram-connector-lines">
+            <span></span><span></span><span></span>
+          </div>
+
+          <div class="diagram-clusters-stack">
+            <div class="diagram-cluster-box box-k7">
+              <div class="c-head"><span>Klaster Kelas 7</span> <code>/kelas7</code> atau <code>kelas7.sicibinaga.my.id</code></div>
+              <div class="c-chips">
+                <span><i class="fa-solid fa-table"></i> GSheet K7</span>
+                <span><i class="fa-solid fa-database"></i> Supabase K7</span>
+                <span><i class="fa-solid fa-microchip"></i> AI Key K7</span>
+              </div>
+            </div>
+
+            <div class="diagram-cluster-box box-k8">
+              <div class="c-head"><span>Klaster Kelas 8</span> <code>/kelas8</code> atau <code>kelas8.sicibinaga.my.id</code></div>
+              <div class="c-chips">
+                <span><i class="fa-solid fa-table"></i> GSheet K8</span>
+                <span><i class="fa-solid fa-database"></i> Supabase K8</span>
+                <span><i class="fa-solid fa-microchip"></i> AI Key K8</span>
+              </div>
+            </div>
+
+            <div class="diagram-cluster-box box-k9">
+              <div class="c-head"><span>Klaster Kelas 9</span> <code>/kelas9</code> atau <code>kelas9.sicibinaga.my.id</code></div>
+              <div class="c-chips">
+                <span><i class="fa-solid fa-table"></i> GSheet K9</span>
+                <span><i class="fa-solid fa-database"></i> Supabase K9</span>
+                <span><i class="fa-solid fa-microchip"></i> AI Key K9</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANDUAN TEKNIS INTEGRASI DOMAIN SICIBINAGA.MY.ID -->
+  <section class="domain-guide-section" id="panduan-domain">
+    <div class="container">
+      <div class="section-header-center">
+        <span class="section-eyebrow"><i class="fa-solid fa-globe"></i> SOLUSI PENYATUAN DOMAIN TUNGGAL</span>
+        <h2 class="section-title">Bisakah Ketiga Aplikasi Dijadikan Satu Domain ke <code>sicibinaga.my.id</code>?</h2>
+        <p class="section-desc">
+          <strong>Sangat Bisa 100%!</strong> Meskipun <code>sicibinaga7</code>, <code>sicibinaga8</code>, dan <code>sicibinaga9</code> berada di project Vercel dan database yang berbeda, Anda dapat menyatukannya di bawah satu domain resmi <strong>sicibinaga.my.id</strong> tanpa mengubah database maupun kode backend sedikit pun. Berikut <strong>3 metode terbaik</strong> yang sudah disiapkan di dalam paket ZIP ini:
+        </p>
+      </div>
+
+      <div class="domain-methods-tabs">
+        <button type="button" class="method-tab-btn active" onclick="switchDomainMethodTab('metode1', this)">
+          <i class="fa-solid fa-star"></i> Opsi 1: Sub-Path / Rewrites (<code>sicibinaga.my.id/kelas7</code>)
+        </button>
+        <button type="button" class="method-tab-btn" onclick="switchDomainMethodTab('metode2', this)">
+          <i class="fa-solid fa-sitemap"></i> Opsi 2: Subdomain DNS (<code>kelas7.sicibinaga.my.id</code>)
+        </button>
+        <button type="button" class="method-tab-btn" onclick="switchDomainMethodTab('metode3', this)">
+          <i class="fa-solid fa-window-maximize"></i> Opsi 3: Single-Domain Portal Launcher
+        </button>
+      </div>
+
+      <!-- TAB 1: VERCEL REWRITES -->
+      <div class="domain-method-pane" id="pane-metode1">
+        <div class="method-card">
+          <div class="method-info">
+            <span class="badge-recommended">PALING DIREKOMENDASIKAN &amp; BERSIH</span>
+            <h3>Opsi 1: Satu Domain Utama dengan Vercel Reverse-Proxy Rewrites</h3>
+            <p>
+              Halaman Landing ini dipasang pada domain utama <strong><code>https://sicibinaga.my.id</code></strong>. File <strong><code>vercel.json</code></strong> yang sudah disertakan di dalam paket ZIP ini otomatis meneruskan (<em>rewrite/proxy</em>) rute ke masing-masing server Vercel tanpa mengubah URL di browser siswa:
+            </p>
+            <ul class="method-url-list">
+              <li><i class="fa-solid fa-circle-check"></i> <code>https://sicibinaga.my.id</code> &rarr; Halaman Landing Utama (Homepage)</li>
+              <li><i class="fa-solid fa-circle-check"></i> <code>https://sicibinaga.my.id/kelas7</code> &rarr; Meneruskan ke <code>sicibinaga7.vercel.app</code></li>
+              <li><i class="fa-solid fa-circle-check"></i> <code>https://sicibinaga.my.id/kelas8</code> &rarr; Meneruskan ke <code>sicibinaga8.vercel.app</code></li>
+              <li><i class="fa-solid fa-circle-check"></i> <code>https://sicibinaga.my.id/kelas9</code> &rarr; Meneruskan ke <code>sicibinaga9.vercel.app</code></li>
+            </ul>
+            <div class="method-steps-note">
+              <strong>Cara Pasang di Vercel (Hanya 2 Menit):</strong>
+              <ol>
+                <li>Upload folder/ZIP Landing Page ini sebagai project baru di Vercel (misal: <code>sicibinaga-portal</code>).</li>
+                <li>Masuk ke menu <strong>Settings &rarr; Domains</strong> di project Vercel tersebut, lalu tambahkan domain <strong><code>sicibinaga.my.id</code></strong>.</li>
+                <li>Arahkan DNS <code>A Record</code> (@) ke <code>76.76.21.21</code> dan <code>CNAME</code> (www) ke <code>cname.vercel-dns.com</code> di panel domain <code>.my.id</code> Anda. Selesai!</li>
+              </ol>
+            </div>
+          </div>
+          <div class="method-code-box">
+            <div class="code-box-header">
+              <span><i class="fa-solid fa-file-code"></i> vercel.json (Sudah Disertakan di ZIP)</span>
+              <button type="button" onclick="copyCodeSnippet('snippetVercelJson')"><i class="fa-regular fa-copy"></i> Salin</button>
+            </div>
+            <pre id="snippetVercelJson"><code>{
+  "rewrites": [
+    {
+      "source": "/kelas7",
+      "destination": "https://sicibinaga7.vercel.app/"
+    },
+    {
+      "source": "/kelas7/:path*",
+      "destination": "https://sicibinaga7.vercel.app/:path*"
+    },
+    {
+      "source": "/kelas8",
+      "destination": "https://sicibinaga8.vercel.app/"
+    },
+    {
+      "source": "/kelas8/:path*",
+      "destination": "https://sicibinaga8.vercel.app/:path*"
+    },
+    {
+      "source": "/kelas9",
+      "destination": "https://sicibinaga9.vercel.app/"
+    },
+    {
+      "source": "/kelas9/:path*",
+      "destination": "https://sicibinaga9.vercel.app/:path*"
+    }
+  ]
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: SUBDOMAIN DNS -->
+      <div class="domain-method-pane hidden" id="pane-metode2">
+        <div class="method-card">
+          <div class="method-info">
+            <span class="badge-recommended" style="background:#0284c7;">ISOLASI COOKIE &amp; FULLSCREEN TERBAIK</span>
+            <h3>Opsi 2: Arsitektur Subdomain Resmi pada <code>sicibinaga.my.id</code></h3>
+            <p>
+              Anda juga dapat menghubungkan domain utama ke Landing Page ini, dan memberikan subdomain resmi untuk masing-masing project Vercel Kelas 7, 8, dan 9 melalui pengaturan DNS <code>CNAME</code>:
+            </p>
+            <ul class="method-url-list">
+              <li><i class="fa-solid fa-globe"></i> <strong><code>sicibinaga.my.id</code></strong> &rarr; Project Vercel Landing Page Ini</li>
+              <li><i class="fa-solid fa-globe"></i> <strong><code>kelas7.sicibinaga.my.id</code></strong> &rarr; Project Vercel <code>sicibinaga7</code></li>
+              <li><i class="fa-solid fa-globe"></i> <strong><code>kelas8.sicibinaga.my.id</code></strong> &rarr; Project Vercel <code>sicibinaga8</code></li>
+              <li><i class="fa-solid fa-globe"></i> <strong><code>kelas9.sicibinaga.my.id</code></strong> &rarr; Project Vercel <code>sicibinaga9</code></li>
+            </ul>
+          </div>
+          <div class="method-code-box">
+            <div class="code-box-header">
+              <span><i class="fa-solid fa-network-wired"></i> Tabel Konfigurasi DNS Domain (.my.id)</span>
+            </div>
+            <pre><code>Tipe    Host / Name    Value / Target
+---------------------------------------------------
+A       @              76.76.21.21
+CNAME   www            cname.vercel-dns.com
+CNAME   kelas7         cname.vercel-dns.com
+CNAME   kelas8         cname.vercel-dns.com
+CNAME   kelas9         cname.vercel-dns.com</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: FULLSCREEN IFRAME PORTAL -->
+      <div class="domain-method-pane hidden" id="pane-metode3">
+        <div class="method-card">
+          <div class="method-info">
+            <span class="badge-recommended" style="background:#d97706;">SUDAH AKTIF DI HALAMAN INI</span>
+            <h3>Opsi 3: Mode Portal Terintegrasi (Buka Langsung di Dalam <code>sicibinaga.my.id</code>)</h3>
+            <p>
+              Halaman Landing ini sudah dilengkapi fitur <strong>"Buka di Layar Ini"</strong> dengan dukungan penuh izin <code>allow="fullscreen; microphone; autoplay; clipboard-write"</code>. Siswa cukup membuka <strong><code>sicibinaga.my.id</code></strong>, memilih kartu kelasnya, dan aplikasi akan tampil 100% layar penuh tanpa berpindah alamat web.
+            </p>
+            <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
+              <button type="button" class="btn-hero-primary" onclick="openPortalPreviewModal('7')"><i class="fa-solid fa-play"></i> Uji Portal Kelas 7</button>
+              <button type="button" class="btn-hero-primary" onclick="openPortalPreviewModal('8')"><i class="fa-solid fa-play"></i> Uji Portal Kelas 8</button>
+              <button type="button" class="btn-hero-primary" onclick="openPortalPreviewModal('9')"><i class="fa-solid fa-play"></i> Uji Portal Kelas 9</button>
+            </div>
+          </div>
+          <div class="method-code-box">
+            <div class="code-box-header">
+              <span><i class="fa-solid fa-code"></i> Parameter URL Cepat</span>
+            </div>
+            <pre><code># Anda juga bisa membagikan tautan langsung:
+https://sicibinaga.my.id/?jenjang=7
+https://sicibinaga.my.id/?jenjang=8
+https://sicibinaga.my.id/?jenjang=9
+
+# Otomatis membuka portal jenjang terkait!</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ & PANDUAN SINGKAT SISWA / GURU -->
+  <section class="faq-section" id="faq-panduan">
+    <div class="container">
+      <div class="section-header-center">
+        <span class="section-eyebrow"><i class="fa-solid fa-circle-question"></i> PUSAT INFORMASI &amp; BANTUAN</span>
+        <h2 class="section-title">Panduan Akses Siswa, Guru &amp; Pengawas Ujian</h2>
+      </div>
+
+      <div class="faq-accordion-stack">
+        <div class="faq-item">
+          <button type="button" class="faq-question" onclick="toggleFaqItem(this)">
+            <span>1. Mengapa saya harus memilih portal sesuai jenjang Kelas 7, Kelas 8, atau Kelas 9?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            Karena akun siswa, daftar mata pelajaran, modul Ruang Belajar (LMS), serta sesi ujian CBT disimpan pada server database yang terpisah untuk setiap angkatan. Pastikan siswa Kelas 7 masuk ke Portal Kelas 7, Kelas 8 ke Portal Kelas 8, dan Kelas 9 ke Portal Kelas 9.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button type="button" class="faq-question" onclick="toggleFaqItem(this)">
+            <span>2. Browser apa yang wajib digunakan saat mengikuti Ujian CBT &amp; Simulasi TKA?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            Gunakan browser resmi <strong>Google Chrome</strong> (Android/Laptop), <strong>Safari</strong> (iPhone/iPad), atau <strong>Opera</strong>. Hindari membuka tautan ujian dari browser internal aplikasi chat agar fitur <em>Fullscreen Anti-Cheat</em> dan penyimpanan otomatis ke server berjalan sempurna.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button type="button" class="faq-question" onclick="toggleFaqItem(this)">
+            <span>3. Bagaimana cara Bapak/Ibu Guru atau Admin masuk ke Dashboard Studio LMS &amp; Monitor Ujian?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            Buka portal jenjang kelas yang Bapak/Ibu ampu (Kelas 7, 8, atau 9), lalu klik tombol <strong>"Panel Guru / Admin"</strong> di pojok kanan atas halaman login aplikasi untuk mengelola Bank Soal, mengaktifkan saklar LMS/CBT per mata pelajaran, atau memantau nilai secara <em>real-time</em>.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand-col">
+        <div class="footer-brand-row">
+          <img src="assets/logo-sicibinaga.png" alt="Logo SICIBINAGA" class="footer-logo" />
+          <div>
+            <div class="footer-brand-name">SICIBINAGA • TKA READY</div>
+            <div class="footer-brand-sub">UPTD SMP Negeri 3 Bangil</div>
+          </div>
+        </div>
+        <p class="footer-desc">
+          Ekosistem Pembelajaran Konstruktif (LMS), Turnamen Sains &amp; Literasi (Live Arena), serta Asesmen Berbasis Komputer (CBT) terintegrasi Kecerdasan Buatan.
+        </p>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>Akses Klaster Jenjang</h4>
+        <ul>
+          <li><a href="https://sicibinaga7.vercel.app" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-right"></i> Portal Kelas 7 (sicibinaga7.vercel.app)</a></li>
+          <li><a href="https://sicibinaga8.vercel.app" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-right"></i> Portal Kelas 8 (sicibinaga8.vercel.app)</a></li>
+          <li><a href="https://sicibinaga9.vercel.app" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-right"></i> Portal Kelas 9 (sicibinaga9.vercel.app)</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>Status Klaster Server</h4>
+        <ul class="footer-status-list">
+          <li><span class="dot-online"></span> Database Spreadsheet K7–K9: <strong>Aktif</strong></li>
+          <li><span class="dot-online"></span> Supabase Realtime Engine: <strong>Aktif</strong></li>
+          <li><span class="dot-online"></span> Groq AI Multi-Key Cluster: <strong>Aktif</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <span>&copy; 2026 <strong>SICIBINAGA — SMP Negeri 3 Bangil</strong>. Dikembangkan dengan Arsitektur Serverless Multi-Cluster.</span>
+      <span>Domain Resmi: <strong>sicibinaga.my.id</strong></span>
+    </div>
+  </footer>
+
+  <!-- MODAL 1: QUICK CLASS FINDER -->
+  <div class="portal-modal-backdrop hidden" id="quickFinderModal" onclick="if(event.target===this) closeQuickClassFinderModal()">
+    <div class="quick-finder-window">
+      <div class="qf-header">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <img src="assets/logo-sicibinaga.png" alt="Logo" style="width:42px; height:42px; border-radius:10px;" />
+          <div>
+            <span style="font-size:11px; font-weight:800; color:var(--gold-500); text-transform:uppercase;">ASISTEN ARAHAN SERVER</span>
+            <h3 style="font-size:18px; font-weight:800;">Pilih Jenjang &amp; Rombel Kelasmu</h3>
+          </div>
+        </div>
+        <button type="button" class="btn-modal-close" onclick="closeQuickClassFinderModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="qf-body">
+        <p style="font-size:13.5px; color:var(--text-muted); margin-bottom:16px;">
+          Klik salah satu tombol jenjang di bawah ini untuk langsung menuju ke server aplikasi kelasmu:
+        </p>
+        <div class="qf-cards-stack">
+          <a href="https://sicibinaga7.vercel.app" target="_blank" rel="noopener" class="qf-grade-item item-k7" onclick="saveLastVisitedGrade('7')">
+            <div class="qf-badge">7</div>
+            <div style="flex:1;">
+              <div style="font-weight:800; font-size:15px;">Portal SICIBINAGA Kelas 7 (7A – 7H)</div>
+              <div style="font-size:12px; opacity:0.85;">sicibinaga7.vercel.app • Server Database &amp; AI Kelas 7</div>
+            </div>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+          <a href="https://sicibinaga8.vercel.app" target="_blank" rel="noopener" class="qf-grade-item item-k8" onclick="saveLastVisitedGrade('8')">
+            <div class="qf-badge">8</div>
+            <div style="flex:1;">
+              <div style="font-weight:800; font-size:15px;">Portal SICIBINAGA Kelas 8 (8A – 8H)</div>
+              <div style="font-size:12px; opacity:0.85;">sicibinaga8.vercel.app • Server Database &amp; AI Kelas 8</div>
+            </div>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+          <a href="https://sicibinaga9.vercel.app" target="_blank" rel="noopener" class="qf-grade-item item-k9" onclick="saveLastVisitedGrade('9')">
+            <div class="qf-badge">9</div>
+            <div style="flex:1;">
+              <div style="font-weight:800; font-size:15px;">Portal SICIBINAGA Kelas 9 (9A – 9H)</div>
+              <div style="font-size:12px; opacity:0.85;">sicibinaga9.vercel.app • Server Database &amp; AI Kelas 9 (TKA Ready)</div>
+            </div>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: FULLSCREEN IN-PAGE PORTAL LAUNCHER (IFRAME) -->
+  <div class="iframe-portal-overlay hidden" id="iframePortalOverlay">
+    <div class="iframe-portal-topbar">
+      <div class="iframe-topbar-left">
+        <img src="assets/logo-sicibinaga.png" alt="Logo" class="iframe-mini-logo" />
+        <span class="iframe-active-title" id="iframeActiveTitle">Portal SICIBINAGA</span>
+      </div>
+      <div class="iframe-switcher-pills">
+        <button type="button" class="iframe-switch-btn" id="iframeBtn7" onclick="openPortalPreviewModal('7')">Kelas 7</button>
+        <button type="button" class="iframe-switch-btn" id="iframeBtn8" onclick="openPortalPreviewModal('8')">Kelas 8</button>
+        <button type="button" class="iframe-switch-btn" id="iframeBtn9" onclick="openPortalPreviewModal('9')">Kelas 9</button>
+      </div>
+      <div class="iframe-topbar-actions">
+        <a href="https://sicibinaga8.vercel.app" target="_blank" rel="noopener" id="iframeExternalLink" class="btn-iframe-newtab">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> <span>Tab Penuh</span>
+        </a>
+        <button type="button" class="btn-iframe-close" onclick="closePortalPreviewModal()">
+          <i class="fa-solid fa-xmark"></i> <span>Tutup Portal</span>
+        </button>
+      </div>
+    </div>
+    <div class="iframe-container-wrap">
+      <iframe id="portalMainIframe" src="about:blank" allow="fullscreen; microphone; camera; autoplay; clipboard-read; clipboard-write" title="Aplikasi SICIBINAGA"></iframe>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="portalToast" class="portal-toast hidden"></div>
+
+  <!-- Custom Script -->
+  <script src="script.js"></script>
+</body>
+</html>

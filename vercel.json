@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/kelas7",
+      "destination": "https://sicibinaga7.vercel.app/"
+    },
+    {
+      "source": "/kelas7/:path*",
+      "destination": "https://sicibinaga7.vercel.app/:path*"
+    },
+    {
+      "source": "/kelas8",
+      "destination": "https://sicibinaga8.vercel.app/"
+    },
+    {
+      "source": "/kelas8/:path*",
+      "destination": "https://sicibinaga8.vercel.app/:path*"
+    },
+    {
+      "source": "/kelas9",
+      "destination": "https://sicibinaga9.vercel.app/"
+    },
+    {
+      "source": "/kelas9/:path*",
+      "destination": "https://sicibinaga9.vercel.app/:path*"
+    }
+  ]
+}
