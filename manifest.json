@@ -1,0 +1,23 @@
+{
+  "name": "SICIBINAGA • Portal Dashboard SMPN 3 Bangil",
+  "short_name": "SICIBINAGA",
+  "description": "Portal Dashboard Pembelajaran Digital (LMS), Ujian CBT Anti-Cheat, dan Live Arena Quiz SMP Negeri 3 Bangil.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#091411",
+  "theme_color": "#059669",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "logo-sicibinaga.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
