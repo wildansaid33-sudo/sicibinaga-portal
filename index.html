@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
-  <title>SICIBINAGA • SuperApp Dashboard Pembelajaran & CBT — SMPN 3 Bangil</title>
-  <meta name="description" content="Dashboard Interaktif Aplikasi SICIBINAGA (TKA Ready) SMP Negeri 3 Bangil. Akses Kelas 7, Kelas 8, dan Kelas 9 dilengkapi Cek Kesiapan CBT, Pemanasan HOTS AI, dan Asisten Suara AI." />
-  <meta name="theme-color" content="#064e3b" />
+  <title>SICIBINAGA • Bento SuperApp Dashboard — SMPN 3 Bangil</title>
+  <meta name="description" content="Dashboard Portal Resmi Aplikasi SICIBINAGA (TKA Ready) SMP Negeri 3 Bangil. Akses Kelas 7, Kelas 8, dan Kelas 9 dengan UI Bento Modern, Kuis HOTS AI, Cek Kesiapan CBT, dan Asisten Suara AI." />
+  <meta name="theme-color" content="#0d4738" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" href="logo-sicibinaga.png" />
 
-  <!-- Google Fonts: Plus Jakarta Sans & Space Grotesk -->
+  <!-- Google Fonts: Plus Jakarta Sans, Space Grotesk &Righteous/Fredoka for Chunky Brand -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet" />
 
   <!-- FontAwesome 6.5 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
@@ -24,586 +24,549 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- DYNAMIC AMBIENT BACKGROUND -->
-  <div class="ambient-glow glow-1" aria-hidden="true"></div>
-  <div class="ambient-glow glow-2" aria-hidden="true"></div>
-  <div class="ambient-glow glow-3" aria-hidden="true"></div>
+  <!-- DECORATIVE GEOMETRIC OUTER BACKDROP ACCENTS -->
+  <div class="geo-stripe stripe-top-left" aria-hidden="true"></div>
+  <div class="geo-stripe stripe-bottom-left" aria-hidden="true"></div>
+  <div class="geo-ring ring-right" aria-hidden="true"></div>
 
-  <!-- STICKY APP HEADER / NAVBAR -->
-  <header class="app-header" id="appHeader">
-    <div class="container header-inner">
-      <a href="#" class="brand-wrap" aria-label="Beranda Dashboard SICIBINAGA">
-        <div class="brand-logo-box">
-          <img src="logo-sicibinaga.png" alt="Logo SICIBINAGA" class="brand-logo" />
-        </div>
-        <div class="brand-meta">
-          <div class="brand-title-line">
-            <span class="brand-title">SICIBINAGA</span>
-            <span class="brand-pill">NEXT-GEN</span>
+  <!-- MAIN FRAMED BENTO APP SHELL -->
+  <div class="bento-app-shell" id="beranda">
+
+    <!-- 1. TOP BARBR-STYLE HEADER -->
+    <header class="bento-topbar">
+      <div class="topbar-left">
+        <a href="#" class="brand-cluster" aria-label="Beranda SICIBINAGA">
+          <img src="logo-sicibinaga.png" alt="Logo SICIBINAGA" class="brand-chunky-logo" />
+          <div class="brand-chunky-text">
+            <div class="brand-chunky-row">
+              <span class="chunky-wordmark">SICIBINAGA</span>
+              <span class="chunky-badge">TKA READY</span>
+            </div>
+            <span class="chunky-sub" id="dynamicGreetingSub">UPTD SMP Negeri 3 Bangil • Portal Terpadu LMS, CBT &amp; Live Arena</span>
           </div>
-          <span class="brand-sub">SMP Negeri 3 Bangil • Smart EdTech SuperApp</span>
-        </div>
-      </a>
+        </a>
+      </div>
 
-      <!-- Quick Command Search Trigger (Desktop & Tablet) -->
-      <button type="button" class="cmd-search-trigger" onclick="openCommandPalette()" title="Cari Cepat Rombel, Fitur, atau Tanya AI (Ctrl+K)">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <span>Cari kelas, fitur, atau ketik perintah...</span>
-        <kbd>Ctrl K</kbd>
-      </button>
-
-      <div class="header-right">
-        <!-- Streak Counter Pill -->
-        <div class="streak-pill" id="streakBadge" title="Streak Aktif Belajar Harian Kamu">
+      <!-- Right Clover / Squircle Action Buttons -->
+      <div class="topbar-actions">
+        <!-- Streak Pill -->
+        <div class="top-streak-chip" title="Streak Aktif Belajar Harian">
           <i class="fa-solid fa-fire-flame-curved"></i>
           <span id="streakCountText">1 Hari</span>
         </div>
 
-        <div class="server-status-pill" title="Status Real-Time 3 Klaster Server">
-          <span class="status-dot-live"></span>
-          <span class="status-text" id="avgPingHeader">Ping 24ms</span>
-          <span class="status-sep">•</span>
-          <span id="liveClockWib" class="clock-text">--:-- WIB</span>
-        </div>
-
-        <button type="button" class="btn-icon-only" id="btnSoundToggle" onclick="toggleSoundFx()" title="Suara Interaksi UI (Aktif/Nonaktif)">
+        <!-- Clover Button 1: Blue Notification / Sound FX -->
+        <button type="button" class="squircle-btn btn-clover-blue" id="btnSoundToggle" onclick="toggleSoundFx()" title="Suara Interaksi UI (Aktif/Nonaktif)">
           <i class="fa-solid fa-volume-high" id="soundIcon"></i>
         </button>
 
-        <button type="button" class="btn-icon-only" id="btnThemeToggle" onclick="toggleTheme()" aria-label="Ubah Tema Terang atau Gelap" title="Mode Terang / Gelap">
+        <!-- Squircle Button 2: Deep Emerald Search / Command Palette (Ctrl+K) -->
+        <button type="button" class="squircle-btn btn-squircle-emerald" onclick="openCommandPalette()" title="Cari Cepat Rombel 7A–9H atau Fitur (Ctrl + K)">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+        <!-- Squircle Button 3: Warm Orange Theme Switcher -->
+        <button type="button" class="squircle-btn btn-squircle-orange" id="btnThemeToggle" onclick="toggleTheme()" title="Ubah Mode Terang / Gelap">
           <i class="fa-solid fa-moon" id="themeIcon"></i>
         </button>
-      </div>
-    </div>
-  </header>
 
-  <!-- MAIN DASHBOARD CONTENT -->
-  <main class="dashboard-main container" id="beranda">
-
-    <!-- 1. DYNAMIC PERSONALIZED HERO & QUICK ROMBEL BAR -->
-    <section class="overview-card" aria-label="Tentang Aplikasi SICIBINAGA">
-      <div class="overview-grid">
-        <div class="overview-info">
-          <div class="overview-badge-row">
-            <span class="chip-official"><i class="fa-solid fa-shield-halved"></i> PORTAL RESMI • SICIBINAGA.MY.ID</span>
-            <span class="chip-ai"><i class="fa-solid fa-microchip"></i> Groq OSS-120B Engine</span>
-            <button type="button" class="chip-pin-Trigger" onclick="openProfileModal()">
-              <i class="fa-solid fa-user-pen"></i> <span id="userProfileChipText">Set Identitas Kelasmu</span>
-            </button>
-          </div>
-
-          <h1 class="overview-title" id="dynamicGreetingTitle">
-            Selamat Datang di Ekosistem Digital <span class="text-highlight">SICIBINAGA</span>
-          </h1>
-
-          <p class="overview-desc">
-            <strong>SICIBINAGA</strong> (<em>Sistem CBT Interaktif, Bina Akademik &amp; Gamifikasi AI</em>) adalah pusat pembelajaran digital <strong>SMP Negeri 3 Bangil</strong> yang mengintegrasikan <strong>Ruang Belajar 5 Langkah (LMS)</strong>, <strong>Ujian CBT Anti-Cheat</strong>, dan <strong>Live Arena Quiz</strong> ke dalam 3 klaster server mandiri per jenjang kelas yang cepat, responsif, dan bebas <em>bottleneck</em>.
-          </p>
-
-          <!-- Interactive Quick Action Pills -->
-          <div class="hero-interactive-strip">
-            <button type="button" class="btn-strip-item strip-quiz" onclick="switchInteractiveTab('tab-warmup')">
-              <i class="fa-solid fa-brain"></i>
-              <span>Pemanasan HOTS AI</span>
-            </button>
-            <button type="button" class="btn-strip-item strip-check" onclick="switchInteractiveTab('tab-scanner')">
-              <i class="fa-solid fa-stethoscope"></i>
-              <span>Cek Kesiapan CBT</span>
-            </button>
-            <button type="button" class="btn-strip-item strip-timer" onclick="switchInteractiveTab('tab-pomodoro')">
-              <i class="fa-solid fa-stopwatch"></i>
-              <span>Timer Fokus</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Pintasan Cepat Rombel 7A - 9H & One-Tap Pinned Class -->
-        <div class="quick-launcher-panel">
-          <div class="ql-header">
-            <div class="ql-icon"><i class="fa-solid fa-bolt"></i></div>
-            <div style="flex:1;">
-              <h2 class="ql-title">Akses Cepat Rombel (7A – 9H)</h2>
-              <p class="ql-sub">Pilih kelasmu untuk langsung masuk ke server</p>
-            </div>
-          </div>
-
-          <div class="ql-controls">
-            <select id="quickRombelSelect" class="ql-select" aria-label="Pilih Rombel Kelas" onchange="playClickSound()">
-              <option value="">-- Pilih Kelas / Rombel Kamu --</option>
-              <optgroup label="🟢 Jenjang Kelas 7 (Hijau Zamrud)">
-                <option value="7|7A">Kelas 7A — Portal Kelas 7</option>
-                <option value="7|7B">Kelas 7B — Portal Kelas 7</option>
-                <option value="7|7C">Kelas 7C — Portal Kelas 7</option>
-                <option value="7|7D">Kelas 7D — Portal Kelas 7</option>
-                <option value="7|7E">Kelas 7E — Portal Kelas 7</option>
-                <option value="7|7F">Kelas 7F — Portal Kelas 7</option>
-                <option value="7|7G">Kelas 7G — Portal Kelas 7</option>
-                <option value="7|7H">Kelas 7H — Portal Kelas 7</option>
-              </optgroup>
-              <optgroup label="🟡 Jenjang Kelas 8 (Kuning Emerald)">
-                <option value="8|8A">Kelas 8A — Portal Kelas 8</option>
-                <option value="8|8B">Kelas 8B — Portal Kelas 8</option>
-                <option value="8|8C">Kelas 8C — Portal Kelas 8</option>
-                <option value="8|8D">Kelas 8D — Portal Kelas 8</option>
-                <option value="8|8E">Kelas 8E — Portal Kelas 8</option>
-                <option value="8|8F">Kelas 8F — Portal Kelas 8</option>
-                <option value="8|8G">Kelas 8G — Portal Kelas 8</option>
-                <option value="8|8H">Kelas 8H — Portal Kelas 8</option>
-              </optgroup>
-              <optgroup label="🔴 Jenjang Kelas 9 (Crimson Red)">
-                <option value="9|9A">Kelas 9A — Portal Kelas 9</option>
-                <option value="9|9B">Kelas 9B — Portal Kelas 9</option>
-                <option value="9|9C">Kelas 9C — Portal Kelas 9</option>
-                <option value="9|9D">Kelas 9D — Portal Kelas 9</option>
-                <option value="9|9E">Kelas 9E — Portal Kelas 9</option>
-                <option value="9|9F">Kelas 9F — Portal Kelas 9</option>
-                <option value="9|9G">Kelas 9G — Portal Kelas 9</option>
-                <option value="9|9H">Kelas 9H — Portal Kelas 9</option>
-              </optgroup>
-            </select>
-            <button type="button" class="btn-ql-go" onclick="launchByRombelSelect()">
-              <span>Masuk</span>
-              <i class="fa-solid fa-arrow-right"></i>
-            </button>
-          </div>
-
-          <div class="ql-footer-bar">
-            <div class="ql-last-visit" id="lastVisitBanner">
-              <i class="fa-solid fa-clock-rotate-left"></i>
-              <span id="lastVisitText">Siap digunakan untuk Kelas 7, 8 &amp; 9</span>
-            </div>
-            <button type="button" class="btn-pin-current" onclick="pinSelectedRombel()" title="Simpan sebagai kelas tetap saya">
-              <i class="fa-solid fa-thumbtack"></i> Pin Kelas
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 2. PORTAL JENJANG KELAS (3 KLASTER TEMATIK DENGAN TELEMETRI PING LIVE) -->
-    <section class="grades-section" id="pilih-jenjang" aria-label="Pilih Portal Jenjang Kelas">
-      <div class="section-bar">
-        <div>
-          <h2 class="section-heading"><i class="fa-solid fa-layer-group"></i> Portal Akses Jenjang Kelas</h2>
-          <p class="section-subheading">Pilih sesuai tingkat kelasmu — setiap jenjang memiliki database &amp; server terisolasi</p>
-        </div>
-        <button type="button" class="btn-refresh-ping" onclick="measureAllServerPings(true)">
-          <i class="fa-solid fa-satellite-dish"></i> Cek Ping Server
+        <!-- Squircle Button 4: User Profile & Pin Rombel Avatar -->
+        <button type="button" class="avatar-profile-btn" onclick="openProfileModal()" title="Atur Nama & Pin Rombel Kelas Tetap">
+          <img src="logo-sicibinaga.png" alt="Profil Siswa" />
+          <span class="avatar-online-dot"></span>
+          <span class="avatar-rombel-tag" id="headerRombelTag">SET</span>
         </button>
       </div>
+    </header>
 
-      <div class="grades-grid">
-        <!-- KELAS 7: HIJAU ZAMRUD (EMERALD GREEN) -->
-        <article class="grade-card theme-emerald" id="cardGrade7" data-grade="7">
-          <div class="gc-top">
-            <span class="gc-theme-tag"><i class="fa-solid fa-seedling"></i> KELAS 7 • HIJAU ZAMRUD</span>
-            <span class="gc-live-badge">
-              <span class="dot"></span>
-              <span id="pingBadge7">22ms • ONLINE</span>
-            </span>
-          </div>
+    <!-- 2. MAIN BENTO DASHBOARD GRID -->
+    <main class="bento-grid-container">
 
-          <div class="gc-identity">
-            <div class="gc-avatar">
-              <img src="logo-sicibinaga.png" alt="Kelas 7" />
-              <span class="gc-num">7</span>
-            </div>
-            <div class="gc-title-box">
-              <span class="gc-eyebrow">FONDASI &amp; EKSPLORASI</span>
-              <h3 class="gc-title">SICIBINAGA Kelas 7</h3>
-              <a href="https://sicibinaga.my.id/kelas7" class="gc-url-pill" onclick="event.preventDefault(); openGradePortal('7');">
-                <i class="fa-solid fa-link"></i>
-                <span>sicibinaga.my.id/kelas7</span>
-              </a>
-            </div>
-          </div>
+      <!-- ================= TOP ROW (2 ASYMMETRIC BENTO CARDS) ================= -->
+      <div class="bento-row-top">
 
-          <p class="gc-desc">
-            Ruang belajar konstruktif 5 langkah, penguatan literasi-numerasi dasar, Live Arena, dan evaluasi CBT untuk siswa Kelas 7.
-          </p>
-
-          <div class="gc-rombel-box">
-            <div class="gc-rombel-label">Ketuk Rombel Kelas 7 untuk Masuk:</div>
-            <div class="gc-rombel-grid">
-              <button type="button" data-rombel="7A" onclick="openGradePortal('7','7A')">7A</button>
-              <button type="button" data-rombel="7B" onclick="openGradePortal('7','7B')">7B</button>
-              <button type="button" data-rombel="7C" onclick="openGradePortal('7','7C')">7C</button>
-              <button type="button" data-rombel="7D" onclick="openGradePortal('7','7D')">7D</button>
-              <button type="button" data-rombel="7E" onclick="openGradePortal('7','7E')">7E</button>
-              <button type="button" data-rombel="7F" onclick="openGradePortal('7','7F')">7F</button>
-              <button type="button" data-rombel="7G" onclick="openGradePortal('7','7G')">7G</button>
-              <button type="button" data-rombel="7H" onclick="openGradePortal('7','7H')">7H</button>
-            </div>
-          </div>
-
-          <div class="gc-actions">
-            <a href="https://sicibinaga.my.id/kelas7" class="btn-gc-primary" onclick="event.preventDefault(); openGradePortal('7');">
-              <i class="fa-solid fa-right-to-bracket"></i>
-              <span>Buka Aplikasi Kelas 7</span>
-              <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-            <div class="gc-sub-actions">
-              <button type="button" class="btn-gc-secondary" onclick="openInAppView('7')">
-                <i class="fa-solid fa-expand"></i> Layar Penuh
-              </button>
-              <button type="button" class="btn-gc-secondary" onclick="copyLink('https://sicibinaga.my.id/kelas7', 'Kelas 7')">
-                <i class="fa-regular fa-copy"></i> Salin Link
-              </button>
-            </div>
-          </div>
-        </article>
-
-        <!-- KELAS 8: KUNING EMERALD (GOLD-EMERALD) -->
-        <article class="grade-card theme-gold-emerald" id="cardGrade8" data-grade="8">
-          <div class="gc-top">
-            <span class="gc-theme-tag"><i class="fa-solid fa-crown"></i> KELAS 8 • KUNING EMERALD</span>
-            <span class="gc-live-badge">
-              <span class="dot"></span>
-              <span id="pingBadge8">19ms • ONLINE</span>
-            </span>
-          </div>
-
-          <div class="gc-identity">
-            <div class="gc-avatar">
-              <img src="logo-sicibinaga.png" alt="Kelas 8" />
-              <span class="gc-num">8</span>
-            </div>
-            <div class="gc-title-box">
-              <span class="gc-eyebrow">PENALARAN KRITIS &amp; AKM</span>
-              <h3 class="gc-title">SICIBINAGA Kelas 8</h3>
-              <a href="https://sicibinaga.my.id/kelas8" class="gc-url-pill" onclick="event.preventDefault(); openGradePortal('8');">
-                <i class="fa-solid fa-link"></i>
-                <span>sicibinaga.my.id/kelas8</span>
-              </a>
-            </div>
-          </div>
-
-          <p class="gc-desc">
-            Akselerasi kompetensi analitis, simulasi AKM/ANBK Literasi-Numerasi, turnamen Live Arena, dan asesmen CBT Kelas 8.
-          </p>
-
-          <div class="gc-rombel-box">
-            <div class="gc-rombel-label">Ketuk Rombel Kelas 8 untuk Masuk:</div>
-            <div class="gc-rombel-grid">
-              <button type="button" data-rombel="8A" onclick="openGradePortal('8','8A')">8A</button>
-              <button type="button" data-rombel="8B" onclick="openGradePortal('8','8B')">8B</button>
-              <button type="button" data-rombel="8C" onclick="openGradePortal('8','8C')">8C</button>
-              <button type="button" data-rombel="8D" onclick="openGradePortal('8','8D')">8D</button>
-              <button type="button" data-rombel="8E" onclick="openGradePortal('8','8E')">8E</button>
-              <button type="button" data-rombel="8F" onclick="openGradePortal('8','8F')">8F</button>
-              <button type="button" data-rombel="8G" onclick="openGradePortal('8','8G')">8G</button>
-              <button type="button" data-rombel="8H" onclick="openGradePortal('8','8H')">8H</button>
-            </div>
-          </div>
-
-          <div class="gc-actions">
-            <a href="https://sicibinaga.my.id/kelas8" class="btn-gc-primary" onclick="event.preventDefault(); openGradePortal('8');">
-              <i class="fa-solid fa-right-to-bracket"></i>
-              <span>Buka Aplikasi Kelas 8</span>
-              <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-            <div class="gc-sub-actions">
-              <button type="button" class="btn-gc-secondary" onclick="openInAppView('8')">
-                <i class="fa-solid fa-expand"></i> Layar Penuh
-              </button>
-              <button type="button" class="btn-gc-secondary" onclick="copyLink('https://sicibinaga.my.id/kelas8', 'Kelas 8')">
-                <i class="fa-regular fa-copy"></i> Salin Link
-              </button>
-            </div>
-          </div>
-        </article>
-
-        <!-- KELAS 9: CRIMSON RED -->
-        <article class="grade-card theme-crimson" id="cardGrade9" data-grade="9">
-          <div class="gc-top">
-            <span class="gc-theme-tag"><i class="fa-solid fa-graduation-cap"></i> KELAS 9 • CRIMSON RED</span>
-            <span class="gc-live-badge">
-              <span class="dot"></span>
-              <span id="pingBadge9">21ms • ONLINE</span>
-            </span>
-          </div>
-
-          <div class="gc-identity">
-            <div class="gc-avatar">
-              <img src="logo-sicibinaga.png" alt="Kelas 9" />
-              <span class="gc-num">9</span>
-            </div>
-            <div class="gc-title-box">
-              <span class="gc-eyebrow">PEMANTAPAN TKA &amp; KELULUSAN</span>
-              <h3 class="gc-title">SICIBINAGA Kelas 9</h3>
-              <a href="https://sicibinaga.my.id/kelas9" class="gc-url-pill" onclick="event.preventDefault(); openGradePortal('9');">
-                <i class="fa-solid fa-link"></i>
-                <span>sicibinaga.my.id/kelas9</span>
-              </a>
-            </div>
-          </div>
-
-          <p class="gc-desc">
-            Pemantapan materi komprehensif, simulasi Tes Kemampuan Akademik (TKA Ready), Ujian Sekolah CBT, dan tutor AI Sokratik.
-          </p>
-
-          <div class="gc-rombel-box">
-            <div class="gc-rombel-label">Ketuk Rombel Kelas 9 untuk Masuk:</div>
-            <div class="gc-rombel-grid">
-              <button type="button" data-rombel="9A" onclick="openGradePortal('9','9A')">9A</button>
-              <button type="button" data-rombel="9B" onclick="openGradePortal('9','9B')">9B</button>
-              <button type="button" data-rombel="9C" onclick="openGradePortal('9','9C')">9C</button>
-              <button type="button" data-rombel="9D" onclick="openGradePortal('9','9D')">9D</button>
-              <button type="button" data-rombel="9E" onclick="openGradePortal('9','9E')">9E</button>
-              <button type="button" data-rombel="9F" onclick="openGradePortal('9','9F')">9F</button>
-              <button type="button" data-rombel="9G" onclick="openGradePortal('9','9G')">9G</button>
-              <button type="button" data-rombel="9H" onclick="openGradePortal('9','9H')">9H</button>
-            </div>
-          </div>
-
-          <div class="gc-actions">
-            <a href="https://sicibinaga.my.id/kelas9" class="btn-gc-primary" onclick="event.preventDefault(); openGradePortal('9');">
-              <i class="fa-solid fa-right-to-bracket"></i>
-              <span>Buka Aplikasi Kelas 9</span>
-              <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-            <div class="gc-sub-actions">
-              <button type="button" class="btn-gc-secondary" onclick="openInAppView('9')">
-                <i class="fa-solid fa-expand"></i> Layar Penuh
-              </button>
-              <button type="button" class="btn-gc-secondary" onclick="copyLink('https://sicibinaga.my.id/kelas9', 'Kelas 9')">
-                <i class="fa-regular fa-copy"></i> Salin Link
-              </button>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- 3. INTERAKTIF NEXT-LEVEL HUB (TABS: PEMANASAN HOTS AI, CEK PERANGKAT CBT, TIMER FOKUS, EKOSISTEM) -->
-    <section class="interactive-hub-section" id="fitur-interaktif" aria-label="Fitur Pintar Interaktif">
-      <div class="hub-header-bar">
-        <div>
-          <h2 class="section-heading"><i class="fa-solid fa-wand-magic-sparkles"></i> Smart Interactive Hub</h2>
-          <p class="section-subheading">Fitur interaktif langsung di dashboard sebelum masuk ke ruang ujian atau kelas</p>
-        </div>
-
-        <!-- Segmented App Tabs -->
-        <div class="hub-tabs" role="tablist">
-          <button type="button" class="hub-tab active" data-target="tab-warmup" onclick="switchInteractiveTab('tab-warmup')">
-            <i class="fa-solid fa-brain"></i>
-            <span>Kuis Kilat HOTS AI</span>
-          </button>
-          <button type="button" class="hub-tab" data-target="tab-scanner" onclick="switchInteractiveTab('tab-scanner')">
-            <i class="fa-solid fa-shield-heart"></i>
-            <span>Cek Kesiapan CBT</span>
-          </button>
-          <button type="button" class="hub-tab" data-target="tab-pomodoro" onclick="switchInteractiveTab('tab-pomodoro')">
-            <i class="fa-solid fa-stopwatch"></i>
-            <span>Timer Fokus</span>
-          </button>
-          <button type="button" class="hub-tab" data-target="tab-modules" onclick="switchInteractiveTab('tab-modules')">
-            <i class="fa-solid fa-cubes"></i>
-            <span>3 Pilar Sistem</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- TAB PANE 1: AI DAILY BRAIN WARM-UP (TANTANGAN KILAT HOTS AI) -->
-      <div class="hub-pane" id="tab-warmup">
-        <div class="warmup-card">
-          <div class="warmup-controls-col">
-            <div class="warmup-badge">
-              <i class="fa-solid fa-bolt"></i> POWERED BY GROQ OPENAI/GPT-OSS-120B
-            </div>
-            <h3>Pemanasan Otak HOTS Harian</h3>
-            <p>
-              Asah penalaran kritis sebelum masuk kelas! Pilih jenjang dan topik, lalu AI akan merakit 1 soal tantangan HOTS interaktif secara <em>real-time</em>.
-            </p>
-
-            <div class="warmup-form">
-              <div class="wf-field">
-                <label for="warmupGrade">Pilih Jenjang Kelas</label>
-                <select id="warmupGrade" class="wf-select">
-                  <option value="Kelas 7 SMP">Kelas 7 SMP (Fondasi)</option>
-                  <option value="Kelas 8 SMP" selected>Kelas 8 SMP (AKM/Penalaran)</option>
-                  <option value="Kelas 9 SMP">Kelas 9 SMP (TKA Ready)</option>
-                </select>
-              </div>
-              <div class="wf-field">
-                <label for="warmupSubject">Pilih Bidang Literasi / Sains</label>
-                <select id="warmupSubject" class="wf-select">
-                  <option value="Numerasi & Matematika Kontekstual">🔢 Numerasi &amp; Matematika</option>
-                  <option value="Literasi Membaca Bahasa Indonesia">📖 Literasi Bahasa Indonesia</option>
-                  <option value="Sains & Fenomena IPA">🔬 Sains &amp; Fenomena IPA</option>
-                  <option value="Literasi Bahasa Inggris">🌍 Bahasa Inggris Kontekstual</option>
-                </select>
-              </div>
-              <button type="button" class="btn-generate-quiz" id="btnGenQuiz" onclick="generateAiWarmupQuiz()">
-                <i class="fa-solid fa-wand-magic-sparkles"></i>
-                <span>Buat Soal Tantangan AI Baru</span>
+        <!-- TOP-LEFT CARD: OVERVIEW, STRIPED BAR CHART & QUICK ROMBEL LAUNCHER -->
+        <section class="bento-card card-overview-main" aria-label="Ikhtisar Ekosistem SICIBINAGA">
+          <!-- Filter / Control Pills Header -->
+          <div class="bento-filter-bar">
+            <div class="filter-pill-SelectWrap">
+              <span class="filter-icon-circle"><i class="fa-solid fa-compass"></i></span>
+              <select id="quickRombelSelect" class="filter-clean-select" aria-label="Pilih Rombel Cepat 7A sampai 9H" onchange="playClickSound()">
+                <option value="">Pilih Rombel Cepat (7A – 9H)</option>
+                <optgroup label="🟢 Kelas 7 — Hijau Zamrud">
+                  <option value="7|7A">Rombel Kelas 7A</option>
+                  <option value="7|7B">Rombel Kelas 7B</option>
+                  <option value="7|7C">Rombel Kelas 7C</option>
+                  <option value="7|7D">Rombel Kelas 7D</option>
+                  <option value="7|7E">Rombel Kelas 7E</option>
+                  <option value="7|7F">Rombel Kelas 7F</option>
+                  <option value="7|7G">Rombel Kelas 7G</option>
+                  <option value="7|7H">Rombel Kelas 7H</option>
+                </optgroup>
+                <optgroup label="🟡 Kelas 8 — Kuning Emerald">
+                  <option value="8|8A">Rombel Kelas 8A</option>
+                  <option value="8|8B">Rombel Kelas 8B</option>
+                  <option value="8|8C">Rombel Kelas 8C</option>
+                  <option value="8|8D">Rombel Kelas 8D</option>
+                  <option value="8|8E">Rombel Kelas 8E</option>
+                  <option value="8|8F">Rombel Kelas 8F</option>
+                  <option value="8|8G">Rombel Kelas 8G</option>
+                  <option value="8|8H">Rombel Kelas 8H</option>
+                </optgroup>
+                <optgroup label="🔴 Kelas 9 — Crimson Red">
+                  <option value="9|9A">Rombel Kelas 9A</option>
+                  <option value="9|9B">Rombel Kelas 9B</option>
+                  <option value="9|9C">Rombel Kelas 9C</option>
+                  <option value="9|9D">Rombel Kelas 9D</option>
+                  <option value="9|9E">Rombel Kelas 9E</option>
+                  <option value="9|9F">Rombel Kelas 9F</option>
+                  <option value="9|9G">Rombel Kelas 9G</option>
+                  <option value="9|9H">Rombel Kelas 9H</option>
+                </optgroup>
+              </select>
+              <button type="button" class="btn-filter-go" onclick="launchByRombelSelect()">
+                Masuk <i class="fa-solid fa-arrow-right"></i>
               </button>
             </div>
 
-            <div class="warmup-score-box">
-              <div>
-                <span class="ws-lbl">Skor Pemanasanmu</span>
-                <strong class="ws-val" id="warmupXpScore">0 XP</strong>
-              </div>
-              <div class="ws-divider"></div>
-              <div>
-                <span class="ws-lbl">Terjawab Benar</span>
-                <strong class="ws-val" id="warmupCorrectCount">0 Soal</strong>
+            <div class="filter-right-pills">
+              <button type="button" class="pill-dropdown-btn" onclick="pinSelectedRombel()" title="Simpan sebagai Rombel Tetap">
+                <i class="fa-solid fa-thumbtack" style="color:#f97316;"></i>
+                <span id="pinnedClassLabel">Pin Rombel</span>
+              </button>
+              <div class="pill-dropdown-btn clock-pill-top">
+                <span class="dot-live-green"></span>
+                <span id="liveClockWib">--:-- WIB</span>
               </div>
             </div>
           </div>
 
-          <div class="warmup-stage-col" id="warmupQuizStage">
-            <!-- Default Interactive HOTS Question Loaded Immediately -->
-          </div>
-        </div>
-      </div>
+          <!-- Split Body: Left Green Striped Chart Box + Right Overview Stats -->
+          <div class="overview-split-body">
+            <!-- Left Deep Emerald Striped Chart Box -->
+            <div class="emerald-chart-stage">
+              <div class="chart-stage-top">
+                <span class="chart-tag-orange" id="chartActiveTag">3 Server Aktif</span>
+                <span class="chart-caption-right">Trafik &amp; Stabilitas Klaster</span>
+              </div>
 
-      <!-- TAB PANE 2: PRE-CBT DEVICE & NETWORK READINESS SCANNER -->
-      <div class="hub-pane hidden" id="tab-scanner">
-        <div class="scanner-card">
-          <div class="scanner-top">
-            <div>
-              <span class="warmup-badge"><i class="fa-solid fa-satellite-dish"></i> DIAGNOSTIK PERANGKAT UJIAN</span>
-              <h3>Cek Kesiapan Perangkat &amp; Jaringan CBT Anti-Cheat</h3>
-              <p>Pastikan smartphone atau laptopmu memenuhi syarat keamanan <em>Fullscreen Lockdown</em> sebelum memulai ujian resmi.</p>
+              <div class="chart-bars-layout">
+                <div class="chart-y-axis">
+                  <span>100%</span>
+                  <span>75%</span>
+                  <span>50%</span>
+                  <span>0%</span>
+                </div>
+
+                <div class="chart-columns-wrap" id="telemetryBarsWrap">
+                  <div class="bar-col-item" onclick="openGradePortal('7','7A')">
+                    <div class="bar-fill striped-bar" style="height: 68%;" title="Klaster 7A-7D: Stabil"></div>
+                    <span class="bar-day">K7-A</span>
+                  </div>
+                  <div class="bar-col-item" onclick="openGradePortal('7','7E')">
+                    <div class="bar-fill striped-bar" style="height: 54%;" title="Klaster 7E-7H: Stabil"></div>
+                    <span class="bar-day">K7-B</span>
+                  </div>
+                  <div class="bar-col-item" onclick="openGradePortal('8','8A')">
+                    <div class="bar-fill striped-bar" style="height: 76%;" title="Klaster 8A-8D: Aktif"></div>
+                    <span class="bar-day">K8-A</span>
+                  </div>
+                  <div class="bar-col-item active-yellow-bar" onclick="openGradePortal('8')">
+                    <div class="bar-fill yellow-highlight-bar" style="height: 96%;" title="Puncak Performa Multi-Server 100%"></div>
+                    <span class="bar-day">OPTIMAL</span>
+                  </div>
+                  <div class="bar-col-item" onclick="openGradePortal('8','8E')">
+                    <div class="bar-fill striped-bar" style="height: 84%;" title="Klaster 8E-8H: Aktif"></div>
+                    <span class="bar-day">K8-B</span>
+                  </div>
+                  <div class="bar-col-item" onclick="openGradePortal('9','9A')">
+                    <div class="bar-fill striped-bar" style="height: 72%;" title="Klaster 9A-9D TKA: Stabil"></div>
+                    <span class="bar-day">K9-A</span>
+                  </div>
+                  <div class="bar-col-item" onclick="openGradePortal('9','9E')">
+                    <div class="bar-fill striped-bar" style="height: 80%;" title="Klaster 9E-9H TKA: Stabil"></div>
+                    <span class="bar-day">K9-B</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <button type="button" class="btn-run-scan" id="btnRunScan" onclick="runCbtDeviceScanner()">
+
+            <!-- Right Overview Summary & Description -->
+            <div class="overview-summary-col">
+              <div class="summary-head-pill">
+                <span class="summary-icon-orange"><i class="fa-solid fa-chart-simple"></i></span>
+                <span class="summary-head-title">SICIBINAGA Overview</span>
+              </div>
+
+              <div class="summary-big-metric">
+                <span class="metric-Delta-pill">+100% Ready</span>
+                <div class="metric-hero-val" id="heroMainMetric">24 Rombel</div>
+              </div>
+
+              <p class="summary-concise-desc">
+                <strong>SICIBINAGA</strong> menyatukan <strong>LMS 5 Langkah</strong>, <strong>Ujian CBT Anti-Cheat</strong>, dan <strong>Live Arena Quiz</strong> dalam 3 server mandiri (Kelas 7, 8 &amp; 9) agar bebas <em>server down</em>.
+              </p>
+
+              <div class="summary-trends-row">
+                <div class="trend-item">
+                  <div class="trend-val-line">
+                    <strong>99.9%</strong>
+                    <i class="fa-solid fa-arrow-up"></i>
+                  </div>
+                  <span class="trend-sub">Stabilitas CBT</span>
+                </div>
+                <div class="trend-item">
+                  <div class="trend-val-line">
+                    <strong id="avgPingMetric">21ms</strong>
+                    <i class="fa-solid fa-arrow-up"></i>
+                  </div>
+                  <span class="trend-sub">Respon Server</span>
+                </div>
+              </div>
+
+              <div class="summary-foot-note" id="lastVisitText">
+                Terintegrasi Groq AI (openai/gpt-oss-120b)
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TOP-RIGHT CARD: PORTAL AKSES JENJANG KELAS (KELAS 7, 8, 9) -->
+        <section class="bento-card card-grade-portals" id="pilih-jenjang" aria-label="Portal Jenjang Kelas 7, 8, dan 9">
+          <div class="bento-card-header">
+            <h2 class="bento-title-emerald">Portal Jenjang Kelas</h2>
+            <button type="button" class="btn-circle-action" onclick="measureAllServerPings(true)" title="Segarkan Ping Server Kelas 7, 8, dan 9">
               <i class="fa-solid fa-rotate"></i>
-              <span>Pindai Ulang Sekarang</span>
             </button>
           </div>
 
-          <div class="scanner-grid" id="scannerGrid">
-            <div class="scan-item" id="scanBrowser">
-              <div class="scan-icon"><i class="fa-brands fa-chrome"></i></div>
-              <div class="scan-info">
-                <span class="scan-label">Kompatibilitas Browser</span>
-                <strong class="scan-val" id="scanBrowserVal">Memeriksa...</strong>
+          <div class="appointment-Portal-list">
+            <!-- ITEM KELAS 7: HIJAU ZAMRUD -->
+            <article class="portal-row-card row-theme-k7" id="cardGrade7">
+              <div class="pr-main-row">
+                <div class="pr-avatar badge-k7" onclick="openGradePortal('7')">
+                  <img src="logo-sicibinaga.png" alt="Kelas 7" />
+                  <span class="pr-grade-num">7</span>
+                </div>
+                <div class="pr-info" onclick="openGradePortal('7')">
+                  <h3 class="pr-name">SICIBINAGA Kelas 7</h3>
+                  <div class="pr-tags">
+                    <span class="pr-pill pill-emerald">Hijau Zamrud</span>
+                    <span class="pr-url-text">/kelas7</span>
+                  </div>
+                </div>
+                <div class="pr-right">
+                  <span class="pr-ping" id="pingBadge7">22ms • Online</span>
+                  <div class="pr-btn-group">
+                    <a href="https://sicibinaga.my.id/kelas7" class="btn-pr-launch launch-k7" onclick="event.preventDefault(); openGradePortal('7');">
+                      Buka <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                    <button type="button" class="btn-pr-embed" onclick="openInAppView('7')" title="Buka Layar Penuh">
+                      <i class="fa-solid fa-expand"></i>
+                    </button>
+                  </div>
+                </div>
               </div>
-              <span class="scan-status" id="scanBrowserStatus">...</span>
-            </div>
+              <!-- Rombel 7A - 7H Pills -->
+              <div class="pr-rombel-strip">
+                <button type="button" data-rombel="7A" onclick="openGradePortal('7','7A')">7A</button>
+                <button type="button" data-rombel="7B" onclick="openGradePortal('7','7B')">7B</button>
+                <button type="button" data-rombel="7C" onclick="openGradePortal('7','7C')">7C</button>
+                <button type="button" data-rombel="7D" onclick="openGradePortal('7','7D')">7D</button>
+                <button type="button" data-rombel="7E" onclick="openGradePortal('7','7E')">7E</button>
+                <button type="button" data-rombel="7F" onclick="openGradePortal('7','7F')">7F</button>
+                <button type="button" data-rombel="7G" onclick="openGradePortal('7','7G')">7G</button>
+                <button type="button" data-rombel="7H" onclick="openGradePortal('7','7H')">7H</button>
+              </div>
+            </article>
 
-            <div class="scan-item" id="scanFullscreen">
-              <div class="scan-icon"><i class="fa-solid fa-expand"></i></div>
-              <div class="scan-info">
-                <span class="scan-label">Dukungan Fullscreen Lock CBT</span>
-                <strong class="scan-val" id="scanFullscreenVal">Memeriksa...</strong>
+            <!-- ITEM KELAS 8: KUNING EMERALD -->
+            <article class="portal-row-card row-theme-k8" id="cardGrade8">
+              <div class="pr-main-row">
+                <div class="pr-avatar badge-k8" onclick="openGradePortal('8')">
+                  <img src="logo-sicibinaga.png" alt="Kelas 8" />
+                  <span class="pr-grade-num">8</span>
+                </div>
+                <div class="pr-info" onclick="openGradePortal('8')">
+                  <h3 class="pr-name">SICIBINAGA Kelas 8</h3>
+                  <div class="pr-tags">
+                    <span class="pr-pill pill-gold-emerald">Kuning Emerald</span>
+                    <span class="pr-url-text">/kelas8</span>
+                  </div>
+                </div>
+                <div class="pr-right">
+                  <span class="pr-ping" id="pingBadge8">19ms • Online</span>
+                  <div class="pr-btn-group">
+                    <a href="https://sicibinaga.my.id/kelas8" class="btn-pr-launch launch-k8" onclick="event.preventDefault(); openGradePortal('8');">
+                      Buka <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                    <button type="button" class="btn-pr-embed" onclick="openInAppView('8')" title="Buka Layar Penuh">
+                      <i class="fa-solid fa-expand"></i>
+                    </button>
+                  </div>
+                </div>
               </div>
-              <span class="scan-status" id="scanFullscreenStatus">...</span>
-            </div>
+              <!-- Rombel 8A - 8H Pills -->
+              <div class="pr-rombel-strip">
+                <button type="button" data-rombel="8A" onclick="openGradePortal('8','8A')">8A</button>
+                <button type="button" data-rombel="8B" onclick="openGradePortal('8','8B')">8B</button>
+                <button type="button" data-rombel="8C" onclick="openGradePortal('8','8C')">8C</button>
+                <button type="button" data-rombel="8D" onclick="openGradePortal('8','8D')">8D</button>
+                <button type="button" data-rombel="8E" onclick="openGradePortal('8','8E')">8E</button>
+                <button type="button" data-rombel="8F" onclick="openGradePortal('8','8F')">8F</button>
+                <button type="button" data-rombel="8G" onclick="openGradePortal('8','8G')">8G</button>
+                <button type="button" data-rombel="8H" onclick="openGradePortal('8','8H')">8H</button>
+              </div>
+            </article>
 
-            <div class="scan-item" id="scanNetwork">
-              <div class="scan-icon"><i class="fa-solid fa-wifi"></i></div>
-              <div class="scan-info">
-                <span class="scan-label">Koneksi &amp; Latensi Server</span>
-                <strong class="scan-val" id="scanNetworkVal">Memeriksa...</strong>
+            <!-- ITEM KELAS 9: CRIMSON RED -->
+            <article class="portal-row-card row-theme-k9" id="cardGrade9">
+              <div class="pr-main-row">
+                <div class="pr-avatar badge-k9" onclick="openGradePortal('9')">
+                  <img src="logo-sicibinaga.png" alt="Kelas 9" />
+                  <span class="pr-grade-num">9</span>
+                </div>
+                <div class="pr-info" onclick="openGradePortal('9')">
+                  <h3 class="pr-name">SICIBINAGA Kelas 9</h3>
+                  <div class="pr-tags">
+                    <span class="pr-pill pill-crimson">Crimson Red</span>
+                    <span class="pr-url-text">/kelas9</span>
+                  </div>
+                </div>
+                <div class="pr-right">
+                  <span class="pr-ping" id="pingBadge9">21ms • Online</span>
+                  <div class="pr-btn-group">
+                    <a href="https://sicibinaga.my.id/kelas9" class="btn-pr-launch launch-k9" onclick="event.preventDefault(); openGradePortal('9');">
+                      Buka <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                    <button type="button" class="btn-pr-embed" onclick="openInAppView('9')" title="Buka Layar Penuh">
+                      <i class="fa-solid fa-expand"></i>
+                    </button>
+                  </div>
+                </div>
               </div>
-              <span class="scan-status" id="scanNetworkStatus">...</span>
-            </div>
-
-            <div class="scan-item" id="scanScreen">
-              <div class="scan-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
-              <div class="scan-info">
-                <span class="scan-label">Resolusi &amp; Mode Layar</span>
-                <strong class="scan-val" id="scanScreenVal">Memeriksa...</strong>
+              <!-- Rombel 9A - 9H Pills -->
+              <div class="pr-rombel-strip">
+                <button type="button" data-rombel="9A" onclick="openGradePortal('9','9A')">9A</button>
+                <button type="button" data-rombel="9B" onclick="openGradePortal('9','9B')">9B</button>
+                <button type="button" data-rombel="9C" onclick="openGradePortal('9','9C')">9C</button>
+                <button type="button" data-rombel="9D" onclick="openGradePortal('9','9D')">9D</button>
+                <button type="button" data-rombel="9E" onclick="openGradePortal('9','9E')">9E</button>
+                <button type="button" data-rombel="9F" onclick="openGradePortal('9','9F')">9F</button>
+                <button type="button" data-rombel="9G" onclick="openGradePortal('9','9G')">9G</button>
+                <button type="button" data-rombel="9H" onclick="openGradePortal('9','9H')">9H</button>
               </div>
-              <span class="scan-status" id="scanScreenStatus">...</span>
-            </div>
+            </article>
           </div>
+        </section>
 
-          <div class="scanner-verdict" id="scannerVerdict">
-            <i class="fa-solid fa-circle-check"></i>
-            <span>Perangkat Anda <strong>SIAP 100%</strong> untuk mengikuti Ujian CBT Anti-Cheat &amp; Live Arena SICIBINAGA.</span>
-          </div>
-        </div>
       </div>
 
-      <!-- TAB PANE 3: POMODORO STUDY FOCUS TIMER -->
-      <div class="hub-pane hidden" id="tab-pomodoro">
-        <div class="pomodoro-card">
-          <div class="pomo-left">
-            <span class="warmup-badge"><i class="fa-solid fa-hourglass-half"></i> SMART STUDY TIMER</span>
-            <h3>Timer Fokus Belajar Mandiri</h3>
-            <p>Gunakan teknik fokus terukur saat membaca Pilar Materi LMS atau berlatih soal TKA agar tidak cepat lelah.</p>
-            <div class="pomo-presets">
-              <button type="button" class="pomo-preset active" onclick="setPomodoroMode(25, 'Fokus Belajar 25 Menit', this)">🎯 Fokus 25m</button>
-              <button type="button" class="pomo-preset" onclick="setPomodoroMode(15, 'Latihan Kilat 15 Menit', this)">⚡ Kilat 15m</button>
-              <button type="button" class="pomo-preset" onclick="setPomodoroMode(5, 'Istirahat Singkat 5 Menit', this)">☕ Rehat 5m</button>
-            </div>
-          </div>
+      <!-- ================= BOTTOM ROW (3 BENTO CARDS) ================= -->
+      <div class="bento-row-bottom" id="fitur-interaktif">
 
-          <div class="pomo-center">
-            <div class="pomo-ring">
-              <span class="pomo-mode-lbl" id="pomoModeLabel">Fokus Belajar 25 Menit</span>
-              <div class="pomo-time-display" id="pomoTimeDisplay">25:00</div>
-            </div>
-            <div class="pomo-actions">
-              <button type="button" class="btn-pomo-main" id="btnPomoToggle" onclick="togglePomodoroTimer()">
-                <i class="fa-solid fa-play"></i> <span>Mulai Fokus</span>
+        <!-- BOTTOM-LEFT CARD: SMART INTERACTIVE HUB (KUIS HOTS AI / DIAGNOSTIK CBT / POMODORO) -->
+        <section class="bento-card card-interactive-hub" aria-label="Pusat Interaktif Siswa">
+          <div class="bento-card-header">
+            <h2 class="bento-title-emerald" id="hubCardTitle">Pemanasan HOTS AI</h2>
+            <div class="mini-hub-switcher">
+              <button type="button" class="mhub-btn active" data-target="tab-warmup" onclick="switchInteractiveTab('tab-warmup')">
+                🧠 HOTS
               </button>
-              <button type="button" class="btn-pomo-reset" onclick="resetPomodoroTimer()" title="Reset Waktu">
-                <i class="fa-solid fa-rotate-left"></i>
+              <button type="button" class="mhub-btn" data-target="tab-scanner" onclick="switchInteractiveTab('tab-scanner')">
+                🛡️ Cek CBT
+              </button>
+              <button type="button" class="mhub-btn" data-target="tab-pomodoro" onclick="switchInteractiveTab('tab-pomodoro')">
+                ⏱️ Fokus
               </button>
             </div>
           </div>
-        </div>
-      </div>
 
-      <!-- TAB PANE 4: 3 PILAR FUNGSIONALITAS INTI -->
-      <div class="hub-pane hidden" id="tab-modules">
-        <div class="modules-grid">
-          <div class="module-item">
-            <div class="mod-icon mod-cbt"><i class="fa-solid fa-shield-halved"></i></div>
-            <div class="mod-body">
-              <h3>Sistem Ujian CBT Anti-Cheat</h3>
-              <p>
-                Mendukung 6 tipe soal AKM &amp; TKA (PG, PG Kompleks, Benar-Salah, Menjodohkan, Sebab-Akibat, Isian Singkat) dengan penguncian layar penuh (<em>Fullscreen Lock</em>), deteksi pindah aplikasi, Token Pengawas, dan penyimpanan otomatis.
-              </p>
+          <!-- PANE 1: AI DAILY BRAIN WARM-UP -->
+          <div class="hub-bento-pane" id="tab-warmup">
+            <div class="warmup-filter-row">
+              <select id="warmupGrade" class="compact-select">
+                <option value="Kelas 7 SMP">Kelas 7</option>
+                <option value="Kelas 8 SMP" selected>Kelas 8</option>
+                <option value="Kelas 9 SMP">Kelas 9</option>
+              </select>
+              <select id="warmupSubject" class="compact-select" style="flex:1;">
+                <option value="Numerasi & Matematika Kontekstual">🔢 Numerasi</option>
+                <option value="Literasi Membaca Bahasa Indonesia">📖 Literasi</option>
+                <option value="Sains & Fenomena IPA">🔬 Sains IPA</option>
+                <option value="Literasi Bahasa Inggris">🌍 B. Inggris</option>
+              </select>
+              <button type="button" class="btn-follow-pill" id="btnGenQuiz" onclick="generateAiWarmupQuiz()">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Soal AI
+              </button>
+            </div>
+
+            <div id="warmupQuizStage" class="warmup-bento-stage"></div>
+          </div>
+
+          <!-- PANE 2: PRE-CBT DEVICE SCANNER (STYLED LIKE TOP BARBER'S LIST!) -->
+          <div class="hub-bento-pane hidden" id="tab-scanner">
+            <div class="specialist-list">
+              <div class="spec-row">
+                <div class="spec-avatar icon-bg-amber"><i class="fa-brands fa-chrome"></i></div>
+                <div class="spec-meta">
+                  <strong id="scanBrowserVal">Browser Resmi</strong>
+                  <span>Kompatibilitas CBT <em class="star-tag">★ 5.0</em></span>
+                </div>
+                <button type="button" class="btn-follow-pill" id="scanBrowserStatus" onclick="runCbtDeviceScanner()">Optimal</button>
+              </div>
+
+              <div class="spec-row">
+                <div class="spec-avatar icon-bg-emerald"><i class="fa-solid fa-expand"></i></div>
+                <div class="spec-meta">
+                  <strong id="scanFullscreenVal">Fullscreen Lock API</strong>
+                  <span>Keamanan Anti-Cheat <em class="star-tag">★ 5.0</em></span>
+                </div>
+                <button type="button" class="btn-follow-pill" id="scanFullscreenStatus" onclick="runCbtDeviceScanner()">Siap CBT</button>
+              </div>
+
+              <div class="spec-row">
+                <div class="spec-avatar icon-bg-blue"><i class="fa-solid fa-wifi"></i></div>
+                <div class="spec-meta">
+                  <strong id="scanNetworkVal">Koneksi &amp; Latensi</strong>
+                  <span>Jaringan Multi-Server <em class="star-tag">★ 4.9</em></span>
+                </div>
+                <button type="button" class="btn-follow-pill" id="scanNetworkStatus" onclick="runCbtDeviceScanner()">Stabil</button>
+              </div>
+
+              <div class="spec-row">
+                <div class="spec-avatar icon-bg-rose"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                <div class="spec-meta">
+                  <strong id="scanScreenVal">Resolusi Adaptif</strong>
+                  <span>Mode Layar Perangkat <em class="star-tag">★ 5.0</em></span>
+                </div>
+                <button type="button" class="btn-follow-pill" id="scanScreenStatus" onclick="runCbtDeviceScanner()">Responsif</button>
+              </div>
             </div>
           </div>
 
-          <div class="module-item">
-            <div class="mod-icon mod-lms"><i class="fa-solid fa-book-open-reader"></i></div>
-            <div class="mod-body">
-              <h3>LMS Konstruktif 5 Langkah</h3>
-              <p>
-                Alur belajar aktif terstruktur: <strong>(1)</strong> Video Interaktif, <strong>(2)</strong> Pilar Materi Inti, <strong>(3)</strong> Flashcard 3D <em>Active Recall</em>, <strong>(4)</strong> Studi Kasus &amp; Diskusi Socratic AI Tutor, serta <strong>(5)</strong> Kuis Formatif Berpembahasan.
-              </p>
+          <!-- PANE 3: POMODORO FOCUS TIMER -->
+          <div class="hub-bento-pane hidden" id="tab-pomodoro">
+            <div class="bento-pomo-wrap">
+              <div class="pomo-presets-row">
+                <button type="button" class="pomo-chip active" onclick="setPomodoroMode(25, 'Fokus Belajar 25 Menit', this)">25m Fokus</button>
+                <button type="button" class="pomo-chip" onclick="setPomodoroMode(15, 'Latihan Kilat 15 Menit', this)">15m Kilat</button>
+                <button type="button" class="pomo-chip" onclick="setPomodoroMode(5, 'Istirahat 5 Menit', this)">5m Rehat</button>
+              </div>
+              <div class="pomo-clock-box">
+                <span id="pomoModeLabel" class="pomo-sub-lbl">Fokus Belajar 25 Menit</span>
+                <div id="pomoTimeDisplay" class="pomo-digits">25:00</div>
+              </div>
+              <div class="pomo-btn-row">
+                <button type="button" class="btn-pomo-start" id="btnPomoToggle" onclick="togglePomodoroTimer()">
+                  <i class="fa-solid fa-play"></i> <span>Mulai Fokus</span>
+                </button>
+                <button type="button" class="btn-pomo-rst" onclick="resetPomodoroTimer()" title="Reset Timer">
+                  <i class="fa-solid fa-rotate-left"></i>
+                </button>
+              </div>
             </div>
           </div>
+        </section>
 
-          <div class="module-item">
-            <div class="mod-icon mod-arena"><i class="fa-solid fa-trophy"></i></div>
-            <div class="mod-body">
-              <h3>Live Arena Quiz &amp; Gamifikasi</h3>
-              <p>
-                Turnamen kuis interaktif sinkron satu kelas menggunakan PIN Room dengan papan klasemen langsung (<em>Real-time Leaderboard</em>), sistem 7 Level Cendekia, XP, serta 16 koleksi Lencana Bingkai Avatar.
-              </p>
+        <!-- BOTTOM-MIDDLE CARD: INDEKS PERFORMA & SKOR XP (STYLED LIKE REVENUE SUMMARY WAVE CHART) -->
+        <section class="bento-card card-wave-summary" aria-label="Ringkasan Skor XP dan Kesiapan">
+          <div class="bento-card-header">
+            <h2 class="bento-title-emerald">Indeks Kesiapan &amp; XP</h2>
+            <button type="button" class="btn-circle-action" onclick="switchInteractiveTab('tab-scanner')" title="Lihat Detail Kesiapan Perangkat">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </button>
+          </div>
+
+          <div class="revenue-inner-box">
+            <div class="rev-top-row">
+              <div>
+                <span class="rev-label">Skor Aktivitas &amp; Kuis HOTS</span>
+                <div class="rev-big-orange" id="warmupXpScore">100 XP</div>
+              </div>
+              <span class="rev-blue-pill" id="warmupCorrectCount">
+                <i class="fa-solid fa-arrow-up"></i> Siap TKA
+              </span>
+            </div>
+
+            <!-- Smooth Orange Wave Chart with Hatched Vertical Lines -->
+            <div class="wave-svg-container">
+              <svg viewBox="0 0 320 115" class="wave-svg" preserveAspectRatio="none">
+                <defs>
+                  <pattern id="hatchPattern" width="6" height="10" patternTransform="rotate(0 0 0)" patternUnits="userSpaceOnUse">
+                    <line x1="0" y1="0" x2="0" y2="10" stroke="#f97316" stroke-width="1.5" stroke-opacity="0.28" />
+                  </pattern>
+                  <linearGradient id="waveFade" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#f97316" stop-opacity="0.35" />
+                    <stop offset="100%" stop-color="#f97316" stop-opacity="0.0" />
+                  </linearGradient>
+                </defs>
+                <!-- Area under curve filled with vertical hatch lines -->
+                <path d="M0,95 C25,65 45,65 70,80 C95,95 115,35 145,45 C170,55 185,30 210,55 C235,80 255,40 285,60 C300,70 310,65 320,75 L320,110 L0,110 Z" fill="url(#waveFade)" />
+                <path d="M0,95 C25,65 45,65 70,80 C95,95 115,35 145,45 C170,55 185,30 210,55 C235,80 255,40 285,60 C300,70 310,65 320,75 L320,110 L0,110 Z" fill="url(#hatchPattern)" />
+                <!-- Smooth Orange Stroke Line -->
+                <path d="M0,95 C25,65 45,65 70,80 C95,95 115,35 145,45 C170,55 185,30 210,55 C235,80 255,40 285,60 C300,70 310,65 320,75" fill="none" stroke="#ea580c" stroke-width="3" stroke-linecap="round" />
+              </svg>
+              <div class="wave-x-labels">
+                <span>K7</span>
+                <span>K8</span>
+                <span>K9</span>
+                <span>LMS</span>
+                <span>CBT</span>
+                <span>TKA</span>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
 
-  </main>
+        <!-- BOTTOM-RIGHT CARD: LAYANAN & MODUL INTI (VIBRANT ORANGE CARD LIKE "TOP SERVICES") -->
+        <section class="bento-card card-orange-services" aria-label="Layanan Utama Ekosistem SICIBINAGA">
+          <h2 class="services-card-title">Layanan &amp; Modul Inti</h2>
 
-  <!-- MINIMALIST FOOTER -->
-  <footer class="app-footer">
-    <div class="container footer-inner">
-      <div class="footer-left">
-        <img src="favicon.png" alt="Logo" class="footer-mini-logo" />
-        <span>&copy; 2026 <strong>SICIBINAGA (TKA Ready)</strong> — UPTD SMP Negeri 3 Bangil</span>
+          <div class="services-pills-stack">
+            <button type="button" class="service-frosted-pill" onclick="toggleAiChat(true); sendQuickPrompt('Bagaimana cara login dan aturan keamanan Anti-Cheat saat ujian CBT?');">
+              <span class="srv-icon-circle"><i class="fa-solid fa-shield-halved"></i></span>
+              <span class="srv-name">Ujian CBT Anti-Cheat</span>
+              <span class="srv-count-badge"><i class="fa-solid fa-layer-group"></i> 6 Tipe</span>
+            </button>
+
+            <button type="button" class="service-frosted-pill" onclick="toggleAiChat(true); sendQuickPrompt('Jelaskan 5 langkah belajar di LMS Konstruktif SICIBINAGA!');">
+              <span class="srv-icon-circle"><i class="fa-solid fa-book-open-reader"></i></span>
+              <span class="srv-name">LMS Konstruktif</span>
+              <span class="srv-count-badge"><i class="fa-solid fa-shoe-prints"></i> 5 Tahap</span>
+            </button>
+
+            <button type="button" class="service-frosted-pill" onclick="toggleAiChat(true); sendQuickPrompt('Bagaimana cara mengikuti Live Arena Quiz dan meningkatkan Level/Badge?');">
+              <span class="srv-icon-circle"><i class="fa-solid fa-trophy"></i></span>
+              <span class="srv-name">Live Arena &amp; Badge</span>
+              <span class="srv-count-badge"><i class="fa-solid fa-medal"></i> 16 Badge</span>
+            </button>
+
+            <button type="button" class="service-frosted-pill" onclick="toggleAiChat(true)">
+              <span class="srv-icon-circle"><i class="fa-solid fa-robot"></i></span>
+              <span class="srv-name">Tanya AI Sokratik</span>
+              <span class="srv-count-badge"><i class="fa-solid fa-bolt"></i> OSS-120B</span>
+            </button>
+          </div>
+        </section>
+
       </div>
-      <div class="footer-links">
-        <a href="https://sicibinaga.my.id/kelas7" onclick="event.preventDefault(); openGradePortal('7');">Kelas 7</a>
+
+    </main>
+
+    <!-- COMPACT BENTO FOOTER -->
+    <footer class="bento-footer">
+      <span>&copy; 2026 <strong>SICIBINAGA (TKA Ready)</strong> — UPTD SMP Negeri 3 Bangil</span>
+      <div class="bento-footer-links">
+        <a href="https://sicibinaga.my.id/kelas7" onclick="event.preventDefault(); openGradePortal('7');">Kelas 7 (Zamrud)</a>
         <span>•</span>
-        <a href="https://sicibinaga.my.id/kelas8" onclick="event.preventDefault(); openGradePortal('8');">Kelas 8</a>
+        <a href="https://sicibinaga.my.id/kelas8" onclick="event.preventDefault(); openGradePortal('8');">Kelas 8 (Kuning Emerald)</a>
         <span>•</span>
-        <a href="https://sicibinaga.my.id/kelas9" onclick="event.preventDefault(); openGradePortal('9');">Kelas 9</a>
+        <a href="https://sicibinaga.my.id/kelas9" onclick="event.preventDefault(); openGradePortal('9');">Kelas 9 (Crimson Red)</a>
       </div>
-    </div>
-  </footer>
+    </footer>
+
+  </div>
 
   <!-- FLOATING CAPSULE WIDGET: TANYA AI SICIBINAGA (WITH VOICE & TTS) -->
   <button type="button" class="ai-capsule-widget" id="aiCapsuleBtn" onclick="toggleAiChat(true)" aria-label="Buka Asisten Tanya AI SICIBINAGA">
@@ -613,14 +576,14 @@
     </span>
     <span class="ai-capsule-text">
       <span class="ai-capsule-title">Tanya AI SICIBINAGA</span>
-      <span class="ai-capsule-sub">Suara &amp; Chat • OSS-120B</span>
+      <span class="ai-capsule-sub">Asisten Suara &amp; QnA • OSS-120B</span>
     </span>
   </button>
 
   <!-- MOBILE SMARTPHONE BOTTOM NAVIGATION BAR -->
   <nav class="mobile-bottom-nav" aria-label="Navigasi Smartphone">
     <a href="#beranda" class="mnav-item active" onclick="setActiveMobileNav(this)">
-      <i class="fa-solid fa-house"></i>
+      <i class="fa-solid fa-table-columns"></i>
       <span>Dashboard</span>
     </a>
     <a href="#pilih-jenjang" class="mnav-item" onclick="setActiveMobileNav(this)">
@@ -669,7 +632,6 @@
         </div>
       </header>
 
-      <!-- Quick Prompt Chips -->
       <div class="ai-quick-prompts" id="aiQuickPrompts">
         <button type="button" class="ai-chip" onclick="sendQuickPrompt('Apa itu aplikasi SICIBINAGA dan bagaimana pembagian link kelasnya?')">
           ✨ Apa itu SICIBINAGA?
@@ -688,10 +650,8 @@
         </button>
       </div>
 
-      <!-- Chat Messages Body -->
       <div class="ai-chat-messages" id="aiChatMessages"></div>
 
-      <!-- Input Form with Voice Microphone -->
       <form class="ai-chat-input-bar" id="aiChatForm" onsubmit="handleAiFormSubmit(event)">
         <button type="button" class="btn-ai-mic" id="btnAiMic" onclick="toggleVoiceRecognition()" title="Bicara dengan Suara (Voice Input)">
           <i class="fa-solid fa-microphone"></i>
@@ -752,7 +712,7 @@
             <option value="9|9E">Kelas 9E</option><option value="9|9F">Kelas 9F</option><option value="9|9G">Kelas 9G</option><option value="9|9H">Kelas 9H</option>
           </select>
         </div>
-        <button type="button" class="btn-generate-quiz" onclick="saveStudentProfile()">
+        <button type="button" class="btn-save-profile" onclick="saveStudentProfile()">
           <i class="fa-solid fa-check"></i> Simpan Profil Dashboard
         </button>
       </div>

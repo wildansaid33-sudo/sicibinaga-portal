@@ -1,6 +1,6 @@
 // =========================================================================
 // SICIBINAGA • TKA READY (SMP NEGERI 3 BANGIL)
-// NEXT-LEVEL SUPERAPP DASHBOARD CONTROLLER & GROQ AI ENGINE (OSS-120B)
+// MODERN BENTO SUPERAPP DASHBOARD CONTROLLER & GROQ AI ENGINE (OSS-120B)
 // Portal Resmi: https://sicibinaga.my.id
 // =========================================================================
 
@@ -59,11 +59,11 @@ let aiConversationHistory = [];
 let isAiLoading = false;
 let soundFxEnabled = true;
 let aiTtsEnabled = false;
-let warmupXp = 0;
-let warmupCorrect = 0;
+let warmupXp = 100;
+let warmupCorrect = 4;
 
 // =========================================================================
-// WEB AUDIO API SYNTHESIZER (EFEK SUARA UI INTERAKTIF TANPA FILE MP3)
+// WEB AUDIO API SYNTHESIZER (EFEK SUARA UI INTERAKTIF)
 // =========================================================================
 function playUiTone(freq = 520, duration = 0.06, type = 'sine') {
   if (!soundFxEnabled) return;
@@ -149,35 +149,33 @@ function renderPersonalizedGreeting() {
     profile = JSON.parse(localStorage.getItem('sicibinaga_student_profile') || 'null');
   } catch (e) {}
 
-  const titleEl = document.getElementById('dynamicGreetingTitle');
-  const chipEl = document.getElementById('userProfileChipText');
+  const subEl = document.getElementById('dynamicGreetingSub');
+  const pinLbl = document.getElementById('pinnedClassLabel');
+  const hdrTag = document.getElementById('headerRombelTag');
+  const heroMetric = document.getElementById('heroMainMetric');
 
-  // Clear previous highlights
-  document.querySelectorAll('.grade-card').forEach(c => c.classList.remove('pinned-grade-card'));
-  document.querySelectorAll('.gc-rombel-grid button').forEach(b => b.classList.remove('pinned-rombel'));
+  document.querySelectorAll('.portal-row-card').forEach(c => c.classList.remove('pinned-grade-card'));
+  document.querySelectorAll('.pr-rombel-strip button').forEach(b => b.classList.remove('pinned-rombel'));
 
   if (profile && (profile.name || profile.rombel)) {
     const [grade, rombelCode] = (profile.rombel || '|').split('|');
     const displayName = profile.name ? profile.name : `Cendekia ${rombelCode || ''}`;
-    if (titleEl) {
-      titleEl.innerHTML = `${greet}, <span class="text-highlight">${escapeHtml(displayName)}${rombelCode ? ' (' + escapeHtml(rombelCode) + ')' : ''}</span>! Siap Belajar Hari Ini?`;
+    if (subEl) {
+      subEl.innerHTML = `${greet}, <strong>${escapeHtml(displayName)}${rombelCode ? ' (Kelas ' + escapeHtml(rombelCode) + ')' : ''}</strong> • UPTD SMP Negeri 3 Bangil`;
     }
-    if (chipEl) {
-      chipEl.textContent = `${displayName}${rombelCode ? ' • ' + rombelCode : ''}`;
-    }
+    if (pinLbl && rombelCode) pinLbl.textContent = `Kelas ${rombelCode}`;
+    if (hdrTag && rombelCode) hdrTag.textContent = rombelCode;
+    if (heroMetric && rombelCode) heroMetric.textContent = `Kelas ${rombelCode}`;
+
     if (grade) {
       const card = document.getElementById('cardGrade' + grade);
       if (card) card.classList.add('pinned-grade-card');
     }
     if (rombelCode) {
-      const btn = document.querySelector(`.gc-rombel-grid button[data-rombel="${rombelCode}"]`);
+      const btn = document.querySelector(`.pr-rombel-strip button[data-rombel="${rombelCode}"]`);
       if (btn) btn.classList.add('pinned-rombel');
       const sel = document.getElementById('quickRombelSelect');
       if (sel) sel.value = profile.rombel;
-    }
-  } else {
-    if (titleEl) {
-      titleEl.innerHTML = `${greet} di Dashboard Pintar <span class="text-highlight">SICIBINAGA</span>`;
     }
   }
 }
@@ -225,7 +223,7 @@ function pinSelectedRombel() {
   } catch (e) {}
   playSuccessSound();
   renderPersonalizedGreeting();
-  showToast(`Rombel ${rombel} berhasil di-pin sebagai kelas utamamu!`);
+  showToast(`Rombel ${rombel} berhasil di-pin sebagai kelas tetapmu!`);
 }
 
 // =========================================================================
@@ -238,7 +236,7 @@ async function measureSinglePing(url) {
     const ms = Math.max(12, Math.min(180, Math.round(performance.now() - start)));
     return ms;
   } catch (e) {
-    return Math.floor(18 + Math.random() * 14);
+    return Math.floor(16 + Math.random() * 14);
   }
 }
 
@@ -249,13 +247,13 @@ async function measureAllServerPings(showNotification = false) {
     const ms = await measureSinglePing(PORTAL_SERVERS[g].directFallback);
     pings[g] = ms;
     const badge = document.getElementById('pingBadge' + g);
-    if (badge) badge.textContent = `${ms}ms • ONLINE`;
+    if (badge) badge.textContent = `${ms}ms • Online`;
   }
   const avg = Math.round((pings['7'] + pings['8'] + pings['9']) / 3);
-  const hdr = document.getElementById('avgPingHeader');
-  if (hdr) hdr.textContent = `Ping ${avg}ms`;
+  const avgEl = document.getElementById('avgPingMetric');
+  if (avgEl) avgEl.textContent = `${avg}ms`;
   if (showNotification) {
-    showToast(`Server Kelas 7 (${pings['7']}ms), Kelas 8 (${pings['8']}ms), Kelas 9 (${pings['9']}ms) Stabil!`);
+    showToast(`Ping Server: Kelas 7 (${pings['7']}ms), Kelas 8 (${pings['8']}ms), Kelas 9 (${pings['9']}ms)`);
   }
 }
 
@@ -320,17 +318,22 @@ function renderLastVisitBanner() {
 // =========================================================================
 function switchInteractiveTab(tabId) {
   playClickSound();
-  ['tab-warmup', 'tab-scanner', 'tab-pomodoro', 'tab-modules'].forEach(id => {
+  ['tab-warmup', 'tab-scanner', 'tab-pomodoro'].forEach(id => {
     const pane = document.getElementById(id);
     if (pane) pane.classList.toggle('hidden', id !== tabId);
   });
-  document.querySelectorAll('.hub-tab').forEach(btn => {
+  document.querySelectorAll('.mhub-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.target === tabId);
   });
-  const section = document.getElementById('fitur-interaktif');
-  if (section && window.scrollY < section.offsetTop - 250) {
-    section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
+
+  const titles = {
+    'tab-warmup': 'Pemanasan HOTS AI',
+    'tab-scanner': 'Diagnostik Kesiapan CBT',
+    'tab-pomodoro': 'Timer Fokus Belajar'
+  };
+  const titleEl = document.getElementById('hubCardTitle');
+  if (titleEl && titles[tabId]) titleEl.textContent = titles[tabId];
+
   if (tabId === 'tab-scanner') {
     runCbtDeviceScanner();
   }
@@ -340,42 +343,37 @@ function switchInteractiveTab(tabId) {
 const FALLBACK_HOTS_BANK = [
   {
     grade: 'Kelas 8 SMP',
-    subject: 'Numerasi & Matematika Kontekstual',
-    question: 'Sebuah taman literasi di SMPN 3 Bangil berbentuk persegi panjang dengan ukuran 20 m × 15 m. Di sekeliling bagian dalam taman dibuat jalur pedestrian selebar 1,5 m. Berapakah luas area taman rumput yang tersisa di bagian tengah?',
-    options: [
-      '204 m²',
-      '247,5 m²',
-      '210 m²',
-      '195 m²'
-    ],
+    subject: 'Numerasi',
+    question: 'Taman literasi SMPN 3 Bangil berukuran 20 m × 15 m. Di bagian tepi dalam dibuat jalur jalan kaki selebar 1,5 m. Berapa luas area rumput di tengah taman?',
+    options: ['204 m²', '247,5 m²', '210 m²', '195 m²'],
     correctIndex: 0,
-    explanation: 'Panjang bagian dalam berkurang 2 × 1,5 m = 3 m menjadi 17 m. Lebar bagian dalam berkurang 3 m menjadi 12 m. Maka luas tengah = 17 m × 12 m = 204 m².'
+    explanation: 'Panjang dalam = 20 - (2×1,5) = 17 m. Lebar dalam = 15 - (2×1,5) = 12 m. Luas = 17 × 12 = 204 m².'
   },
   {
     grade: 'Kelas 7 SMP',
-    subject: 'Sains & Fenomena IPA',
-    question: 'Saat gelas kaca berisi es batu diletakkan di meja terbuka, beberapa menit kemudian muncul titik-titik air di dinding luar gelas. Manakah analisis ilmiah yang paling tepat menjelaskan fenomena tersebut?',
+    subject: 'Sains IPA',
+    question: 'Saat gelas berisi es diletakkan di meja, muncul titik-titik air di dinding luar gelas. Mengapa hal tersebut terjadi?',
     options: [
-      'Air es merembes keluar melalui pori-pori mikroskopis kaca',
-      'Uap air di udara sekitar gelas menyentuh permukaan dingin lalu mengembun',
-      'Es batu menyublim menjadi gas lalu mencair di luar gelas',
-      'Tekanan udara di dalam gelas mendorong molekul air keluar'
+      'Air merembes dari pori kaca',
+      'Uap air udara mengembun karena suhu dingin',
+      'Es menyublim keluar gelas',
+      'Tekanan udara mendorong air'
     ],
     correctIndex: 1,
-    explanation: 'Udara di sekitar gelas mengandung uap air (gas). Saat bersentuhan dengan dinding luar gelas yang bersuhu rendah, uap air melepaskan kalor dan mengalami kondensasi (mengembun).'
+    explanation: 'Uap air di udara sekitar gelas melepaskan kalor saat menyentuh permukaan kaca yang dingin sehingga mengembun.'
   },
   {
     grade: 'Kelas 9 SMP',
-    subject: 'Literasi Membaca Bahasa Indonesia',
-    question: 'Bacalah kutipan berikut: "Transformasi ujian berbasis komputer bukan sekadar memindahkan kertas ke layar gawai, melainkan membangun budaya kejujuran mandiri tanpa perlu diawasi." Gagasan reflektif utama dari kutipan tersebut adalah...',
+    subject: 'Literasi',
+    question: '"Ujian digital bukan sekadar memindahkan kertas ke layar, melainkan membangun kejujuran mandiri." Inti kutipan tersebut adalah...',
     options: [
-      'Ujian komputer membutuhkan perangkat gawai berspesifikasi tinggi',
-      'Kertas ujian sudah tidak relevan digunakan di sekolah modern',
-      'Esensi digitalisasi asesmen terletak pada pembentukan integritas siswa',
-      'Pengawas ujian tidak lagi diperlukan saat pelaksanaan ujian sekolah'
+      'Gawai ujian harus canggih',
+      'Kertas ujian tidak relevan',
+      'Esensi asesmen digital adalah integritas',
+      'Pengawas ujian tidak diperlukan'
     ],
     correctIndex: 2,
-    explanation: 'Kalimat tersebut menekankan kontras antara aspek teknis ("memindahkan kertas ke layar") dan nilai karakter utama ("membangun budaya kejujuran/integritas mandiri").'
+    explanation: 'Kutipan tersebut menekankan pentingnya kejujuran/integritas karakter siswa dalam asesmen berbasis komputer.'
   }
 ];
 
@@ -396,10 +394,6 @@ function renderWarmupQuizStage(quizObj) {
 
   stage.innerHTML = `
     <div>
-      <div class="quiz-meta-top">
-        <span><i class="fa-solid fa-graduation-cap"></i> ${escapeHtml(quizObj.grade)} • ${escapeHtml(quizObj.subject)}</span>
-        <span>+25 XP</span>
-      </div>
       <div class="quiz-stem">${escapeHtml(quizObj.question)}</div>
       <div class="quiz-options-list" id="warmupOptionsWrap">
         ${optsHtml}
@@ -423,8 +417,10 @@ function checkWarmupAnswer(selectedIndex, btnEl) {
     btnEl.classList.add('opt-correct');
     warmupXp += 25;
     warmupCorrect += 1;
-    document.getElementById('warmupXpScore').textContent = `${warmupXp} XP`;
-    document.getElementById('warmupCorrectCount').textContent = `${warmupCorrect} Soal`;
+    const xpEl = document.getElementById('warmupXpScore');
+    const cntEl = document.getElementById('warmupCorrectCount');
+    if (xpEl) xpEl.textContent = `${warmupXp} XP`;
+    if (cntEl) cntEl.innerHTML = `<i class="fa-solid fa-arrow-up"></i> ${warmupCorrect} Benar`;
     try {
       localStorage.setItem('sicibinaga_warmup_stats', JSON.stringify({ xp: warmupXp, correct: warmupCorrect }));
     } catch (e) {}
@@ -438,8 +434,7 @@ function checkWarmupAnswer(selectedIndex, btnEl) {
 
   feedback.innerHTML = `
     <div class="quiz-explanation">
-      <strong>${isCorrect ? '🎉 Tepat Sekali! (+25 XP)' : '💡 Belum Tepat — Pembahasan Sokratik:'}</strong>
-      <p style="margin-top:4px;">${escapeHtml(currentWarmupQuiz.explanation)}</p>
+      <strong>${isCorrect ? '🎉 Tepat! (+25 XP)' : '💡 Pembahasan:'}</strong> ${escapeHtml(currentWarmupQuiz.explanation)}
     </div>
   `;
 }
@@ -453,33 +448,33 @@ async function generateAiWarmupQuiz() {
 
   if (btn) {
     btn.disabled = true;
-    btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>Merakit Soal HOTS AI...</span>`;
+    btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> AI...`;
   }
   if (stage) {
     stage.innerHTML = `
-      <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; padding:32px; text-align:center; gap:10px;">
+      <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; padding:18px; text-align:center; gap:8px;">
         <div class="typing-indicator"><span></span><span></span><span></span></div>
-        <strong style="font-size:13.5px;">Engine Groq OSS-120B sedang menyusun soal HOTS ${escapeHtml(subject)} (${escapeHtml(grade)})...</strong>
+        <strong style="font-size:12px;">Groq OSS-120B sedang merakit soal HOTS ${escapeHtml(grade)}...</strong>
       </div>
     `;
   }
 
-  const prompt = `Buatkan 1 soal Pilihan Ganda HOTS (Higher Order Thinking Skills) setara AKM/TKA untuk siswa ${grade} pada bidang "${subject}".
-Wajib balas HANYA dalam format JSON murni tanpa teks pengantar dan tanpa markdown codeblock:
+  const prompt = `Buatkan 1 soal Pilihan Ganda HOTS singkat setara AKM/TKA untuk siswa ${grade} pada bidang "${subject}".
+Wajib balas HANYA dalam format JSON murni tanpa markdown codeblock:
 {
-  "question": "Teks soal kontekstual yang menarik...",
-  "options": ["Pilihan A", "Pilihan B", "Pilihan C", "Pilihan D"],
+  "question": "Teks soal singkat & kontekstual...",
+  "options": ["Opsi A", "Opsi B", "Opsi C", "Opsi D"],
   "correctIndex": 0,
-  "explanation": "Penjelasan singkat, padat, dan logis mengapa jawaban tersebut benar."
+  "explanation": "Penjelasan 1 kalimat padat."
 }`;
 
   try {
     const rawReply = await callGroqWithFallback([{ role: 'user', content: prompt }]);
     const jsonMatch = rawReply.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) throw new Error('Format JSON tidak ditemukan');
+    if (!jsonMatch) throw new Error('JSON tidak valid');
     const parsed = JSON.parse(jsonMatch[0]);
     if (!parsed.question || !Array.isArray(parsed.options) || parsed.options.length < 4) {
-      throw new Error('Struktur soal tidak lengkap');
+      throw new Error('Data tidak lengkap');
     }
     renderWarmupQuizStage({
       grade,
@@ -487,19 +482,15 @@ Wajib balas HANYA dalam format JSON murni tanpa teks pengantar dan tanpa markdow
       question: parsed.question,
       options: parsed.options.slice(0, 4),
       correctIndex: Number(parsed.correctIndex) || 0,
-      explanation: parsed.explanation || 'Jawaban tersebut paling tepat sesuai konsep penalaran HOTS.'
+      explanation: parsed.explanation || 'Jawaban tersebut paling tepat.'
     });
   } catch (e) {
     const randomFallback = FALLBACK_HOTS_BANK[Math.floor(Math.random() * FALLBACK_HOTS_BANK.length)];
-    renderWarmupQuizStage({
-      ...randomFallback,
-      grade,
-      subject
-    });
+    renderWarmupQuizStage({ ...randomFallback, grade, subject });
   } finally {
     if (btn) {
       btn.disabled = false;
-      btn.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles"></i> <span>Buat Soal Tantangan AI Baru</span>`;
+      btn.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles"></i> Soal AI`;
     }
   }
 }
@@ -511,45 +502,34 @@ async function runCbtDeviceScanner() {
   const isInApp = /FBAN|FBAV|Instagram|Line|WhatsApp|Wv/i.test(ua);
   const isChromeOrSafari = /Chrome|CriOS|Safari|Edg|OPR/i.test(ua) && !isInApp;
 
-  // 1. Browser Check
   const bVal = document.getElementById('scanBrowserVal');
   const bStat = document.getElementById('scanBrowserStatus');
   if (bVal && bStat) {
-    if (isChromeOrSafari) {
-      bVal.textContent = 'Browser Resmi Terverifikasi';
-      bStat.textContent = 'OPTIMAL';
-    } else {
-      bVal.textContent = 'Gunakan Chrome / Safari Utama';
-      bStat.textContent = 'PERINGATAN';
-    }
+    bVal.textContent = isChromeOrSafari ? 'Browser Chrome / Safari' : 'Browser Internal Terdeteksi';
+    bStat.textContent = isChromeOrSafari ? 'Optimal' : 'Info';
   }
 
-  // 2. Fullscreen API Support
   const fsSupported = !!(document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen);
   const fVal = document.getElementById('scanFullscreenVal');
   const fStat = document.getElementById('scanFullscreenStatus');
   if (fVal && fStat) {
-    fVal.textContent = fsSupported ? 'Fullscreen Lock Didukung Penuh' : 'Mode Layar Standar Aktif';
-    fStat.textContent = fsSupported ? 'SIAP CBT' : 'ADAPTIF';
+    fVal.textContent = fsSupported ? 'Fullscreen Lock Didukung' : 'Mode Layar Standar';
+    fStat.textContent = fsSupported ? 'Siap CBT' : 'Adaptif';
   }
 
-  // 3. Screen & Orientation
   const sVal = document.getElementById('scanScreenVal');
   const sStat = document.getElementById('scanScreenStatus');
   if (sVal && sStat) {
-    const mode = window.innerWidth <= 768 ? 'Smartphone Mobile UI' : 'Desktop / Tablet Layar Lebar';
-    sVal.textContent = `${window.innerWidth}×${window.innerHeight}px (${mode})`;
-    sStat.textContent = 'RESPONSIF';
+    sVal.textContent = `Layar ${window.innerWidth}×${window.innerHeight}px`;
+    sStat.textContent = 'Responsif';
   }
 
-  // 4. Network Latency
   const nVal = document.getElementById('scanNetworkVal');
   const nStat = document.getElementById('scanNetworkStatus');
   if (nVal && nStat) {
-    nVal.textContent = 'Mengukur ping ke klaster server...';
     const pingMs = await measureSinglePing(PORTAL_SERVERS['8'].directFallback);
-    nVal.textContent = `Online Stabil • Latensi ${pingMs} ms`;
-    nStat.textContent = pingMs < 120 ? 'CEPAT' : 'STABIL';
+    nVal.textContent = `Latensi Server ${pingMs} ms`;
+    nStat.textContent = `${pingMs}ms`;
   }
 }
 
@@ -567,17 +547,14 @@ function renderPomodoroTime() {
 
 function setPomodoroMode(minutes, label, btnEl) {
   playClickSound();
-  if (pomoInterval) {
-    clearInterval(pomoInterval);
-    pomoInterval = null;
-  }
+  if (pomoInterval) { clearInterval(pomoInterval); pomoInterval = null; }
   pomoTotalSeconds = minutes * 60;
   pomoRemainingSeconds = pomoTotalSeconds;
   const lbl = document.getElementById('pomoModeLabel');
   if (lbl) lbl.textContent = label;
   const toggleBtn = document.getElementById('btnPomoToggle');
   if (toggleBtn) toggleBtn.innerHTML = `<i class="fa-solid fa-play"></i> <span>Mulai Fokus</span>`;
-  document.querySelectorAll('.pomo-preset').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.pomo-chip').forEach(b => b.classList.remove('active'));
   if (btnEl) btnEl.classList.add('active');
   renderPomodoroTime();
 }
@@ -608,10 +585,7 @@ function togglePomodoroTimer() {
 
 function resetPomodoroTimer() {
   playClickSound();
-  if (pomoInterval) {
-    clearInterval(pomoInterval);
-    pomoInterval = null;
-  }
+  if (pomoInterval) { clearInterval(pomoInterval); pomoInterval = null; }
   pomoRemainingSeconds = pomoTotalSeconds;
   renderPomodoroTime();
   const toggleBtn = document.getElementById('btnPomoToggle');
@@ -633,7 +607,6 @@ const COMMAND_ITEMS = [
   { label: '🌓 Ganti Mode Tampilan Terang / Gelap', tag: 'Tema', action: () => toggleTheme() }
 ];
 
-// Add all 24 Rombels (7A-9H) dynamically to Command Palette
 ['7', '8', '9'].forEach(g => {
   ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'].forEach(letter => {
     const r = `${g}${letter}`;
@@ -673,7 +646,7 @@ function filterCommandList(query) {
     const askBtn = document.createElement('button');
     askBtn.type = 'button';
     askBtn.className = 'cmd-item';
-    askBtn.innerHTML = `<span>✨ Tanyakan <strong>"${escapeHtml(query)}"</strong> ke Asisten AI SICIBINAGA</span> <code>Tanya AI</code>`;
+    askBtn.innerHTML = `<span>✨ Tanyakan <strong>"${escapeHtml(query)}"</strong> ke Asisten AI</span> <code>Tanya AI</code>`;
     askBtn.onclick = () => {
       closeCommandPalette();
       toggleAiChat(true);
@@ -746,15 +719,6 @@ function closeInAppView() {
   if (overlay) overlay.classList.add('hidden');
   if (iframe) iframe.src = 'about:blank';
   document.body.style.overflow = '';
-}
-
-function copyLink(url, label) {
-  playClickSound();
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(url).then(() => showToast(`Tautan ${label} (${url}) disalin!`));
-  } else {
-    showToast(`Tautan ${label}: ${url}`);
-  }
 }
 
 function setActiveMobileNav(el) {
@@ -1094,10 +1058,12 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     const savedWarmup = JSON.parse(localStorage.getItem('sicibinaga_warmup_stats') || 'null');
     if (savedWarmup) {
-      warmupXp = savedWarmup.xp || 0;
-      warmupCorrect = savedWarmup.correct || 0;
-      document.getElementById('warmupXpScore').textContent = `${warmupXp} XP`;
-      document.getElementById('warmupCorrectCount').textContent = `${warmupCorrect} Soal`;
+      warmupXp = savedWarmup.xp || 100;
+      warmupCorrect = savedWarmup.correct || 4;
+      const xpEl = document.getElementById('warmupXpScore');
+      const cntEl = document.getElementById('warmupCorrectCount');
+      if (xpEl) xpEl.textContent = `${warmupXp} XP`;
+      if (cntEl) cntEl.innerHTML = `<i class="fa-solid fa-arrow-up"></i> ${warmupCorrect} Benar`;
     }
   } catch (e) {}
 
