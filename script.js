@@ -1,6 +1,6 @@
 // =========================================================================
 // SICIBINAGA • TKA READY (SMP NEGERI 3 BANGIL)
-// MODERN BENTO SUPERAPP DASHBOARD CONTROLLER, YOUTUBE STUDIO & GROQ AI ENGINE
+// MODERN BENTO SUPERAPP DASHBOARD CONTROLLER & GROQ AI ENGINE (OSS-120B)
 // Portal Resmi: https://sicibinaga.my.id
 // =========================================================================
 
@@ -26,47 +26,43 @@ const PORTAL_SERVERS = {
   }
 };
 
-// 2. KONFIGURASI 4 VIDEO TUTORIAL RESMI SICIBINAGA (YOUTUBE INTEGRATED)
+// 2. KONFIGURASI 4 VIDEO TUTORIAL RESMI PENGGUNAAN SICIBINAGA
 const TUTORIAL_VIDEOS = [
   {
     id: '-qMBiGZ7oR4',
-    title: 'TUTORIAL LOGIN AKUN SICIBINAGA (USERNAME + PASSWORD)',
-    shortLabel: '1. Login Akun',
-    stepBadge: 'Langkah 1 dari 4 • YouTube Shorts',
-    durationBadge: 'Panduan Cepat Login',
-    desc: 'Cara masuk ke portal jenjang kelas SICIBINAGA menggunakan Username dan Password akun siswa dengan benar.',
-    watchUrl: 'https://youtube.com/shorts/-qMBiGZ7oR4',
-    embedUrl: 'https://www.youtube.com/embed/-qMBiGZ7oR4?rel=0&modestbranding=1&playsinline=1'
+    title: 'TUTORIAL LOGIN AKUN SICIBINAGA (USERNAME + PASWORD)',
+    badge: 'VIDEO 1 DARI 4 • SHORTS',
+    category: 'Panduan Akses & Kredensial Siswa',
+    desc: 'Cara memilih rombel kelas (7A–9H) dan masuk menggunakan Username serta Password akun siswa dengan benar.',
+    embedUrl: 'https://www.youtube.com/embed/-qMBiGZ7oR4?rel=0&modestbranding=1&playsinline=1',
+    watchUrl: 'https://youtube.com/shorts/-qMBiGZ7oR4'
   },
   {
     id: 'H8kwynV-aq0',
     title: 'TUTORIAL PENGERJAAN LMS (KELAS ONLINE) APLIKASI SICIBINAGA',
-    shortLabel: '2. Kelas LMS',
-    stepBadge: 'Langkah 2 dari 4 • Kelas Online LMS',
-    durationBadge: 'Alur 5 Langkah LMS',
-    desc: 'Panduan lengkap mengerjakan Ruang Belajar LMS Konstruktif 5 Langkah: Pengantar, Materi Inti, Flashcard 3D, Socratic AI Tutor, dan Kuis Formatif.',
-    watchUrl: 'https://youtu.be/H8kwynV-aq0',
-    embedUrl: 'https://www.youtube.com/embed/H8kwynV-aq0?rel=0&modestbranding=1&playsinline=1'
+    badge: 'VIDEO 2 DARI 4 • KELAS ONLINE',
+    category: 'Alur Belajar Konstruktif 5 Langkah',
+    desc: 'Panduan lengkap mengikuti kelas online LMS 5 langkah: Video Pengantar, Materi Inti, Kartu Pintar 3D Flashcard, Socratic AI Tutor, dan Kuis Formatif.',
+    embedUrl: 'https://www.youtube.com/embed/H8kwynV-aq0?rel=0&modestbranding=1&playsinline=1',
+    watchUrl: 'https://youtu.be/H8kwynV-aq0'
   },
   {
     id: '6OAgxNdDHqI',
     title: 'TUTORIAL PENGERJAAN UJIAN CBT APLIKASI SICIBINAGA',
-    shortLabel: '3. Ujian CBT',
-    stepBadge: 'Langkah 3 dari 4 • Ujian CBT Anti-Cheat',
-    durationBadge: 'Panduan Ujian & Token',
-    desc: 'Cara memilih mata pelajaran ujian, memasukkan Token Mulai, mematuhi keamanan Fullscreen Anti-Cheat, serta menjawab 6 tipe soal AKM/TKA.',
-    watchUrl: 'https://youtu.be/6OAgxNdDHqI',
-    embedUrl: 'https://www.youtube.com/embed/6OAgxNdDHqI?rel=0&modestbranding=1&playsinline=1'
+    badge: 'VIDEO 3 DARI 4 • UJIAN CBT',
+    category: 'Sistem Evaluasi & Keamanan Anti-Cheat',
+    desc: 'Cara memulai ujian CBT dengan Token Mulai, mengerjakan 6 tipe soal standar AKM/TKA, mematuhi mode Fullscreen Lockdown, hingga menyelesaikan ujian.',
+    embedUrl: 'https://www.youtube.com/embed/6OAgxNdDHqI?rel=0&modestbranding=1&playsinline=1',
+    watchUrl: 'https://youtu.be/6OAgxNdDHqI'
   },
   {
     id: 'kvkWpvvrJ3M',
     title: 'TUTORIAL PENGERJAAN LIVE ARENA (GAME) QUIS APLIKASI SICIBINAGA',
-    shortLabel: '4. Live Arena',
-    stepBadge: 'Langkah 4 dari 4 • Turnamen Live Arena',
-    durationBadge: 'Gamifikasi & PIN Room',
-    desc: 'Cara bergabung ke turnamen kuis interaktif satu kelas menggunakan Kode PIN Room, meraih skor tertinggi di Leaderboard, dan mengumpulkan XP/Badge.',
-    watchUrl: 'https://youtu.be/kvkWpvvrJ3M',
-    embedUrl: 'https://www.youtube.com/embed/kvkWpvvrJ3M?rel=0&modestbranding=1&playsinline=1'
+    badge: 'VIDEO 4 DARI 4 • LIVE ARENA',
+    category: 'Turnamen Kuis Interaktif & Gamifikasi',
+    desc: 'Cara bergabung ke turnamen kuis satu kelas menggunakan Kode PIN Room, menjawab cepat & tepat, serta mengumpulkan XP dan 16 lencana di Leaderboard.',
+    embedUrl: 'https://www.youtube.com/embed/kvkWpvvrJ3M?rel=0&modestbranding=1&playsinline=1',
+    watchUrl: 'https://youtu.be/kvkWpvvrJ3M'
   }
 ];
 
@@ -90,11 +86,11 @@ Tugas Anda adalah menjawab pertanyaan siswa, guru, pengawas ujian, dan orang tua
    - Kelas 7 (7A–7H): https://sicibinaga.my.id/kelas7 (Tema Hijau Zamrud / Emerald)
    - Kelas 8 (8A–8H): https://sicibinaga.my.id/kelas8 (Tema Kuning Emerald / Gold-Emerald)
    - Kelas 9 (9A–9H): https://sicibinaga.my.id/kelas9 (Tema Crimson Red)
-2. 4 Video Tutorial Resmi Penggunaan Aplikasi SICIBINAGA:
+2. 4 Video Tutorial Resmi Cara Penggunaan SICIBINAGA:
    - Tutorial 1 (Login Akun Username + Password): https://youtube.com/shorts/-qMBiGZ7oR4
-   - Tutorial 2 (Pengerjaan LMS Kelas Online 5 Langkah): https://youtu.be/H8kwynV-aq0
-   - Tutorial 3 (Pengerjaan Ujian CBT Anti-Cheat): https://youtu.be/6OAgxNdDHqI
-   - Tutorial 4 (Pengerjaan Live Arena Game Quis): https://youtu.be/kvkWpvvrJ3M
+   - Tutorial 2 (Pengerjaan LMS / Kelas Online): https://youtu.be/H8kwynV-aq0
+   - Tutorial 3 (Pengerjaan Ujian CBT): https://youtu.be/6OAgxNdDHqI
+   - Tutorial 4 (Pengerjaan Live Arena Game Quiz): https://youtu.be/kvkWpvvrJ3M
 3. Sistem Ujian CBT Anti-Cheat:
    - Mendukung 6 tipe soal AKM & TKA: Pilihan Ganda, PG Kompleks, Benar-Salah, Menjodohkan, Sebab-Akibat, dan Isian Singkat.
    - Dilengkapi Fullscreen Lockdown, deteksi pindah tab/aplikasi, Token Mulai & Selesai, serta auto-save jawaban. Jika terkunci karena terdeteksi keluar layar, siswa melapor ke Pengawas untuk di-reset di panel Live Monitoring.
@@ -156,45 +152,45 @@ function toggleSoundFx() {
 }
 
 // =========================================================================
-// WIDGET STUDIO VIDEO TUTORIAL YOUTUBE (4 PANDUAN TERINTEGRASI)
+// WIDGET VIDEO PLAYER TUTORIAL (4 VIDEO YOUTUBE UTUH)
 // =========================================================================
 function selectTutorialVideo(index, scrollToWidget = false) {
   playClickSound();
-  const total = TUTORIAL_VIDEOS.length;
-  currentTutorialIndex = ((index % total) + total) % total;
-  const vid = TUTORIAL_VIDEOS[currentTutorialIndex];
+  const safeIndex = ((index % TUTORIAL_VIDEOS.length) + TUTORIAL_VIDEOS.length) % TUTORIAL_VIDEOS.length;
+  currentTutorialIndex = safeIndex;
+  const vid = TUTORIAL_VIDEOS[safeIndex];
 
   const iframe = document.getElementById('tutorialYoutubeIframe');
-  const stepBadge = document.getElementById('activeVideoStepBadge');
-  const durationBadge = document.getElementById('activeVideoDurationBadge');
+  const badgeEl = document.getElementById('activeVideoBadge');
+  const catEl = document.getElementById('activeVideoCategory');
   const titleEl = document.getElementById('activeVideoTitle');
   const descEl = document.getElementById('activeVideoDesc');
-  const extBtn = document.getElementById('activeVideoExternalBtn');
+  const ytLink = document.getElementById('activeVideoYtLink');
 
   if (iframe) {
     iframe.src = `${vid.embedUrl}&autoplay=1`;
     iframe.title = vid.title;
   }
-  if (stepBadge) stepBadge.textContent = vid.stepBadge;
-  if (durationBadge) durationBadge.innerHTML = `<i class="fa-regular fa-clock"></i> ${escapeHtml(vid.durationBadge)}`;
+  if (badgeEl) badgeEl.textContent = vid.badge;
+  if (catEl) catEl.textContent = vid.category;
   if (titleEl) titleEl.textContent = vid.title;
   if (descEl) descEl.textContent = vid.desc;
-  if (extBtn) extBtn.href = vid.watchUrl;
+  if (ytLink) ytLink.href = vid.watchUrl;
 
-  document.querySelectorAll('.vs-step-chip').forEach((chip, idx) => {
-    chip.classList.toggle('active', idx === currentTutorialIndex);
+  document.querySelectorAll('.vw-tab-pill').forEach((btn, idx) => {
+    btn.classList.toggle('active', idx === safeIndex);
   });
 
-  document.querySelectorAll('.vs-playlist-card').forEach((card, idx) => {
-    card.classList.toggle('active', idx === currentTutorialIndex);
+  document.querySelectorAll('.vw-card-item').forEach((card, idx) => {
+    card.classList.toggle('active', idx === safeIndex);
   });
 
   if (scrollToWidget) {
-    const sec = document.getElementById('video-tutorial');
-    if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const section = document.getElementById('panduan-video');
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
-
-  showToast(`▶️ Memutar: ${vid.shortLabel}`);
 }
 
 function nextTutorialVideo() {
@@ -697,10 +693,10 @@ function resetPomodoroTimer() {
 // COMMAND PALETTE (CTRL+K / QUICK SEARCH)
 // =========================================================================
 const COMMAND_ITEMS = [
-  { label: '▶️ Video 1: Tutorial Login Akun SICIBINAGA (Username + Password)', tag: 'YouTube', action: () => selectTutorialVideo(0, true) },
-  { label: '▶️ Video 2: Tutorial Pengerjaan LMS (Kelas Online) SICIBINAGA', tag: 'YouTube', action: () => selectTutorialVideo(1, true) },
-  { label: '▶️ Video 3: Tutorial Pengerjaan Ujian CBT Aplikasi SICIBINAGA', tag: 'YouTube', action: () => selectTutorialVideo(2, true) },
-  { label: '▶️ Video 4: Tutorial Pengerjaan Live Arena (Game) Quis SICIBINAGA', tag: 'YouTube', action: () => selectTutorialVideo(3, true) },
+  { label: '🎬 Video 1: Tutorial Login Akun SICIBINAGA', tag: 'Video Tutorial', action: () => selectTutorialVideo(0, true) },
+  { label: '🎬 Video 2: Tutorial Pengerjaan LMS (Kelas Online)', tag: 'Video Tutorial', action: () => selectTutorialVideo(1, true) },
+  { label: '🎬 Video 3: Tutorial Pengerjaan Ujian CBT', tag: 'Video Tutorial', action: () => selectTutorialVideo(2, true) },
+  { label: '🎬 Video 4: Tutorial Live Arena (Game) Quiz', tag: 'Video Tutorial', action: () => selectTutorialVideo(3, true) },
   { label: '🟢 Buka Portal SICIBINAGA Kelas 7 (7A–7H)', tag: '/kelas7', action: () => openGradePortal('7') },
   { label: '🟡 Buka Portal SICIBINAGA Kelas 8 (8A–8H)', tag: '/kelas8', action: () => openGradePortal('8') },
   { label: '🔴 Buka Portal SICIBINAGA Kelas 9 (9A–9H)', tag: '/kelas9', action: () => openGradePortal('9') },
@@ -923,8 +919,8 @@ function renderAiWelcomeMessage() {
     <p>Halo! Saya <strong>Asisten AI SICIBINAGA</strong> SMP Negeri 3 Bangil 👋</p>
     <p>Ketik atau <strong>klik ikon mikrofon 🎙️</strong> untuk bertanya seputar:</p>
     <ul>
-      <li>🔑 <strong>Cara Login Akun Siswa</strong> (Username + Password)</li>
-      <li>🛡️ <strong>Ujian CBT Anti-Cheat</strong> (Token, 6 Tipe Soal &amp; Fullscreen Lock)</li>
+      <li>🎬 <strong>4 Video Tutorial Resmi</strong> (Login, LMS, CBT, &amp; Live Arena)</li>
+      <li>🛡️ <strong>Ujian CBT Anti-Cheat</strong> (Login, Token, 6 Tipe Soal &amp; Fullscreen Lock)</li>
       <li>📚 <strong>LMS Konstruktif 5 Langkah</strong> &amp; Socratic AI Tutor</li>
       <li>🏆 <strong>Live Arena Quiz</strong>, XP &amp; 16 Lencana Cendekia</li>
     </ul>
@@ -1028,18 +1024,19 @@ async function callGroqWithFallback(historyMessages) {
 
 function generateSmartLocalAnswer(q) {
   const s = q.toLowerCase();
-  if (s.includes('login') || s.includes('username') || s.includes('password') || s.includes('masuk akun')) {
-    return `**Panduan Login Akun Siswa SICIBINAGA:**
-1. Pilih portal jenjang kelasmu di dashboard (**Kelas 7**, **Kelas 8**, atau **Kelas 9**).
-2. Masukkan **Username** dan **Password** resmi yang telah dibagikan oleh wali kelas/admin sekolah.
-3. Klik tombol **Masuk**, atau tonton video panduan singkat di sini: [Tutorial Login Akun SICIBINAGA](https://youtube.com/shorts/-qMBiGZ7oR4).`;
+  if (s.includes('video') || s.includes('tutorial') || s.includes('youtube')) {
+    return `**4 Video Tutorial Resmi Penggunaan Aplikasi SICIBINAGA:**
+1. **Tutorial Login Akun (Username + Password):** [https://youtube.com/shorts/-qMBiGZ7oR4](https://youtube.com/shorts/-qMBiGZ7oR4)
+2. **Tutorial Pengerjaan LMS (Kelas Online):** [https://youtu.be/H8kwynV-aq0](https://youtu.be/H8kwynV-aq0)
+3. **Tutorial Pengerjaan Ujian CBT:** [https://youtu.be/6OAgxNdDHqI](https://youtu.be/6OAgxNdDHqI)
+4. **Tutorial Pengerjaan Live Arena (Game) Quiz:** [https://youtu.be/kvkWpvvrJ3M](https://youtu.be/kvkWpvvrJ3M)`;
   }
   if (s.includes('cbt') || s.includes('ujian') || s.includes('anti-cheat') || s.includes('terkunci') || s.includes('token')) {
     return `**Panduan Sistem Ujian CBT & Anti-Cheat SICIBINAGA:**
 1. **Cara Mulai Ujian:** Masuk ke portal jenjang kelasmu (\`/kelas7\`, \`/kelas8\`, atau \`/kelas9\`), login dengan akun siswa, buka menu **Portal Ujian CBT**, pilih mata pelajaran, dan masukkan **Token Mulai** dari pengawas.
 2. **Aturan Anti-Cheat:** Ujian wajib berjalan dalam mode **Layar Penuh (Fullscreen Lockdown)**. Dilarang keluar tab, membuka aplikasi lain, atau menggunakan *split-screen*.
 3. **Solusi Jika Terkunci:** Jika layar ujian terkunci karena terdeteksi keluar layar, segera lapor ke **Pengawas / Guru** di kelas agar status akunmu di-*reset* melalui panel *Live Monitoring*.
-4. **Video Panduan:** [Tutorial Pengerjaan Ujian CBT SICIBINAGA](https://youtu.be/6OAgxNdDHqI).`;
+4. **Video Tutorial CBT:** [https://youtu.be/6OAgxNdDHqI](https://youtu.be/6OAgxNdDHqI)`;
   }
   if (s.includes('lms') || s.includes('5 langkah') || s.includes('ruang belajar') || s.includes('modul')) {
     return `**Alur Belajar LMS Konstruktif 5 Langkah di SICIBINAGA:**
@@ -1047,20 +1044,20 @@ function generateSmartLocalAnswer(q) {
 2. **Pilar Materi Inti:** Membaca poin-poin konsep utama yang ringkas dan terstruktur.
 3. **Kartu Pintar 3D (Flashcard):** Melatih ingatan aktif (*Active Recall*) dengan membalik kartu tanya-jawab.
 4. **Studi Kasus & Socratic AI Tutor:** Berdiskusi dengan AI yang memandu penalaran kritis lewat pertanyaan pemantik.
-5. **Kuis Formatif Berpembahasan:** Evaluasi akhir modul untuk mendapatkan XP.
-- **Video Panduan:** [Tutorial Pengerjaan LMS SICIBINAGA](https://youtu.be/H8kwynV-aq0).`;
+5. **Kuis Formatif Berpembahasan:** Evaluasi akhir modul untuk mendapatkan poin XP.
+- **Video Tutorial LMS:** [https://youtu.be/H8kwynV-aq0](https://youtu.be/H8kwynV-aq0)`;
   }
   if (s.includes('arena') || s.includes('live') || s.includes('badge') || s.includes('level') || s.includes('pin')) {
     return `**Panduan Live Arena Quiz & Gamifikasi SICIBINAGA:**
 - **Cara Gabung Live Arena:** Buka menu **Live Arena** di portal kelasmu, lalu masukkan **Kode PIN Room** yang ditampilkan Bapak/Ibu Guru di depan kelas.
 - **Sistem Skor:** Kecepatan dan ketepatan menjawab menentukan posisimu di *Real-time Leaderboard*.
-- **Video Panduan:** [Tutorial Live Arena (Game) Quis SICIBINAGA](https://youtu.be/kvkWpvvrJ3M).`;
+- **Video Tutorial Live Arena:** [https://youtu.be/kvkWpvvrJ3M](https://youtu.be/kvkWpvvrJ3M)`;
   }
   return `**Tentang Ekosistem Aplikasi SICIBINAGA (SMPN 3 Bangil):**
 **SICIBINAGA** mengintegrasikan **Ruang Belajar 5 Langkah (LMS)**, **Ujian CBT Anti-Cheat**, dan **Live Arena Quiz** ke dalam 3 klaster portal mandiri:
-- 🟢 **Kelas 7 (7A–7H):** [https://sicibinaga.my.id/kelas7](https://sicibinaga.my.id/kelas7)
-- 🟡 **Kelas 8 (8A–8H):** [https://sicibinaga.my.id/kelas8](https://sicibinaga.my.id/kelas8)
-- 🔴 **Kelas 9 (9A–9H):** [https://sicibinaga.my.id/kelas9](https://sicibinaga.my.id/kelas9)`;
+- 🟢 **Kelas 7 (7A–7H):** [https://sicibinaga.my.id/kelas7](https://sicibinaga.my.id/kelas7) *(Tema Hijau Zamrud)*
+- 🟡 **Kelas 8 (8A–8H):** [https://sicibinaga.my.id/kelas8](https://sicibinaga.my.id/kelas8) *(Tema Kuning Emerald)*
+- 🔴 **Kelas 9 (9A–9H):** [https://sicibinaga.my.id/kelas9](https://sicibinaga.my.id/kelas9) *(Tema Crimson Red)*`;
 }
 
 function appendChatBubble(sender, htmlContent, isHtml = false) {
@@ -1085,7 +1082,7 @@ function appendTypingIndicator() {
   wrapper.className = 'ai-msg msg-bot';
   wrapper.id = id;
   wrapper.innerHTML = `
-    <div class="msg-avatar"><i class="fa-solid fa-robot"></i></div>
+    <div class="msg-avatar"><i class="${iconClass = 'fa-solid fa-robot'}"></i></div>
     <div class="msg-bubble"><div class="typing-indicator"><span></span><span></span><span></span></div></div>
   `;
   container.appendChild(wrapper);
@@ -1114,8 +1111,7 @@ function formatMarkdownToHtml(md) {
   html = html.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
   html = html.replace(/(^|\s)(https?:\/\/[^\s<]+)/g, '$1<a href="$2" target="_blank" rel="noopener">$2</a>');
 
-  const lines = html.split(/?
-/);
+  const lines = html.split(/\r?\n/);
   let result = '';
   let inUl = false;
   let inOl = false;

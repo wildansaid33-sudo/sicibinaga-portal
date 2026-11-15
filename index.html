@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
   <title>SICIBINAGA • Bento SuperApp Dashboard — SMPN 3 Bangil</title>
-  <meta name="description" content="Dashboard Portal Resmi Aplikasi SICIBINAGA (TKA Ready) SMP Negeri 3 Bangil. Akses Kelas 7, Kelas 8, dan Kelas 9 dengan UI Bento Modern, Video Tutorial Terintegrasi, Kuis HOTS AI, Cek Kesiapan CBT, dan Asisten Suara AI." />
+  <meta name="description" content="Dashboard Portal Resmi Aplikasi SICIBINAGA (TKA Ready) SMP Negeri 3 Bangil. Akses Kelas 7, Kelas 8, dan Kelas 9 dengan UI Bento Modern, Tutorial Video Interaktif, Kuis HOTS AI, Cek Kesiapan CBT, dan Asisten Suara AI." />
   <meta name="theme-color" content="#0d4738" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -12,7 +12,7 @@
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" href="logo-sicibinaga.png" />
 
-  <!-- Google Fonts: Plus Jakarta Sans, Space Grotesk & Fredoka for Chunky Brand -->
+  <!-- Google Fonts: Plus Jakarta Sans, Space Grotesk & Fredoka -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- DECORATIVE GEOMETRIC OUTER BACKDROP ACCENTS (DESKTOP ONLY) -->
+  <!-- DECORATIVE GEOMETRIC OUTER BACKDROP ACCENTS (Hidden on Mobile to prevent overflow) -->
   <div class="geo-stripe stripe-top-left" aria-hidden="true"></div>
   <div class="geo-stripe stripe-bottom-left" aria-hidden="true"></div>
   <div class="geo-ring ring-right" aria-hidden="true"></div>
@@ -32,7 +32,7 @@
   <!-- MAIN FRAMED BENTO APP SHELL -->
   <div class="bento-app-shell" id="beranda">
 
-    <!-- 1. TOP BARBR-STYLE HEADER (PROPORTIONAL ON MOBILE & DESKTOP) -->
+    <!-- 1. TOP BARBR-STYLE HEADER (Optimized for Smartphone & Desktop) -->
     <header class="bento-topbar">
       <div class="topbar-left">
         <a href="#beranda" class="brand-cluster" aria-label="Beranda SICIBINAGA">
@@ -134,9 +134,9 @@
                 <i class="fa-solid fa-thumbtack" style="color:#f97316;"></i>
                 <span id="pinnedClassLabel">Pin Rombel</span>
               </button>
-              <a href="#video-tutorial" class="pill-dropdown-btn pill-tutorial-shortcut" onclick="playClickSound()" title="Tonton 4 Video Tutorial Penggunaan SICIBINAGA">
-                <i class="fa-brands fa-youtube" style="color:#ef4444;"></i>
-                <span>Tutorial Video</span>
+              <a href="#panduan-video" class="pill-dropdown-btn pill-video-shortcut" onclick="playClickSound()">
+                <i class="fa-solid fa-circle-play" style="color:#046c4e;"></i>
+                <span>4 Video Panduan</span>
               </a>
               <div class="pill-dropdown-btn clock-pill-top">
                 <span class="dot-live-green"></span>
@@ -197,15 +197,13 @@
 
             <!-- Right Overview Summary & Description -->
             <div class="overview-summary-col">
-              <div class="overview-top-meta">
-                <div class="summary-head-pill">
-                  <span class="summary-icon-orange"><i class="fa-solid fa-chart-simple"></i></span>
-                  <span class="summary-head-title">SICIBINAGA Overview</span>
-                </div>
-                <span class="metric-Delta-pill">+100% Ready</span>
+              <div class="summary-head-pill">
+                <span class="summary-icon-orange"><i class="fa-solid fa-chart-simple"></i></span>
+                <span class="summary-head-title">SICIBINAGA Overview</span>
               </div>
 
               <div class="summary-big-metric">
+                <span class="metric-Delta-pill">+100% Ready</span>
                 <div class="metric-hero-val" id="heroMainMetric">24 Rombel</div>
               </div>
 
@@ -368,79 +366,77 @@
 
       </div>
 
-      <!-- ================= MIDDLE ROW: INTEGRATED YOUTUBE VIDEO TUTORIAL STUDIO WIDGET ================= -->
-      <section class="bento-card card-video-studio" id="video-tutorial" aria-label="Pusat Video Tutorial Penggunaan Aplikasi SICIBINAGA">
-        <div class="video-studio-header">
-          <div class="vs-title-cluster">
-            <span class="vs-badge-icon"><i class="fa-brands fa-youtube"></i></span>
+      <!-- ================= MIDDLE ROW: BENTO VIDEO TUTORIAL PLAYER WIDGET (4 VIDEOS) ================= -->
+      <section class="bento-card card-video-tutorials" id="panduan-video" aria-label="Video Tutorial Penggunaan Aplikasi SICIBINAGA">
+        <div class="bento-card-header video-widget-header">
+          <div class="vw-title-cluster">
+            <span class="vw-badge-icon"><i class="fa-brands fa-youtube"></i></span>
             <div>
-              <div class="vs-title-row">
-                <h2 class="bento-title-emerald">Studio Video Tutorial SICIBINAGA</h2>
-                <span class="vs-count-pill">4 Panduan Utuh</span>
+              <div class="vw-heading-row">
+                <h2 class="bento-title-emerald">Video Tutorial Penggunaan</h2>
+                <span class="vw-count-pill">4 Video Utuh</span>
               </div>
-              <p class="vs-sub-desc">Panduan resmi langkah demi langkah cara login akun hingga pengerjaan LMS, Ujian CBT, dan Live Arena Quiz</p>
+              <p class="vw-subtitle">Panduan resmi langkah demi langkah Login, LMS Kelas Online, Ujian CBT, dan Live Arena Quiz</p>
             </div>
           </div>
 
-          <!-- Quick Step Filter Pills (Mobile Horizontal Scrollable) -->
-          <div class="vs-step-pills" role="tablist" aria-label="Pilih Video Tutorial">
-            <button type="button" class="vs-step-chip active" data-vid-index="0" onclick="selectTutorialVideo(0)">
-              <i class="fa-solid fa-key"></i> <span>1. Login Akun</span>
+          <!-- Quick Category Pills on Desktop / Tablet -->
+          <div class="vw-quick-tabs" role="tablist" aria-label="Pilih Video Tutorial">
+            <button type="button" class="vw-tab-pill active" data-vid-index="0" onclick="selectTutorialVideo(0)">
+              <i class="fa-solid fa-user-lock"></i> <span>1. Login Akun</span>
             </button>
-            <button type="button" class="vs-step-chip" data-vid-index="1" onclick="selectTutorialVideo(1)">
+            <button type="button" class="vw-tab-pill" data-vid-index="1" onclick="selectTutorialVideo(1)">
               <i class="fa-solid fa-book-open-reader"></i> <span>2. Kelas LMS</span>
             </button>
-            <button type="button" class="vs-step-chip" data-vid-index="2" onclick="selectTutorialVideo(2)">
-              <i class="fa-solid fa-laptop-file"></i> <span>3. Ujian CBT</span>
+            <button type="button" class="vw-tab-pill" data-vid-index="2" onclick="selectTutorialVideo(2)">
+              <i class="fa-solid fa-shield-halved"></i> <span>3. Ujian CBT</span>
             </button>
-            <button type="button" class="vs-step-chip" data-vid-index="3" onclick="selectTutorialVideo(3)">
+            <button type="button" class="vw-tab-pill" data-vid-index="3" onclick="selectTutorialVideo(3)">
               <i class="fa-solid fa-gamepad"></i> <span>4. Live Arena</span>
             </button>
           </div>
         </div>
 
-        <!-- Video Studio Split Layout: Left/Top Main Player + Right/Bottom Interactive Playlist -->
-        <div class="video-studio-body">
-          <!-- Main Embedded Player Column -->
-          <div class="vs-player-column">
-            <div class="vs-frame-shell" id="vsFrameShell">
+        <!-- Split Bento Video Layout: Left Main Responsive Player + Right Interactive Playlist -->
+        <div class="vw-bento-body">
+          <!-- Main Video Stage -->
+          <div class="vw-stage-col">
+            <div class="vw-player-frame" id="vwPlayerContainer">
               <iframe
                 id="tutorialYoutubeIframe"
                 src="https://www.youtube.com/embed/-qMBiGZ7oR4?rel=0&modestbranding=1&playsinline=1"
-                title="TUTORIAL LOGIN AKUN SICIBINAGA (USERNAME + PASSWORD)"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                title="TUTORIAL LOGIN AKUN SICIBINAGA (USERNAME + PASWORD)"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
                 allowfullscreen
                 loading="lazy"
               ></iframe>
             </div>
 
-            <!-- Active Video Info & Action Controls -->
-            <div class="vs-now-playing-bar">
-              <div class="vs-np-meta">
-                <div class="vs-np-badges">
-                  <span class="vs-tag-step" id="activeVideoStepBadge">Langkah 1 dari 4 • YouTube Shorts</span>
-                  <span class="vs-tag-duration" id="activeVideoDurationBadge"><i class="fa-regular fa-clock"></i> Panduan Cepat</span>
+            <!-- Active Video Info Bar below Player -->
+            <div class="vw-active-meta">
+              <div class="vw-active-text">
+                <div class="vw-meta-tags">
+                  <span class="vw-step-badge" id="activeVideoBadge">VIDEO 1 DARI 4 • SHORTS</span>
+                  <span class="vw-cat-tag" id="activeVideoCategory">Panduan Akses &amp; Kredensial</span>
                 </div>
-                <h3 class="vs-np-title" id="activeVideoTitle">TUTORIAL LOGIN AKUN SICIBINAGA (USERNAME + PASSWORD)</h3>
-                <p class="vs-np-desc" id="activeVideoDesc">Cara masuk ke portal jenjang kelas SICIBINAGA menggunakan Username dan Password akun siswa dengan benar.</p>
+                <h3 class="vw-active-title" id="activeVideoTitle">TUTORIAL LOGIN AKUN SICIBINAGA (USERNAME + PASWORD)</h3>
+                <p class="vw-active-desc" id="activeVideoDesc">Cara memilih rombel kelas (7A–9H) dan masuk menggunakan Username serta Password akun siswa dengan benar.</p>
               </div>
 
-              <div class="vs-np-actions">
-                <div class="vs-nav-prevnext">
-                  <button type="button" class="btn-vs-nav" onclick="prevTutorialVideo()" title="Video Sebelumnya">
-                    <i class="fa-solid fa-backward-step"></i>
-                  </button>
-                  <button type="button" class="btn-vs-nav" onclick="nextTutorialVideo()" title="Video Selanjutnya">
-                    <i class="fa-solid fa-forward-step"></i>
-                  </button>
-                </div>
+              <div class="vw-active-actions">
+                <button type="button" class="btn-vw-nav" onclick="prevTutorialVideo()" title="Video Sebelumnya">
+                  <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button type="button" class="btn-vw-nav" onclick="nextTutorialVideo()" title="Video Selanjutnya">
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
                 <a
                   href="https://youtube.com/shorts/-qMBiGZ7oR4"
-                  id="activeVideoExternalBtn"
+                  id="activeVideoYtLink"
                   target="_blank"
                   rel="noopener"
-                  class="btn-vs-youtube"
-                  onclick="playClickSound()"
+                  class="btn-vw-yt"
+                  title="Tonton langsung di aplikasi YouTube"
                 >
                   <i class="fa-brands fa-youtube"></i>
                   <span>Buka di YouTube</span>
@@ -449,75 +445,82 @@
             </div>
           </div>
 
-          <!-- Interactive 4-Video Playlist Column -->
-          <div class="vs-playlist-column" id="tutorialPlaylistContainer">
-            <!-- Video Item 1: Login Akun -->
-            <article class="vs-playlist-card active" data-vid-index="0" onclick="selectTutorialVideo(0)">
-              <div class="vsp-thumb-wrap">
-                <img src="https://i.ytimg.com/vi/-qMBiGZ7oR4/hqdefault.jpg" alt="Thumbnail Tutorial Login Akun SICIBINAGA" loading="lazy" />
-                <span class="vsp-play-overlay"><i class="fa-solid fa-play"></i></span>
-                <span class="vsp-format-badge badge-shorts">SHORTS</span>
-              </div>
-              <div class="vsp-content">
-                <div class="vsp-top-row">
-                  <span class="vsp-step-num">VIDEO 01 • AKSES MASUK</span>
-                  <span class="vsp-playing-indicator"><i class="fa-solid fa-volume-high"></i> Diputar</span>
-                </div>
-                <h4 class="vsp-title">TUTORIAL LOGIN AKUN SICIBINAGA (USERNAME + PASSWORD)</h4>
-                <p class="vsp-sub">Panduan masuk akun siswa di portal kelas dengan Username &amp; Password.</p>
-              </div>
-            </article>
+          <!-- Right Playlist Bento Cards (4 Complete Tutorial Videos) -->
+          <div class="vw-playlist-col">
+            <div class="vw-playlist-head">
+              <span>Daftar Putar Tutorial (4 Materi)</span>
+              <span class="vw-playlist-hint"><i class="fa-solid fa-hand-pointer"></i> Ketuk untuk memutar</span>
+            </div>
 
-            <!-- Video Item 2: Pengerjaan LMS -->
-            <article class="vs-playlist-card" data-vid-index="1" onclick="selectTutorialVideo(1)">
-              <div class="vsp-thumb-wrap">
-                <img src="https://i.ytimg.com/vi/H8kwynV-aq0/hqdefault.jpg" alt="Thumbnail Tutorial Pengerjaan LMS SICIBINAGA" loading="lazy" />
-                <span class="vsp-play-overlay"><i class="fa-solid fa-play"></i></span>
-                <span class="vsp-format-badge">FULL HD</span>
-              </div>
-              <div class="vsp-content">
-                <div class="vsp-top-row">
-                  <span class="vsp-step-num">VIDEO 02 • KELAS ONLINE</span>
-                  <span class="vsp-playing-indicator"><i class="fa-solid fa-volume-high"></i> Diputar</span>
+            <div class="vw-playlist-items" id="tutorialPlaylistContainer">
+              <!-- Video Item 1: Login Akun -->
+              <article class="vw-card-item active" data-vid-index="0" onclick="selectTutorialVideo(0)">
+                <div class="vw-thumb-wrap">
+                  <img src="https://i.ytimg.com/vi/-qMBiGZ7oR4/hqdefault.jpg" alt="Thumbnail Tutorial Login Akun SICIBINAGA" loading="lazy" />
+                  <span class="vw-play-overlay"><i class="fa-solid fa-play"></i></span>
+                  <span class="vw-format-tag tag-shorts">SHORTS</span>
                 </div>
-                <h4 class="vsp-title">TUTORIAL PENGERJAAN LMS (KELAS ONLINE) APLIKASI SICIBINAGA</h4>
-                <p class="vsp-sub">Alur belajar konstruktif 5 langkah: materi, flashcard 3D, AI Tutor &amp; kuis.</p>
-              </div>
-            </article>
+                <div class="vw-item-info">
+                  <div class="vw-item-top">
+                    <span class="vw-item-num">01 • LOGIN AKUN</span>
+                    <span class="vw-playing-dot">Diputar</span>
+                  </div>
+                  <h4 class="vw-item-title">TUTORIAL LOGIN AKUN SICIBINAGA (USERNAME + PASWORD)</h4>
+                  <p class="vw-item-sub">Panduan masuk akun siswa dengan Username &amp; Password.</p>
+                </div>
+              </article>
 
-            <!-- Video Item 3: Ujian CBT -->
-            <article class="vs-playlist-card" data-vid-index="2" onclick="selectTutorialVideo(2)">
-              <div class="vsp-thumb-wrap">
-                <img src="https://i.ytimg.com/vi/6OAgxNdDHqI/hqdefault.jpg" alt="Thumbnail Tutorial Pengerjaan Ujian CBT SICIBINAGA" loading="lazy" />
-                <span class="vsp-play-overlay"><i class="fa-solid fa-play"></i></span>
-                <span class="vsp-format-badge">FULL HD</span>
-              </div>
-              <div class="vsp-content">
-                <div class="vsp-top-row">
-                  <span class="vsp-step-num">VIDEO 03 • UJIAN RESMI</span>
-                  <span class="vsp-playing-indicator"><i class="fa-solid fa-volume-high"></i> Diputar</span>
+              <!-- Video Item 2: LMS (Kelas Online) -->
+              <article class="vw-card-item" data-vid-index="1" onclick="selectTutorialVideo(1)">
+                <div class="vw-thumb-wrap">
+                  <img src="https://i.ytimg.com/vi/H8kwynV-aq0/hqdefault.jpg" alt="Thumbnail Tutorial LMS SICIBINAGA" loading="lazy" />
+                  <span class="vw-play-overlay"><i class="fa-solid fa-play"></i></span>
+                  <span class="vw-format-tag tag-full">FULL HD</span>
                 </div>
-                <h4 class="vsp-title">TUTORIAL PENGERJAAN UJIAN CBT APLIKASI SICIBINAGA</h4>
-                <p class="vsp-sub">Cara input token ujian, aturan Fullscreen Anti-Cheat &amp; 6 tipe soal TKA.</p>
-              </div>
-            </article>
+                <div class="vw-item-info">
+                  <div class="vw-item-top">
+                    <span class="vw-item-num">02 • KELAS ONLINE (LMS)</span>
+                    <span class="vw-playing-dot">Diputar</span>
+                  </div>
+                  <h4 class="vw-item-title">TUTORIAL PENGERJAAN LMS (KELAS ONLINE) APLIKASI SICIBINAGA</h4>
+                  <p class="vw-item-sub">Alur belajar 5 langkah, Flashcard 3D &amp; Socratic AI Tutor.</p>
+                </div>
+              </article>
 
-            <!-- Video Item 4: Live Arena (Game) Quis -->
-            <article class="vs-playlist-card" data-vid-index="3" onclick="selectTutorialVideo(3)">
-              <div class="vsp-thumb-wrap">
-                <img src="https://i.ytimg.com/vi/kvkWpvvrJ3M/hqdefault.jpg" alt="Thumbnail Tutorial Live Arena Game Quis SICIBINAGA" loading="lazy" />
-                <span class="vsp-play-overlay"><i class="fa-solid fa-play"></i></span>
-                <span class="vsp-format-badge">FULL HD</span>
-              </div>
-              <div class="vsp-content">
-                <div class="vsp-top-row">
-                  <span class="vsp-step-num">VIDEO 04 • GAMIFIKASI</span>
-                  <span class="vsp-playing-indicator"><i class="fa-solid fa-volume-high"></i> Diputar</span>
+              <!-- Video Item 3: Ujian CBT -->
+              <article class="vw-card-item" data-vid-index="2" onclick="selectTutorialVideo(2)">
+                <div class="vw-thumb-wrap">
+                  <img src="https://i.ytimg.com/vi/6OAgxNdDHqI/hqdefault.jpg" alt="Thumbnail Tutorial Ujian CBT SICIBINAGA" loading="lazy" />
+                  <span class="vw-play-overlay"><i class="fa-solid fa-play"></i></span>
+                  <span class="vw-format-tag tag-cbt">CBT LOCK</span>
                 </div>
-                <h4 class="vsp-title">TUTORIAL PENGERJAAN LIVE ARENA (GAME) QUIS APLIKASI SICIBINAGA</h4>
-                <p class="vsp-sub">Cara gabung PIN Room turnamen kuis interaktif, raih XP &amp; puncak klasemen.</p>
-              </div>
-            </article>
+                <div class="vw-item-info">
+                  <div class="vw-item-top">
+                    <span class="vw-item-num">03 • UJIAN CBT</span>
+                    <span class="vw-playing-dot">Diputar</span>
+                  </div>
+                  <h4 class="vw-item-title">TUTORIAL PENGERJAAN UJIAN CBT APLIKASI SICIBINAGA</h4>
+                  <p class="vw-item-sub">Cara input token, 6 tipe soal TKA &amp; aturan Anti-Cheat.</p>
+                </div>
+              </article>
+
+              <!-- Video Item 4: Live Arena (Game) Quiz -->
+              <article class="vw-card-item" data-vid-index="3" onclick="selectTutorialVideo(3)">
+                <div class="vw-thumb-wrap">
+                  <img src="https://i.ytimg.com/vi/kvkWpvvrJ3M/hqdefault.jpg" alt="Thumbnail Tutorial Live Arena Quiz SICIBINAGA" loading="lazy" />
+                  <span class="vw-play-overlay"><i class="fa-solid fa-play"></i></span>
+                  <span class="vw-format-tag tag-game">GAME QUIZ</span>
+                </div>
+                <div class="vw-item-info">
+                  <div class="vw-item-top">
+                    <span class="vw-item-num">04 • LIVE ARENA QUIZ</span>
+                    <span class="vw-playing-dot">Diputar</span>
+                  </div>
+                  <h4 class="vw-item-title">TUTORIAL PENGERJAAN LIVE ARENA (GAME) QUIS APLIKASI SICIBINAGA</h4>
+                  <p class="vw-item-sub">Gabung PIN Room, kuis interaktif &amp; kejar skor Leaderboard.</p>
+                </div>
+              </article>
+            </div>
           </div>
         </div>
       </section>
@@ -629,7 +632,7 @@
           </div>
         </section>
 
-        <!-- BOTTOM-MIDDLE CARD: INDEKS PERFORMA & SKOR XP (WAVE CHART) -->
+        <!-- BOTTOM-MIDDLE CARD: INDEKS PERFORMA & SKOR XP -->
         <section class="bento-card card-wave-summary" aria-label="Ringkasan Skor XP dan Kesiapan">
           <div class="bento-card-header">
             <h2 class="bento-title-emerald">Indeks Kesiapan &amp; XP</h2>
@@ -685,19 +688,19 @@
             <button type="button" class="service-frosted-pill" onclick="selectTutorialVideo(2, true)">
               <span class="srv-icon-circle"><i class="fa-solid fa-shield-halved"></i></span>
               <span class="srv-name">Ujian CBT Anti-Cheat</span>
-              <span class="srv-count-badge"><i class="fa-solid fa-play"></i> Video CBT</span>
+              <span class="srv-count-badge"><i class="fa-solid fa-circle-play"></i> Demo CBT</span>
             </button>
 
             <button type="button" class="service-frosted-pill" onclick="selectTutorialVideo(1, true)">
               <span class="srv-icon-circle"><i class="fa-solid fa-book-open-reader"></i></span>
               <span class="srv-name">LMS Konstruktif</span>
-              <span class="srv-count-badge"><i class="fa-solid fa-play"></i> Video LMS</span>
+              <span class="srv-count-badge"><i class="fa-solid fa-circle-play"></i> Demo LMS</span>
             </button>
 
             <button type="button" class="service-frosted-pill" onclick="selectTutorialVideo(3, true)">
               <span class="srv-icon-circle"><i class="fa-solid fa-trophy"></i></span>
               <span class="srv-name">Live Arena &amp; Badge</span>
-              <span class="srv-count-badge"><i class="fa-solid fa-play"></i> Video Quiz</span>
+              <span class="srv-count-badge"><i class="fa-solid fa-circle-play"></i> Demo Game</span>
             </button>
 
             <button type="button" class="service-frosted-pill" onclick="toggleAiChat(true)">
@@ -726,7 +729,7 @@
 
   </div>
 
-  <!-- FLOATING CAPSULE WIDGET: TANYA AI SICIBINAGA (DESKTOP & TABLET) -->
+  <!-- FLOATING CAPSULE WIDGET: TANYA AI SICIBINAGA (WITH VOICE & TTS) -->
   <button type="button" class="ai-capsule-widget" id="aiCapsuleBtn" onclick="toggleAiChat(true)" aria-label="Buka Asisten Tanya AI SICIBINAGA">
     <span class="ai-capsule-Orb">
       <i class="fa-solid fa-wand-magic-sparkles"></i>
@@ -742,19 +745,19 @@
   <nav class="mobile-bottom-nav" aria-label="Navigasi Smartphone">
     <a href="#beranda" class="mnav-item active" onclick="setActiveMobileNav(this)">
       <i class="fa-solid fa-table-columns"></i>
-      <span>Beranda</span>
+      <span>Dashboard</span>
     </a>
     <a href="#pilih-jenjang" class="mnav-item" onclick="setActiveMobileNav(this)">
       <i class="fa-solid fa-layer-group"></i>
-      <span>Kelas</span>
+      <span>Portal Kelas</span>
     </a>
-    <a href="#video-tutorial" class="mnav-item" onclick="setActiveMobileNav(this)">
-      <i class="fa-brands fa-youtube"></i>
+    <a href="#panduan-video" class="mnav-item" onclick="setActiveMobileNav(this)">
+      <i class="fa-solid fa-circle-play"></i>
       <span>Tutorial</span>
     </a>
     <a href="#fitur-interaktif" class="mnav-item" onclick="setActiveMobileNav(this); switchInteractiveTab('tab-warmup');">
       <i class="fa-solid fa-brain"></i>
-      <span>HOTS</span>
+      <span>HOTS &amp; Cek</span>
     </a>
     <button type="button" class="mnav-item mnav-ai" onclick="toggleAiChat(true)">
       <div class="mnav-ai-badge">
@@ -798,8 +801,8 @@
         <button type="button" class="ai-chip" onclick="sendQuickPrompt('Apa itu aplikasi SICIBINAGA dan bagaimana pembagian link kelasnya?')">
           ✨ Apa itu SICIBINAGA?
         </button>
-        <button type="button" class="ai-chip" onclick="sendQuickPrompt('Bagaimana cara login akun SICIBINAGA dengan username dan password?')">
-          🔑 Cara Login Akun
+        <button type="button" class="ai-chip" onclick="sendQuickPrompt('Tampilkan link 4 video tutorial penggunaan aplikasi SICIBINAGA!')">
+          🎬 4 Video Tutorial
         </button>
         <button type="button" class="ai-chip" onclick="sendQuickPrompt('Bagaimana cara login dan aturan keamanan Anti-Cheat saat ujian CBT?')">
           🛡️ Cara &amp; Aturan Ujian CBT
