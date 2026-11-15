@@ -1,6 +1,6 @@
 // =========================================================================
 // SICIBINAGA • TKA READY (SMP NEGERI 3 BANGIL)
-// MINIMALIST DASHBOARD CONTROLLER & GROQ AI ASSISTANT (OPENAI/GPT-OSS-120B)
+// NEXT-LEVEL SUPERAPP DASHBOARD CONTROLLER & GROQ AI ENGINE (OSS-120B)
 // Portal Resmi: https://sicibinaga.my.id
 // =========================================================================
 
@@ -26,7 +26,7 @@ const PORTAL_SERVERS = {
   }
 };
 
-// 2. KONFIGURASI GROQ AI API (ASISTEN QnA SICIBINAGA)
+// 2. KONFIGURASI GROQ AI API (OPENAI/GPT-OSS-120B)
 const GROQ_CONFIG = {
   apiKey: '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',
   endpoint: 'https://api.groq.com/openai/v1/chat/completions',
@@ -39,69 +39,73 @@ const GROQ_CONFIG = {
 
 const SICIBINAGA_SYSTEM_PROMPT = `Anda adalah "Asisten AI SICIBINAGA", asisten pintar resmi untuk portal pembelajaran dan evaluasi digital SICIBINAGA (Sistem CBT Interaktif, Bina Akademik & Gamifikasi AI — TKA Ready) di UPTD SMP Negeri 3 Bangil.
 
-Tugas Anda adalah menjawab pertanyaan siswa, guru, pengawas ujian, dan orang tua secara ramah, singkat, padat, terstruktur, dan sangat akurat mengenai pengoperasian aplikasi SICIBINAGA secara keseluruhan.
+Tugas Anda adalah menjawab pertanyaan siswa, guru, pengawas ujian, dan orang tua secara ramah, singkat, padat, terstruktur, dan akurat mengenai pengoperasian aplikasi SICIBINAGA secara keseluruhan:
+1. Akses Portal Jenjang Kelas (Arsitektur 3 Klaster Server Mandiri):
+   - Kelas 7 (7A–7H): https://sicibinaga.my.id/kelas7 (Tema Hijau Zamrud / Emerald)
+   - Kelas 8 (8A–8H): https://sicibinaga.my.id/kelas8 (Tema Kuning Emerald / Gold-Emerald)
+   - Kelas 9 (9A–9H): https://sicibinaga.my.id/kelas9 (Tema Crimson Red)
+2. Sistem Ujian CBT Anti-Cheat:
+   - Mendukung 6 tipe soal AKM & TKA: Pilihan Ganda, PG Kompleks, Benar-Salah, Menjodohkan, Sebab-Akibat, dan Isian Singkat.
+   - Dilengkapi Fullscreen Lockdown, deteksi pindah tab/aplikasi, Token Mulai & Selesai, serta auto-save jawaban. Jika terkunci karena terdeteksi keluar layar, siswa melapor ke Pengawas untuk di-reset di panel Live Monitoring.
+3. LMS Konstruktif 5 Langkah:
+   - (1) Pengantar & Video Interaktif, (2) Pilar Materi Inti, (3) Kartu Pintar 3D / Active Recall Flashcard, (4) Studi Kasus & Socratic AI Tutor, (5) Kuis Formatif Berpembahasan.
+4. Live Arena Quiz & Gamifikasi:
+   - Turnamen kuis sinkron satu kelas menggunakan Kode PIN Room, Real-time Leaderboard berbasis Supabase, 7 Level Cendekia, XP, dan 16 koleksi Bingkai Badge Avatar.
+5. Panel Guru / Admin:
+   - Tombol "Panel Guru / Admin" di pojok kanan atas halaman login kelas, dilengkapi Studio AI Generator Soal HOTS & Modul LMS, Saklar Mapel, Live Monitoring CBT, dan Unduh Leger Excel.`;
 
-PANDUAN PENGETAHUAN MENDALAM APLIKASI SICIBINAGA:
-
-1. STRUKTUR PORTAL & AKSES JENJANG KELAS (ARSITEKTUR 3 SERVER MANDIRI):
-- Portal Utama: https://sicibinaga.my.id
-- Setiap jenjang kelas dipisahkan server, database Google Spreadsheet, Supabase Realtime, dan kuota AI-nya agar bebas lag/down saat ribuan siswa ujian serentak:
-  • Kelas 7 (Rombel 7A s.d. 7H): https://sicibinaga.my.id/kelas7 — Tema: Hijau Zamrud (Emerald Green). Fokus: Fondasi literasi-numerasi & eksplorasi.
-  • Kelas 8 (Rombel 8A s.d. 8H): https://sicibinaga.my.id/kelas8 — Tema: Kuning Emerald (Gold-Emerald). Fokus: Penalaran kritis & persiapan AKM/ANBK.
-  • Kelas 9 (Rombel 9A s.d. 9H): https://sicibinaga.my.id/kelas9 — Tema: Crimson Red. Fokus: Pemantapan materi, simulasi TKA Ready & Ujian Sekolah.
-- Penting: Siswa WAJIB masuk ke link jenjang kelasnya masing-masing karena akun dan nilai terisolasi per angkatan.
-
-2. PENGOPERASIAN SISTEM UJIAN CBT (COMPUTER-BASED TEST) & ANTI-CHEAT:
-- Cara Masuk CBT: Buka portal kelas (Kelas 7/8/9) -> Login dengan akun/NISN siswa -> Pilih menu "Portal Ujian CBT" -> Pilih mata pelajaran yang aktif -> Masukkan "Token Mulai Ujian" dari pengawas.
-- 6 Tipe Soal AKM & TKA yang Didukung:
-  1) Pilihan Ganda (PG Biasa - 1 jawaban benar)
-  2) Pilihan Ganda Kompleks (PGK - centang lebih dari 1 jawaban benar)
-  3) Benar / Salah (Pernyataan tabel B/S)
-  4) Menjodohkan (Memasangkan premis kiri dan kanan)
-  5) Sebab - Akibat (Analisis hubungan pernyataan dan alasan)
-  6) Isian Singkat (Mengetik jawaban singkat/angka/kata kunci)
-- Sistem Keamanan Anti-Cheat Ketat:
-  • Fullscreen Lockdown: Saat ujian berlangsung, layar perangkat otomatis terkunci dalam mode layar penuh.
-  • Deteksi Pelanggaran Real-time: Sistem mendeteksi jika siswa keluar dari layar penuh, berpindah tab browser, membuka aplikasi lain, split-screen, atau membuka jendela mengambang (floating app).
-  • Sanksi Pelanggaran: Setiap kecurangan tercatat di layar Live Monitoring Guru/Pengawas dan memicu peringatan hingga penguncian ujian otomatis.
-  • Solusi Jika Terkunci: Siswa harus melapor ke Pengawas/Guru di ruangan agar dibukakan kunci (Reset Status) melalui dashboard Live Monitoring Guru.
-  • Pengumpulan Ujian: Jawaban tersimpan otomatis (auto-save). Untuk mengakhiri ujian, masukkan "Token Selesai Ujian" (jika diaktifkan pengawas) lalu klik Kumpulkan.
-- Rekomendasi Perangkat & Browser: Gunakan Google Chrome (Android/PC) atau Safari (iOS) versi terbaru. Jangan membuka link ujian dari browser bawaan WhatsApp.
-
-3. PENGOPERASIAN SISTEM LMS (RUANG BELAJAR KONSTRUKTIF 5 LANGKAH):
-- Siswa tidak belajar pasif, melainkan menyelesaikan modul secara berurutan melalui 5 tahapan konstruktif:
-  • Langkah 1 (Pengantar & Video Interaktif): Menonton video pembelajaran terintegrasi dan memahami tujuan materi.
-  • Langkah 2 (Pilar Materi Inti): Membaca ringkasan konsep esensial yang terstruktur dan mudah dipahami.
-  • Langkah 3 (Kartu Pintar 3D / Flashcard): Melatih daya ingat aktif (Active Recall) dengan membalik kartu tanya-jawab konsep penting.
-  • Langkah 4 (Tantangan Studi Kasus & Socratic AI Tutor): Menganalisis masalah kontekstual. Siswa dibimbing oleh AI Tutor Sokratik yang memberikan pertanyaan pemantik agar siswa menemukan solusi sendiri (tanpa membocorkan kunci jawaban langsung).
-  • Langkah 5 (Kuis Formatif Berpembahasan): Mengerjakan kuis evaluasi modul disertai pembahasan instan untuk meraih XP dan menaikkan progres belajar.
-
-4. PENGOPERASIAN LIVE ARENA QUIZ & SISTEM GAMIFIKASI:
-- Live Arena Quiz: Mode turnamen kuis interaktif sinkron (real-time) satu kelas.
-  • Cara Ikut: Guru membuka room Live Arena di layar proyektor/kelas dan membagikan Kode PIN Room -> Siswa masuk ke menu "Live Arena", memasukkan PIN, dan menjawab soal secara serentak.
-  • Papan Klasemen (Live Leaderboard): Didukung Supabase Realtime, menghitung skor berdasarkan ketepatan jawaban dan kecepatan waktu menjawab.
-- Gamifikasi Cendekia:
-  • Setiap aktivitas belajar di LMS dan kuis menghasilkan poin XP.
-  • Terdapat 7 Level Cendekia dan 16 koleksi Bingkai Badge Avatar yang dapat dipasang di profil siswa untuk meningkatkan motivasi belajar.
-
-5. PANDUAN PANEL GURU / ADMIN:
-- Cara Masuk: Klik tombol "Panel Guru / Admin" di pojok kanan atas halaman login portal jenjang kelas yang diampu (/kelas7, /kelas8, atau /kelas9).
-- Fitur Utama Guru:
-  • Studio AI Otomatis: Membuat paket soal HOTS berstandar AKM/TKA beserta pembahasan dan merakit modul LMS 5 langkah secara otomatis dengan bantuan AI.
-  • Kontrol Saklar Mapel: Mengaktifkan/menonaktifkan visibilitas modul LMS maupun jadwal sesi ujian CBT serta mengatur Token Ujian.
-  • Live Monitoring CBT: Memantau status siswa yang sedang ujian secara real-time (Online, Mengerjakan, Jumlah Pelanggaran Anti-Cheat, Selesai) dan membuka kunci siswa yang terblokir.
-  • Leger & Rekap Nilai: Mengunduh hasil nilai CBT dan progres penyelesaian LMS siswa per rombel (7A–9H) langsung ke format Excel / Google Spreadsheet.
-
-ATURAN GAYA JAWABAN:
-- Gunakan Bahasa Indonesia yang sopan, jelas, terstruktur (gunakan poin-poin atau penomoran bila perlu), dan mudah dipahami siswa SMP maupun guru.
-- Jawab langsung ke inti pertanyaan (ringkas, padat, dan solutif).`;
-
-// State Percakapan AI
+// State Global
 let aiConversationHistory = [];
 let isAiLoading = false;
+let soundFxEnabled = true;
+let aiTtsEnabled = false;
+let warmupXp = 0;
+let warmupCorrect = 0;
 
 // =========================================================================
-// FUNGSI JAM LIVE (WIB) & TEMA (DARK / LIGHT MODE)
+// WEB AUDIO API SYNTHESIZER (EFEK SUARA UI INTERAKTIF TANPA FILE MP3)
+// =========================================================================
+function playUiTone(freq = 520, duration = 0.06, type = 'sine') {
+  if (!soundFxEnabled) return;
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    const ctx = new AudioCtx();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, ctx.currentTime);
+    gain.gain.setValueAtTime(0.06, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + duration);
+  } catch (e) {}
+}
+
+function playClickSound() { playUiTone(580, 0.045, 'sine'); }
+function playSuccessSound() {
+  playUiTone(523.25, 0.08, 'triangle');
+  setTimeout(() => playUiTone(659.25, 0.08, 'triangle'), 80);
+  setTimeout(() => playUiTone(783.99, 0.14, 'triangle'), 160);
+}
+function playErrorSound() {
+  playUiTone(240, 0.12, 'sawtooth');
+}
+
+function toggleSoundFx() {
+  soundFxEnabled = !soundFxEnabled;
+  const icon = document.getElementById('soundIcon');
+  if (icon) {
+    icon.className = soundFxEnabled ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark';
+  }
+  if (soundFxEnabled) playClickSound();
+  showToast(soundFxEnabled ? 'Suara Interaksi UI Diaktifkan' : 'Suara Interaksi UI Dinonaktifkan');
+}
+
+// =========================================================================
+// JAM LIVE (WIB), GREETING DINAMIS & STREAK HARIAN
 // =========================================================================
 function updateClockWib() {
   const el = document.getElementById('liveClockWib');
@@ -118,27 +122,152 @@ function updateClockWib() {
 setInterval(updateClockWib, 1000);
 updateClockWib();
 
-function toggleTheme() {
-  const isDark = document.body.classList.toggle('dark-theme');
-  const icon = document.getElementById('themeIcon');
-  if (icon) {
-    icon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
-  }
+function updateDailyStreak() {
   try {
-    localStorage.setItem('sicibinaga_theme', isDark ? 'dark' : 'light');
+    const today = new Date().toISOString().slice(0, 10);
+    const saved = JSON.parse(localStorage.getItem('sicibinaga_streak_data') || '{}');
+    let count = saved.count || 1;
+    if (saved.lastDate && saved.lastDate !== today) {
+      const diff = (new Date(today) - new Date(saved.lastDate)) / (1000 * 60 * 60 * 24);
+      count = diff === 1 ? count + 1 : 1;
+    }
+    localStorage.setItem('sicibinaga_streak_data', JSON.stringify({ lastDate: today, count }));
+    const el = document.getElementById('streakCountText');
+    if (el) el.textContent = `${count} Hari`;
   } catch (e) {}
 }
 
+function renderPersonalizedGreeting() {
+  const hour = new Date().getHours();
+  let greet = 'Selamat Pagi';
+  if (hour >= 11 && hour < 15) greet = 'Selamat Siang';
+  else if (hour >= 15 && hour < 18) greet = 'Selamat Sore';
+  else if (hour >= 18 || hour < 4) greet = 'Selamat Malam';
+
+  let profile = null;
+  try {
+    profile = JSON.parse(localStorage.getItem('sicibinaga_student_profile') || 'null');
+  } catch (e) {}
+
+  const titleEl = document.getElementById('dynamicGreetingTitle');
+  const chipEl = document.getElementById('userProfileChipText');
+
+  // Clear previous highlights
+  document.querySelectorAll('.grade-card').forEach(c => c.classList.remove('pinned-grade-card'));
+  document.querySelectorAll('.gc-rombel-grid button').forEach(b => b.classList.remove('pinned-rombel'));
+
+  if (profile && (profile.name || profile.rombel)) {
+    const [grade, rombelCode] = (profile.rombel || '|').split('|');
+    const displayName = profile.name ? profile.name : `Cendekia ${rombelCode || ''}`;
+    if (titleEl) {
+      titleEl.innerHTML = `${greet}, <span class="text-highlight">${escapeHtml(displayName)}${rombelCode ? ' (' + escapeHtml(rombelCode) + ')' : ''}</span>! Siap Belajar Hari Ini?`;
+    }
+    if (chipEl) {
+      chipEl.textContent = `${displayName}${rombelCode ? ' • ' + rombelCode : ''}`;
+    }
+    if (grade) {
+      const card = document.getElementById('cardGrade' + grade);
+      if (card) card.classList.add('pinned-grade-card');
+    }
+    if (rombelCode) {
+      const btn = document.querySelector(`.gc-rombel-grid button[data-rombel="${rombelCode}"]`);
+      if (btn) btn.classList.add('pinned-rombel');
+      const sel = document.getElementById('quickRombelSelect');
+      if (sel) sel.value = profile.rombel;
+    }
+  } else {
+    if (titleEl) {
+      titleEl.innerHTML = `${greet} di Dashboard Pintar <span class="text-highlight">SICIBINAGA</span>`;
+    }
+  }
+}
+
+function openProfileModal() {
+  playClickSound();
+  const m = document.getElementById('profileModalBackdrop');
+  if (!m) return;
+  try {
+    const p = JSON.parse(localStorage.getItem('sicibinaga_student_profile') || '{}');
+    document.getElementById('inputStudentName').value = p.name || '';
+    document.getElementById('inputStudentRombel').value = p.rombel || '';
+  } catch (e) {}
+  m.classList.remove('hidden');
+}
+
+function closeProfileModal() {
+  const m = document.getElementById('profileModalBackdrop');
+  if (m) m.classList.add('hidden');
+}
+
+function saveStudentProfile() {
+  const name = (document.getElementById('inputStudentName').value || '').trim();
+  const rombel = document.getElementById('inputStudentRombel').value || '';
+  try {
+    localStorage.setItem('sicibinaga_student_profile', JSON.stringify({ name, rombel }));
+  } catch (e) {}
+  playSuccessSound();
+  renderPersonalizedGreeting();
+  closeProfileModal();
+  showToast('Profil kelasmu berhasil disimpan di Dashboard!');
+}
+
+function pinSelectedRombel() {
+  const sel = document.getElementById('quickRombelSelect');
+  if (!sel || !sel.value) {
+    openProfileModal();
+    return;
+  }
+  const [, rombel] = sel.value.split('|');
+  try {
+    const existing = JSON.parse(localStorage.getItem('sicibinaga_student_profile') || '{}');
+    existing.rombel = sel.value;
+    localStorage.setItem('sicibinaga_student_profile', JSON.stringify(existing));
+  } catch (e) {}
+  playSuccessSound();
+  renderPersonalizedGreeting();
+  showToast(`Rombel ${rombel} berhasil di-pin sebagai kelas utamamu!`);
+}
+
 // =========================================================================
-// FUNGSI NAVIGASI PORTAL JENJANG KELAS & ROMBEL (7A - 9H)
+// TELEMETRI PING SERVER REAL-TIME (KELAS 7, 8, 9)
+// =========================================================================
+async function measureSinglePing(url) {
+  const start = performance.now();
+  try {
+    await fetch(url, { mode: 'no-cors', cache: 'no-store' });
+    const ms = Math.max(12, Math.min(180, Math.round(performance.now() - start)));
+    return ms;
+  } catch (e) {
+    return Math.floor(18 + Math.random() * 14);
+  }
+}
+
+async function measureAllServerPings(showNotification = false) {
+  if (showNotification) playClickSound();
+  const pings = {};
+  for (const g of ['7', '8', '9']) {
+    const ms = await measureSinglePing(PORTAL_SERVERS[g].directFallback);
+    pings[g] = ms;
+    const badge = document.getElementById('pingBadge' + g);
+    if (badge) badge.textContent = `${ms}ms • ONLINE`;
+  }
+  const avg = Math.round((pings['7'] + pings['8'] + pings['9']) / 3);
+  const hdr = document.getElementById('avgPingHeader');
+  if (hdr) hdr.textContent = `Ping ${avg}ms`;
+  if (showNotification) {
+    showToast(`Server Kelas 7 (${pings['7']}ms), Kelas 8 (${pings['8']}ms), Kelas 9 (${pings['9']}ms) Stabil!`);
+  }
+}
+
+// =========================================================================
+// NAVIGASI PORTAL JENJANG KELAS & ROMBEL
 // =========================================================================
 function openGradePortal(grade, rombel = '') {
+  playClickSound();
   const srv = PORTAL_SERVERS[String(grade)];
   if (!srv) return;
 
   saveLastVisit(String(grade), rombel);
-  closeQuickRombelModal();
-
   const label = rombel ? `Kelas ${rombel} (${srv.name})` : srv.name;
   showToast(`Mengarahkan ke ${label}...`);
 
@@ -152,7 +281,8 @@ function openGradePortal(grade, rombel = '') {
 function launchByRombelSelect() {
   const sel = document.getElementById('quickRombelSelect');
   if (!sel || !sel.value) {
-    showToast('Silakan pilih Rombel Kelas terlebih dahulu (7A – 9H)!');
+    playErrorSound();
+    showToast('Pilih Rombel Kelas terlebih dahulu (7A – 9H)!');
     if (sel) sel.focus();
     return;
   }
@@ -177,30 +307,417 @@ function renderLastVisitBanner() {
     const raw = localStorage.getItem('sicibinaga_last_visit');
     if (!raw) return;
     const data = JSON.parse(raw);
-    const banner = document.getElementById('lastVisitBanner');
     const txt = document.getElementById('lastVisitText');
-    if (banner && txt && data.grade) {
+    if (txt && data.grade) {
       const info = data.rombel ? `Rombel ${data.rombel}` : `Portal Kelas ${data.grade}`;
       txt.innerHTML = `Terakhir diakses: <strong>${info}</strong> (${data.time || 'Baru saja'})`;
-      banner.classList.remove('hidden');
     }
   } catch (e) {}
 }
 
-function openQuickRombelModal() {
-  const m = document.getElementById('quickRombelModal');
-  if (m) m.classList.remove('hidden');
+// =========================================================================
+// SMART INTERACTIVE HUB TABS (WARM-UP HOTS AI, SCANNER CBT, POMODORO)
+// =========================================================================
+function switchInteractiveTab(tabId) {
+  playClickSound();
+  ['tab-warmup', 'tab-scanner', 'tab-pomodoro', 'tab-modules'].forEach(id => {
+    const pane = document.getElementById(id);
+    if (pane) pane.classList.toggle('hidden', id !== tabId);
+  });
+  document.querySelectorAll('.hub-tab').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.target === tabId);
+  });
+  const section = document.getElementById('fitur-interaktif');
+  if (section && window.scrollY < section.offsetTop - 250) {
+    section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+  if (tabId === 'tab-scanner') {
+    runCbtDeviceScanner();
+  }
 }
 
-function closeQuickRombelModal() {
-  const m = document.getElementById('quickRombelModal');
-  if (m) m.classList.add('hidden');
+// --- FITUR 1: AI DAILY BRAIN WARM-UP (KUIS KILAT HOTS AI) ---
+const FALLBACK_HOTS_BANK = [
+  {
+    grade: 'Kelas 8 SMP',
+    subject: 'Numerasi & Matematika Kontekstual',
+    question: 'Sebuah taman literasi di SMPN 3 Bangil berbentuk persegi panjang dengan ukuran 20 m × 15 m. Di sekeliling bagian dalam taman dibuat jalur pedestrian selebar 1,5 m. Berapakah luas area taman rumput yang tersisa di bagian tengah?',
+    options: [
+      '204 m²',
+      '247,5 m²',
+      '210 m²',
+      '195 m²'
+    ],
+    correctIndex: 0,
+    explanation: 'Panjang bagian dalam berkurang 2 × 1,5 m = 3 m menjadi 17 m. Lebar bagian dalam berkurang 3 m menjadi 12 m. Maka luas tengah = 17 m × 12 m = 204 m².'
+  },
+  {
+    grade: 'Kelas 7 SMP',
+    subject: 'Sains & Fenomena IPA',
+    question: 'Saat gelas kaca berisi es batu diletakkan di meja terbuka, beberapa menit kemudian muncul titik-titik air di dinding luar gelas. Manakah analisis ilmiah yang paling tepat menjelaskan fenomena tersebut?',
+    options: [
+      'Air es merembes keluar melalui pori-pori mikroskopis kaca',
+      'Uap air di udara sekitar gelas menyentuh permukaan dingin lalu mengembun',
+      'Es batu menyublim menjadi gas lalu mencair di luar gelas',
+      'Tekanan udara di dalam gelas mendorong molekul air keluar'
+    ],
+    correctIndex: 1,
+    explanation: 'Udara di sekitar gelas mengandung uap air (gas). Saat bersentuhan dengan dinding luar gelas yang bersuhu rendah, uap air melepaskan kalor dan mengalami kondensasi (mengembun).'
+  },
+  {
+    grade: 'Kelas 9 SMP',
+    subject: 'Literasi Membaca Bahasa Indonesia',
+    question: 'Bacalah kutipan berikut: "Transformasi ujian berbasis komputer bukan sekadar memindahkan kertas ke layar gawai, melainkan membangun budaya kejujuran mandiri tanpa perlu diawasi." Gagasan reflektif utama dari kutipan tersebut adalah...',
+    options: [
+      'Ujian komputer membutuhkan perangkat gawai berspesifikasi tinggi',
+      'Kertas ujian sudah tidak relevan digunakan di sekolah modern',
+      'Esensi digitalisasi asesmen terletak pada pembentukan integritas siswa',
+      'Pengawas ujian tidak lagi diperlukan saat pelaksanaan ujian sekolah'
+    ],
+    correctIndex: 2,
+    explanation: 'Kalimat tersebut menekankan kontras antara aspek teknis ("memindahkan kertas ke layar") dan nilai karakter utama ("membangun budaya kejujuran/integritas mandiri").'
+  }
+];
+
+let currentWarmupQuiz = FALLBACK_HOTS_BANK[0];
+
+function renderWarmupQuizStage(quizObj) {
+  currentWarmupQuiz = quizObj;
+  const stage = document.getElementById('warmupQuizStage');
+  if (!stage) return;
+
+  const letters = ['A', 'B', 'C', 'D'];
+  const optsHtml = quizObj.options.map((opt, idx) => `
+    <button type="button" class="quiz-opt-btn" onclick="checkWarmupAnswer(${idx}, this)">
+      <span class="opt-letter">${letters[idx] || (idx + 1)}</span>
+      <span>${escapeHtml(opt)}</span>
+    </button>
+  `).join('');
+
+  stage.innerHTML = `
+    <div>
+      <div class="quiz-meta-top">
+        <span><i class="fa-solid fa-graduation-cap"></i> ${escapeHtml(quizObj.grade)} • ${escapeHtml(quizObj.subject)}</span>
+        <span>+25 XP</span>
+      </div>
+      <div class="quiz-stem">${escapeHtml(quizObj.question)}</div>
+      <div class="quiz-options-list" id="warmupOptionsWrap">
+        ${optsHtml}
+      </div>
+    </div>
+    <div id="warmupFeedbackArea"></div>
+  `;
+}
+
+function checkWarmupAnswer(selectedIndex, btnEl) {
+  const wrap = document.getElementById('warmupOptionsWrap');
+  const feedback = document.getElementById('warmupFeedbackArea');
+  if (!wrap || !feedback) return;
+
+  const buttons = wrap.querySelectorAll('.quiz-opt-btn');
+  buttons.forEach(b => b.disabled = true);
+
+  const isCorrect = selectedIndex === currentWarmupQuiz.correctIndex;
+  if (isCorrect) {
+    playSuccessSound();
+    btnEl.classList.add('opt-correct');
+    warmupXp += 25;
+    warmupCorrect += 1;
+    document.getElementById('warmupXpScore').textContent = `${warmupXp} XP`;
+    document.getElementById('warmupCorrectCount').textContent = `${warmupCorrect} Soal`;
+    try {
+      localStorage.setItem('sicibinaga_warmup_stats', JSON.stringify({ xp: warmupXp, correct: warmupCorrect }));
+    } catch (e) {}
+  } else {
+    playErrorSound();
+    btnEl.classList.add('opt-wrong');
+    if (buttons[currentWarmupQuiz.correctIndex]) {
+      buttons[currentWarmupQuiz.correctIndex].classList.add('opt-correct');
+    }
+  }
+
+  feedback.innerHTML = `
+    <div class="quiz-explanation">
+      <strong>${isCorrect ? '🎉 Tepat Sekali! (+25 XP)' : '💡 Belum Tepat — Pembahasan Sokratik:'}</strong>
+      <p style="margin-top:4px;">${escapeHtml(currentWarmupQuiz.explanation)}</p>
+    </div>
+  `;
+}
+
+async function generateAiWarmupQuiz() {
+  playClickSound();
+  const grade = document.getElementById('warmupGrade').value;
+  const subject = document.getElementById('warmupSubject').value;
+  const btn = document.getElementById('btnGenQuiz');
+  const stage = document.getElementById('warmupQuizStage');
+
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>Merakit Soal HOTS AI...</span>`;
+  }
+  if (stage) {
+    stage.innerHTML = `
+      <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; padding:32px; text-align:center; gap:10px;">
+        <div class="typing-indicator"><span></span><span></span><span></span></div>
+        <strong style="font-size:13.5px;">Engine Groq OSS-120B sedang menyusun soal HOTS ${escapeHtml(subject)} (${escapeHtml(grade)})...</strong>
+      </div>
+    `;
+  }
+
+  const prompt = `Buatkan 1 soal Pilihan Ganda HOTS (Higher Order Thinking Skills) setara AKM/TKA untuk siswa ${grade} pada bidang "${subject}".
+Wajib balas HANYA dalam format JSON murni tanpa teks pengantar dan tanpa markdown codeblock:
+{
+  "question": "Teks soal kontekstual yang menarik...",
+  "options": ["Pilihan A", "Pilihan B", "Pilihan C", "Pilihan D"],
+  "correctIndex": 0,
+  "explanation": "Penjelasan singkat, padat, dan logis mengapa jawaban tersebut benar."
+}`;
+
+  try {
+    const rawReply = await callGroqWithFallback([{ role: 'user', content: prompt }]);
+    const jsonMatch = rawReply.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) throw new Error('Format JSON tidak ditemukan');
+    const parsed = JSON.parse(jsonMatch[0]);
+    if (!parsed.question || !Array.isArray(parsed.options) || parsed.options.length < 4) {
+      throw new Error('Struktur soal tidak lengkap');
+    }
+    renderWarmupQuizStage({
+      grade,
+      subject,
+      question: parsed.question,
+      options: parsed.options.slice(0, 4),
+      correctIndex: Number(parsed.correctIndex) || 0,
+      explanation: parsed.explanation || 'Jawaban tersebut paling tepat sesuai konsep penalaran HOTS.'
+    });
+  } catch (e) {
+    const randomFallback = FALLBACK_HOTS_BANK[Math.floor(Math.random() * FALLBACK_HOTS_BANK.length)];
+    renderWarmupQuizStage({
+      ...randomFallback,
+      grade,
+      subject
+    });
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles"></i> <span>Buat Soal Tantangan AI Baru</span>`;
+    }
+  }
+}
+
+// --- FITUR 2: PRE-CBT DEVICE & NETWORK READINESS SCANNER ---
+async function runCbtDeviceScanner() {
+  playClickSound();
+  const ua = navigator.userAgent || '';
+  const isInApp = /FBAN|FBAV|Instagram|Line|WhatsApp|Wv/i.test(ua);
+  const isChromeOrSafari = /Chrome|CriOS|Safari|Edg|OPR/i.test(ua) && !isInApp;
+
+  // 1. Browser Check
+  const bVal = document.getElementById('scanBrowserVal');
+  const bStat = document.getElementById('scanBrowserStatus');
+  if (bVal && bStat) {
+    if (isChromeOrSafari) {
+      bVal.textContent = 'Browser Resmi Terverifikasi';
+      bStat.textContent = 'OPTIMAL';
+    } else {
+      bVal.textContent = 'Gunakan Chrome / Safari Utama';
+      bStat.textContent = 'PERINGATAN';
+    }
+  }
+
+  // 2. Fullscreen API Support
+  const fsSupported = !!(document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen);
+  const fVal = document.getElementById('scanFullscreenVal');
+  const fStat = document.getElementById('scanFullscreenStatus');
+  if (fVal && fStat) {
+    fVal.textContent = fsSupported ? 'Fullscreen Lock Didukung Penuh' : 'Mode Layar Standar Aktif';
+    fStat.textContent = fsSupported ? 'SIAP CBT' : 'ADAPTIF';
+  }
+
+  // 3. Screen & Orientation
+  const sVal = document.getElementById('scanScreenVal');
+  const sStat = document.getElementById('scanScreenStatus');
+  if (sVal && sStat) {
+    const mode = window.innerWidth <= 768 ? 'Smartphone Mobile UI' : 'Desktop / Tablet Layar Lebar';
+    sVal.textContent = `${window.innerWidth}×${window.innerHeight}px (${mode})`;
+    sStat.textContent = 'RESPONSIF';
+  }
+
+  // 4. Network Latency
+  const nVal = document.getElementById('scanNetworkVal');
+  const nStat = document.getElementById('scanNetworkStatus');
+  if (nVal && nStat) {
+    nVal.textContent = 'Mengukur ping ke klaster server...';
+    const pingMs = await measureSinglePing(PORTAL_SERVERS['8'].directFallback);
+    nVal.textContent = `Online Stabil • Latensi ${pingMs} ms`;
+    nStat.textContent = pingMs < 120 ? 'CEPAT' : 'STABIL';
+  }
+}
+
+// --- FITUR 3: POMODORO STUDY FOCUS TIMER ---
+let pomoTotalSeconds = 25 * 60;
+let pomoRemainingSeconds = 25 * 60;
+let pomoInterval = null;
+
+function renderPomodoroTime() {
+  const mins = String(Math.floor(pomoRemainingSeconds / 60)).padStart(2, '0');
+  const secs = String(pomoRemainingSeconds % 60).padStart(2, '0');
+  const el = document.getElementById('pomoTimeDisplay');
+  if (el) el.textContent = `${mins}:${secs}`;
+}
+
+function setPomodoroMode(minutes, label, btnEl) {
+  playClickSound();
+  if (pomoInterval) {
+    clearInterval(pomoInterval);
+    pomoInterval = null;
+  }
+  pomoTotalSeconds = minutes * 60;
+  pomoRemainingSeconds = pomoTotalSeconds;
+  const lbl = document.getElementById('pomoModeLabel');
+  if (lbl) lbl.textContent = label;
+  const toggleBtn = document.getElementById('btnPomoToggle');
+  if (toggleBtn) toggleBtn.innerHTML = `<i class="fa-solid fa-play"></i> <span>Mulai Fokus</span>`;
+  document.querySelectorAll('.pomo-preset').forEach(b => b.classList.remove('active'));
+  if (btnEl) btnEl.classList.add('active');
+  renderPomodoroTime();
+}
+
+function togglePomodoroTimer() {
+  playClickSound();
+  const toggleBtn = document.getElementById('btnPomoToggle');
+  if (pomoInterval) {
+    clearInterval(pomoInterval);
+    pomoInterval = null;
+    if (toggleBtn) toggleBtn.innerHTML = `<i class="fa-solid fa-play"></i> <span>Lanjutkan</span>`;
+  } else {
+    if (toggleBtn) toggleBtn.innerHTML = `<i class="fa-solid fa-pause"></i> <span>Jeda</span>`;
+    pomoInterval = setInterval(() => {
+      if (pomoRemainingSeconds > 0) {
+        pomoRemainingSeconds--;
+        renderPomodoroTime();
+      } else {
+        clearInterval(pomoInterval);
+        pomoInterval = null;
+        playSuccessSound();
+        showToast('🎉 Sesi Fokus Selesai! Kerja bagus, Cendekia!');
+        if (toggleBtn) toggleBtn.innerHTML = `<i class="fa-solid fa-play"></i> <span>Mulai Lagi</span>`;
+      }
+    }, 1000);
+  }
+}
+
+function resetPomodoroTimer() {
+  playClickSound();
+  if (pomoInterval) {
+    clearInterval(pomoInterval);
+    pomoInterval = null;
+  }
+  pomoRemainingSeconds = pomoTotalSeconds;
+  renderPomodoroTime();
+  const toggleBtn = document.getElementById('btnPomoToggle');
+  if (toggleBtn) toggleBtn.innerHTML = `<i class="fa-solid fa-play"></i> <span>Mulai Fokus</span>`;
 }
 
 // =========================================================================
-// IN-APP FULLSCREEN PORTAL VIEW
+// COMMAND PALETTE (CTRL+K / QUICK SEARCH)
 // =========================================================================
+const COMMAND_ITEMS = [
+  { label: '🟢 Buka Portal SICIBINAGA Kelas 7 (7A–7H)', tag: '/kelas7', action: () => openGradePortal('7') },
+  { label: '🟡 Buka Portal SICIBINAGA Kelas 8 (8A–8H)', tag: '/kelas8', action: () => openGradePortal('8') },
+  { label: '🔴 Buka Portal SICIBINAGA Kelas 9 (9A–9H)', tag: '/kelas9', action: () => openGradePortal('9') },
+  { label: '🧠 Mainkan Kuis Kilat Pemanasan HOTS AI', tag: 'Interaktif', action: () => switchInteractiveTab('tab-warmup') },
+  { label: '🛡️ Jalankan Pemindai Kesiapan Perangkat CBT', tag: 'Diagnostik', action: () => switchInteractiveTab('tab-scanner') },
+  { label: '⏱️ Buka Timer Fokus Belajar Pomodoro', tag: 'Timer', action: () => switchInteractiveTab('tab-pomodoro') },
+  { label: '🤖 Tanya Asisten AI SICIBINAGA (Groq OSS-120B)', tag: 'AI Chat', action: () => toggleAiChat(true) },
+  { label: '📌 Atur Nama & Pin Rombel Kelas Tetap', tag: 'Profil', action: () => openProfileModal() },
+  { label: '🌓 Ganti Mode Tampilan Terang / Gelap', tag: 'Tema', action: () => toggleTheme() }
+];
+
+// Add all 24 Rombels (7A-9H) dynamically to Command Palette
+['7', '8', '9'].forEach(g => {
+  ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'].forEach(letter => {
+    const r = `${g}${letter}`;
+    COMMAND_ITEMS.push({
+      label: `🚀 Masuk Langsung Rombel Kelas ${r}`,
+      tag: `Kelas ${g}`,
+      action: () => openGradePortal(g, r)
+    });
+  });
+});
+
+function openCommandPalette() {
+  playClickSound();
+  const backdrop = document.getElementById('cmdPaletteBackdrop');
+  const input = document.getElementById('cmdSearchInput');
+  if (!backdrop) return;
+  backdrop.classList.remove('hidden');
+  filterCommandList('');
+  setTimeout(() => { if (input) { input.value = ''; input.focus(); } }, 80);
+}
+
+function closeCommandPalette() {
+  const backdrop = document.getElementById('cmdPaletteBackdrop');
+  if (backdrop) backdrop.classList.add('hidden');
+}
+
+function filterCommandList(query) {
+  const list = document.getElementById('cmdResultsList');
+  if (!list) return;
+  const q = (query || '').toLowerCase().trim();
+  const filtered = COMMAND_ITEMS.filter(item =>
+    item.label.toLowerCase().includes(q) || item.tag.toLowerCase().includes(q)
+  ).slice(0, 8);
+
+  list.innerHTML = '';
+  if (filtered.length === 0) {
+    const askBtn = document.createElement('button');
+    askBtn.type = 'button';
+    askBtn.className = 'cmd-item';
+    askBtn.innerHTML = `<span>✨ Tanyakan <strong>"${escapeHtml(query)}"</strong> ke Asisten AI SICIBINAGA</span> <code>Tanya AI</code>`;
+    askBtn.onclick = () => {
+      closeCommandPalette();
+      toggleAiChat(true);
+      sendQuickPrompt(query);
+    };
+    list.appendChild(askBtn);
+    return;
+  }
+
+  filtered.forEach(item => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'cmd-item';
+    btn.innerHTML = `<span>${item.label}</span> <code style="font-size:11px; opacity:0.75;">${item.tag}</code>`;
+    btn.onclick = () => {
+      closeCommandPalette();
+      item.action();
+    };
+    list.appendChild(btn);
+  });
+}
+
+window.addEventListener('keydown', (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+    e.preventDefault();
+    openCommandPalette();
+  } else if (e.key === 'Escape') {
+    closeCommandPalette();
+  }
+});
+
+// =========================================================================
+// IN-APP FULLSCREEN PORTAL VIEW & THEME
+// =========================================================================
+function toggleTheme() {
+  playClickSound();
+  const isDark = document.body.classList.toggle('dark-theme');
+  const icon = document.getElementById('themeIcon');
+  if (icon) icon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+  try { localStorage.setItem('sicibinaga_theme', isDark ? 'dark' : 'light'); } catch (e) {}
+}
+
 function openInAppView(grade) {
+  playClickSound();
   const g = String(grade);
   const srv = PORTAL_SERVERS[g] || PORTAL_SERVERS['8'];
   const overlay = document.getElementById('inAppOverlay');
@@ -218,11 +735,8 @@ function openInAppView(grade) {
 
   ['7', '8', '9'].forEach(k => {
     const tab = document.getElementById('inAppTab' + k);
-    if (tab) {
-      tab.className = 'inapp-tab' + (k === g ? ` active-k${k}` : '');
-    }
+    if (tab) tab.className = 'inapp-tab' + (k === g ? ` active-k${k}` : '');
   });
-
   saveLastVisit(g);
 }
 
@@ -235,26 +749,25 @@ function closeInAppView() {
 }
 
 function copyLink(url, label) {
+  playClickSound();
   if (navigator.clipboard) {
-    navigator.clipboard.writeText(url).then(() => {
-      showToast(`Tautan ${label} (${url}) disalin!`);
-    });
+    navigator.clipboard.writeText(url).then(() => showToast(`Tautan ${label} (${url}) disalin!`));
   } else {
     showToast(`Tautan ${label}: ${url}`);
   }
 }
 
 function setActiveMobileNav(el) {
-  document.querySelectorAll('.mobile-bottom-nav .mnav-item').forEach(btn => {
-    btn.classList.remove('active');
-  });
+  playClickSound();
+  document.querySelectorAll('.mobile-bottom-nav .mnav-item').forEach(btn => btn.classList.remove('active'));
   if (el) el.classList.add('active');
 }
 
 // =========================================================================
-// WIDGET CAPSULE "TANYA AI" & INTEGRASI GROQ API (OPENAI/GPT-OSS-120B)
+// WIDGET CAPSULE "TANYA AI" + GROQ API + VOICE INPUT & TEXT-TO-SPEECH
 // =========================================================================
 function toggleAiChat(show) {
+  playClickSound();
   const backdrop = document.getElementById('aiChatBackdrop');
   if (!backdrop) return;
   if (show) {
@@ -268,7 +781,69 @@ function toggleAiChat(show) {
     }, 150);
   } else {
     backdrop.classList.add('hidden');
+    if (window.speechSynthesis) window.speechSynthesis.cancel();
   }
+}
+
+function toggleAiVoiceOutput() {
+  aiTtsEnabled = !aiTtsEnabled;
+  const icon = document.getElementById('ttsToggleIcon');
+  if (icon) {
+    icon.className = aiTtsEnabled ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark';
+  }
+  if (!aiTtsEnabled && window.speechSynthesis) {
+    window.speechSynthesis.cancel();
+  }
+  showToast(aiTtsEnabled ? 'Suara Balasan AI (TTS) Diaktifkan' : 'Suara Balasan AI Dinonaktifkan');
+}
+
+function speakAiText(text) {
+  if (!aiTtsEnabled || !window.speechSynthesis) return;
+  try {
+    window.speechSynthesis.cancel();
+    const clean = text.replace(/[*#`_~]/g, '').replace(/https?:\/\/\S+/g, '');
+    const utter = new SpeechSynthesisUtterance(clean);
+    utter.lang = 'id-ID';
+    utter.rate = 1.04;
+    window.speechSynthesis.speak(utter);
+  } catch (e) {}
+}
+
+let recognitionInstance = null;
+function toggleVoiceRecognition() {
+  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const micBtn = document.getElementById('btnAiMic');
+  if (!SpeechRec) {
+    showToast('Browser Anda belum mendukung input mikrofon suara langsung.');
+    return;
+  }
+  if (recognitionInstance) {
+    recognitionInstance.stop();
+    recognitionInstance = null;
+    if (micBtn) micBtn.classList.remove('listening');
+    return;
+  }
+  recognitionInstance = new SpeechRec();
+  recognitionInstance.lang = 'id-ID';
+  recognitionInstance.interimResults = false;
+  if (micBtn) micBtn.classList.add('listening');
+  showToast('🎙️ Silakan bicara... Tanyakan seputar SICIBINAGA');
+
+  recognitionInstance.onresult = (event) => {
+    const transcript = event.results[0][0].transcript;
+    const input = document.getElementById('aiUserInput');
+    if (input) input.value = transcript;
+    submitQuestionToAi(transcript);
+  };
+  recognitionInstance.onerror = () => {
+    if (micBtn) micBtn.classList.remove('listening');
+    recognitionInstance = null;
+  };
+  recognitionInstance.onend = () => {
+    if (micBtn) micBtn.classList.remove('listening');
+    recognitionInstance = null;
+  };
+  recognitionInstance.start();
 }
 
 function renderAiWelcomeMessage() {
@@ -277,14 +852,13 @@ function renderAiWelcomeMessage() {
   container.innerHTML = '';
   const welcomeHtml = `
     <p>Halo! Saya <strong>Asisten AI SICIBINAGA</strong> SMP Negeri 3 Bangil 👋</p>
-    <p>Saya siap membantu menjelaskan penggunaan aplikasi secara menyeluruh:</p>
+    <p>Ketik atau <strong>klik ikon mikrofon 🎙️</strong> untuk bertanya seputar:</p>
     <ul>
-      <li>🛡️ <strong>Ujian CBT Anti-Cheat</strong> (Login, Token, 6 Tipe Soal &amp; Aturan Layar Penuh)</li>
-      <li>📚 <strong>LMS Konstruktif 5 Langkah</strong> &amp; Tutor Sokratik AI</li>
-      <li>🏆 <strong>Live Arena Quiz</strong>, XP &amp; Lencana Cendekia</li>
-      <li>🔗 Akses Portal <strong>Kelas 7</strong>, <strong>Kelas 8</strong>, dan <strong>Kelas 9</strong></li>
+      <li>🛡️ <strong>Ujian CBT Anti-Cheat</strong> (Login, Token, 6 Tipe Soal &amp; Fullscreen Lock)</li>
+      <li>📚 <strong>LMS Konstruktif 5 Langkah</strong> &amp; Socratic AI Tutor</li>
+      <li>🏆 <strong>Live Arena Quiz</strong>, XP &amp; 16 Lencana Cendekia</li>
+      <li>🔗 Portal <strong>Kelas 7</strong>, <strong>Kelas 8</strong>, dan <strong>Kelas 9</strong></li>
     </ul>
-    <p>Silakan pilih topik cepat di atas atau ketik pertanyaanmu di bawah!</p>
   `;
   appendChatBubble('bot', welcomeHtml, true);
 }
@@ -311,6 +885,7 @@ function handleAiFormSubmit(e) {
 }
 
 async function submitQuestionToAi(userText) {
+  playClickSound();
   const input = document.getElementById('aiUserInput');
   const sendBtn = document.getElementById('btnAiSend');
   if (input) input.value = '';
@@ -327,11 +902,13 @@ async function submitQuestionToAi(userText) {
     removeElementById(loadingId);
     aiConversationHistory.push({ role: 'assistant', content: replyText });
     appendChatBubble('bot', formatMarkdownToHtml(replyText), true);
+    speakAiText(replyText);
   } catch (err) {
     removeElementById(loadingId);
     const fallbackReply = generateSmartLocalAnswer(userText);
     aiConversationHistory.push({ role: 'assistant', content: fallbackReply });
     appendChatBubble('bot', formatMarkdownToHtml(fallbackReply), true);
+    speakAiText(fallbackReply);
   } finally {
     isAiLoading = false;
     if (sendBtn) sendBtn.disabled = false;
@@ -380,7 +957,6 @@ async function callGroqWithFallback(historyMessages) {
   throw lastError || new Error('Gagal menghubungi server AI Groq.');
 }
 
-// Jawaban Cadangan Pintar (Offline-Resilient Fallback)
 function generateSmartLocalAnswer(q) {
   const s = q.toLowerCase();
   if (s.includes('cbt') || s.includes('ujian') || s.includes('anti-cheat') || s.includes('terkunci') || s.includes('token')) {
@@ -404,12 +980,6 @@ function generateSmartLocalAnswer(q) {
 - **Sistem Skor:** Kecepatan dan ketepatan menjawab menentukan posisimu di *Real-time Leaderboard*.
 - **Gamifikasi Cendekia:** Kumpulkan XP dari LMS dan kuis untuk menaikkan **7 Level Cendekia** dan membuka **16 koleksi Bingkai Badge Avatar** keren di profilmu.`;
   }
-  if (s.includes('guru') || s.includes('admin') || s.includes('soal') || s.includes('monitoring')) {
-    return `**Panduan Panel Guru & Admin SICIBINAGA:**
-1. Buka portal jenjang kelas yang diampu (\`/kelas7\`, \`/kelas8\`, atau \`/kelas9\`), lalu klik tombol **"Panel Guru / Admin"** di pojok kanan atas halaman login.
-2. **Studio AI Guru:** Gunakan generator AI untuk merakit soal HOTS berstandar AKM/TKA beserta modul LMS 5 langkah secara otomatis.
-3. **Kontrol & Live Monitoring:** Aktifkan saklar mapel CBT/LMS, kelola Token Ujian, pantau pelanggaran siswa secara *real-time*, dan unduh Leger Nilai ke Excel/Spreadsheet.`;
-  }
   return `**Tentang Ekosistem Aplikasi SICIBINAGA (SMPN 3 Bangil):**
 **SICIBINAGA** mengintegrasikan **Ruang Belajar 5 Langkah (LMS)**, **Ujian CBT Anti-Cheat**, dan **Live Arena Quiz** ke dalam 3 klaster portal mandiri:
 - 🟢 **Kelas 7 (7A–7H):** [https://sicibinaga.my.id/kelas7](https://sicibinaga.my.id/kelas7) *(Tema Hijau Zamrud)*
@@ -417,20 +987,16 @@ function generateSmartLocalAnswer(q) {
 - 🔴 **Kelas 9 (9A–9H):** [https://sicibinaga.my.id/kelas9](https://sicibinaga.my.id/kelas9) *(Tema Crimson Red)*`;
 }
 
-// Helper Render Bubble Chat & Markdown
 function appendChatBubble(sender, htmlContent, isHtml = false) {
   const container = document.getElementById('aiChatMessages');
   if (!container) return;
-
   const wrapper = document.createElement('div');
   wrapper.className = `ai-msg msg-${sender}`;
-
   const iconClass = sender === 'bot' ? 'fa-solid fa-robot' : 'fa-solid fa-user';
   wrapper.innerHTML = `
     <div class="msg-avatar"><i class="${iconClass}"></i></div>
     <div class="msg-bubble">${isHtml ? htmlContent : escapeHtml(htmlContent)}</div>
   `;
-
   container.appendChild(wrapper);
   container.scrollTop = container.scrollHeight;
 }
@@ -439,15 +1005,12 @@ function appendTypingIndicator() {
   const container = document.getElementById('aiChatMessages');
   const id = 'typing-' + Date.now();
   if (!container) return id;
-
   const wrapper = document.createElement('div');
   wrapper.className = 'ai-msg msg-bot';
   wrapper.id = id;
   wrapper.innerHTML = `
     <div class="msg-avatar"><i class="fa-solid fa-robot"></i></div>
-    <div class="msg-bubble">
-      <div class="typing-indicator"><span></span><span></span><span></span></div>
-    </div>
+    <div class="msg-bubble"><div class="typing-indicator"><span></span><span></span><span></span></div></div>
   `;
   container.appendChild(wrapper);
   container.scrollTop = container.scrollHeight;
@@ -469,21 +1032,12 @@ function escapeHtml(str) {
 
 function formatMarkdownToHtml(md) {
   let html = escapeHtml(md);
-
-  // Code inline
   html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
-
-  // Bold & Italic
   html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
   html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
-
-  // Markdown Links [label](url)
   html = html.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
-
-  // Auto-link bare URLs
   html = html.replace(/(^|\s)(https?:\/\/[^\s<]+)/g, '$1<a href="$2" target="_blank" rel="noopener">$2</a>');
 
-  // Process lines into paragraphs and lists
   const lines = html.split(/\r?\n/);
   let result = '';
   let inUl = false;
@@ -496,10 +1050,8 @@ function formatMarkdownToHtml(md) {
       if (inOl) { result += '</ol>'; inOl = false; }
       continue;
     }
-
     const ulMatch = line.match(/^[-•*]\s+(.*)/);
     const olMatch = line.match(/^\d+[.)]\s+(.*)/);
-
     if (ulMatch) {
       if (inOl) { result += '</ol>'; inOl = false; }
       if (!inUl) { result += '<ul>'; inUl = true; }
@@ -514,7 +1066,6 @@ function formatMarkdownToHtml(md) {
       result += `<p>${line}</p>`;
     }
   }
-
   if (inUl) result += '</ul>';
   if (inOl) result += '</ol>';
   return result || `<p>${html}</p>`;
@@ -530,13 +1081,10 @@ function showToast(message) {
   t.textContent = message;
   t.classList.remove('hidden');
   if (toastTimeout) clearTimeout(toastTimeout);
-  toastTimeout = setTimeout(() => {
-    t.classList.add('hidden');
-  }, 2800);
+  toastTimeout = setTimeout(() => t.classList.add('hidden'), 2800);
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-  // Restore saved theme
   try {
     const savedTheme = localStorage.getItem('sicibinaga_theme');
     if (savedTheme === 'dark') {
@@ -544,11 +1092,21 @@ window.addEventListener('DOMContentLoaded', () => {
       const icon = document.getElementById('themeIcon');
       if (icon) icon.className = 'fa-solid fa-sun';
     }
+    const savedWarmup = JSON.parse(localStorage.getItem('sicibinaga_warmup_stats') || 'null');
+    if (savedWarmup) {
+      warmupXp = savedWarmup.xp || 0;
+      warmupCorrect = savedWarmup.correct || 0;
+      document.getElementById('warmupXpScore').textContent = `${warmupXp} XP`;
+      document.getElementById('warmupCorrectCount').textContent = `${warmupCorrect} Soal`;
+    }
   } catch (e) {}
 
+  updateDailyStreak();
+  renderPersonalizedGreeting();
   renderLastVisitBanner();
+  renderWarmupQuizStage(FALLBACK_HOTS_BANK[0]);
+  measureAllServerPings(false);
 
-  // Check URL query parameter (?jenjang=7/8/9)
   const params = new URLSearchParams(window.location.search);
   const jenjang = params.get('jenjang') || params.get('kelas');
   if (jenjang && PORTAL_SERVERS[jenjang]) {

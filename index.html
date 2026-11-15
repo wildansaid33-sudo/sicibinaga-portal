@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
-  <title>SICIBINAGA • Dashboard Portal Pembelajaran & CBT — SMPN 3 Bangil</title>
-  <meta name="description" content="Dashboard Portal Resmi Aplikasi SICIBINAGA (TKA Ready) SMP Negeri 3 Bangil. Akses langsung Kelas 7, Kelas 8, dan Kelas 9 untuk Ujian CBT Anti-Cheat, LMS Konstruktif, dan Live Arena Quiz." />
+  <title>SICIBINAGA • SuperApp Dashboard Pembelajaran & CBT — SMPN 3 Bangil</title>
+  <meta name="description" content="Dashboard Interaktif Aplikasi SICIBINAGA (TKA Ready) SMP Negeri 3 Bangil. Akses Kelas 7, Kelas 8, dan Kelas 9 dilengkapi Cek Kesiapan CBT, Pemanasan HOTS AI, dan Asisten Suara AI." />
   <meta name="theme-color" content="#064e3b" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -24,9 +24,10 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- SUBTLE AMBIENT BACKGROUND -->
+  <!-- DYNAMIC AMBIENT BACKGROUND -->
   <div class="ambient-glow glow-1" aria-hidden="true"></div>
   <div class="ambient-glow glow-2" aria-hidden="true"></div>
+  <div class="ambient-glow glow-3" aria-hidden="true"></div>
 
   <!-- STICKY APP HEADER / NAVBAR -->
   <header class="app-header" id="appHeader">
@@ -38,23 +39,35 @@
         <div class="brand-meta">
           <div class="brand-title-line">
             <span class="brand-title">SICIBINAGA</span>
-            <span class="brand-pill">TKA READY</span>
+            <span class="brand-pill">NEXT-GEN</span>
           </div>
-          <span class="brand-sub">SMP Negeri 3 Bangil • Smart EdTech Dashboard</span>
+          <span class="brand-sub">SMP Negeri 3 Bangil • Smart EdTech SuperApp</span>
         </div>
       </a>
 
+      <!-- Quick Command Search Trigger (Desktop & Tablet) -->
+      <button type="button" class="cmd-search-trigger" onclick="openCommandPalette()" title="Cari Cepat Rombel, Fitur, atau Tanya AI (Ctrl+K)">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <span>Cari kelas, fitur, atau ketik perintah...</span>
+        <kbd>Ctrl K</kbd>
+      </button>
+
       <div class="header-right">
-        <div class="server-status-pill" title="Seluruh Klaster Server Kelas 7, 8, dan 9 Aktif">
+        <!-- Streak Counter Pill -->
+        <div class="streak-pill" id="streakBadge" title="Streak Aktif Belajar Harian Kamu">
+          <i class="fa-solid fa-fire-flame-curved"></i>
+          <span id="streakCountText">1 Hari</span>
+        </div>
+
+        <div class="server-status-pill" title="Status Real-Time 3 Klaster Server">
           <span class="status-dot-live"></span>
-          <span class="status-text">3 Server Online</span>
+          <span class="status-text" id="avgPingHeader">Ping 24ms</span>
           <span class="status-sep">•</span>
           <span id="liveClockWib" class="clock-text">--:-- WIB</span>
         </div>
 
-        <button type="button" class="btn-icon-action" onclick="openQuickRombelModal()" title="Pintasan Pilih Rombel (7A-9H)">
-          <i class="fa-solid fa-compass"></i>
-          <span class="btn-action-label">Pilih Rombel</span>
+        <button type="button" class="btn-icon-only" id="btnSoundToggle" onclick="toggleSoundFx()" title="Suara Interaksi UI (Aktif/Nonaktif)">
+          <i class="fa-solid fa-volume-high" id="soundIcon"></i>
         </button>
 
         <button type="button" class="btn-icon-only" id="btnThemeToggle" onclick="toggleTheme()" aria-label="Ubah Tema Terang atau Gelap" title="Mode Terang / Gelap">
@@ -67,31 +80,55 @@
   <!-- MAIN DASHBOARD CONTENT -->
   <main class="dashboard-main container" id="beranda">
 
-    <!-- 1. COMPACT OVERVIEW & QUICK ROMBEL BAR -->
-    <section class="overview-card" aria-label=" Tentang Aplikasi SICIBINAGA">
+    <!-- 1. DYNAMIC PERSONALIZED HERO & QUICK ROMBEL BAR -->
+    <section class="overview-card" aria-label="Tentang Aplikasi SICIBINAGA">
       <div class="overview-grid">
         <div class="overview-info">
           <div class="overview-badge-row">
-            <span class="chip-official"><i class="fa-solid fa-shield-halved"></i> PORTAL UTAMA • SICIBINAGA.MY.ID</span>
-            <span class="chip-ai"><i class="fa-solid fa-wand-magic-sparkles"></i> AI-Powered LMS &amp; CBT</span>
+            <span class="chip-official"><i class="fa-solid fa-shield-halved"></i> PORTAL RESMI • SICIBINAGA.MY.ID</span>
+            <span class="chip-ai"><i class="fa-solid fa-microchip"></i> Groq OSS-120B Engine</span>
+            <button type="button" class="chip-pin-Trigger" onclick="openProfileModal()">
+              <i class="fa-solid fa-user-pen"></i> <span id="userProfileChipText">Set Identitas Kelasmu</span>
+            </button>
           </div>
-          <h1 class="overview-title">Dashboard Pembelajaran &amp; Asesmen Digital Terpadu</h1>
+
+          <h1 class="overview-title" id="dynamicGreetingTitle">
+            Selamat Datang di Ekosistem Digital <span class="text-highlight">SICIBINAGA</span>
+          </h1>
+
           <p class="overview-desc">
-            <strong>SICIBINAGA</strong> (<em>Sistem CBT Interaktif, Bina Akademik &amp; Gamifikasi AI</em>) adalah aplikasi pendidikan terpadu <strong>SMP Negeri 3 Bangil</strong> yang menyatukan <strong>Ruang Belajar 5 Langkah (LMS)</strong>, <strong>Ujian CBT Anti-Cheat</strong>, dan <strong>Live Arena Quiz</strong>. Sistem beroperasi pada 3 klaster server mandiri per jenjang kelas agar akses belajar dan ujian serentak berjalan cepat, stabil, dan bebas <em>server down</em>.
+            <strong>SICIBINAGA</strong> (<em>Sistem CBT Interaktif, Bina Akademik &amp; Gamifikasi AI</em>) adalah pusat pembelajaran digital <strong>SMP Negeri 3 Bangil</strong> yang mengintegrasikan <strong>Ruang Belajar 5 Langkah (LMS)</strong>, <strong>Ujian CBT Anti-Cheat</strong>, dan <strong>Live Arena Quiz</strong> ke dalam 3 klaster server mandiri per jenjang kelas yang cepat, responsif, dan bebas <em>bottleneck</em>.
           </p>
+
+          <!-- Interactive Quick Action Pills -->
+          <div class="hero-interactive-strip">
+            <button type="button" class="btn-strip-item strip-quiz" onclick="switchInteractiveTab('tab-warmup')">
+              <i class="fa-solid fa-brain"></i>
+              <span>Pemanasan HOTS AI</span>
+            </button>
+            <button type="button" class="btn-strip-item strip-check" onclick="switchInteractiveTab('tab-scanner')">
+              <i class="fa-solid fa-stethoscope"></i>
+              <span>Cek Kesiapan CBT</span>
+            </button>
+            <button type="button" class="btn-strip-item strip-timer" onclick="switchInteractiveTab('tab-pomodoro')">
+              <i class="fa-solid fa-stopwatch"></i>
+              <span>Timer Fokus</span>
+            </button>
+          </div>
         </div>
 
-        <!-- Pintasan Cepat Rombel 7A - 9H -->
+        <!-- Pintasan Cepat Rombel 7A - 9H & One-Tap Pinned Class -->
         <div class="quick-launcher-panel">
           <div class="ql-header">
             <div class="ql-icon"><i class="fa-solid fa-bolt"></i></div>
-            <div>
+            <div style="flex:1;">
               <h2 class="ql-title">Akses Cepat Rombel (7A – 9H)</h2>
-              <p class="ql-sub">Pilih kelasmu untuk langsung masuk ke aplikasi</p>
+              <p class="ql-sub">Pilih kelasmu untuk langsung masuk ke server</p>
             </div>
           </div>
+
           <div class="ql-controls">
-            <select id="quickRombelSelect" class="ql-select" aria-label="Pilih Rombel Kelas">
+            <select id="quickRombelSelect" class="ql-select" aria-label="Pilih Rombel Kelas" onchange="playClickSound()">
               <option value="">-- Pilih Kelas / Rombel Kamu --</option>
               <optgroup label="🟢 Jenjang Kelas 7 (Hijau Zamrud)">
                 <option value="7|7A">Kelas 7A — Portal Kelas 7</option>
@@ -129,29 +166,41 @@
               <i class="fa-solid fa-arrow-right"></i>
             </button>
           </div>
-          <div class="ql-last-visit hidden" id="lastVisitBanner">
-            <i class="fa-solid fa-clock-rotate-left"></i>
-            <span id="lastVisitText">Terakhir diakses: Kelas 8</span>
+
+          <div class="ql-footer-bar">
+            <div class="ql-last-visit" id="lastVisitBanner">
+              <i class="fa-solid fa-clock-rotate-left"></i>
+              <span id="lastVisitText">Siap digunakan untuk Kelas 7, 8 &amp; 9</span>
+            </div>
+            <button type="button" class="btn-pin-current" onclick="pinSelectedRombel()" title="Simpan sebagai kelas tetap saya">
+              <i class="fa-solid fa-thumbtack"></i> Pin Kelas
+            </button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 2. PORTAL JENJANG KELAS (3 KLASTER TEMATIK) -->
+    <!-- 2. PORTAL JENJANG KELAS (3 KLASTER TEMATIK DENGAN TELEMETRI PING LIVE) -->
     <section class="grades-section" id="pilih-jenjang" aria-label="Pilih Portal Jenjang Kelas">
       <div class="section-bar">
         <div>
           <h2 class="section-heading"><i class="fa-solid fa-layer-group"></i> Portal Akses Jenjang Kelas</h2>
-          <p class="section-subheading">Ketuk kartu jenjang atau nomor rombel untuk membuka aplikasi sesuai tingkat kelas</p>
+          <p class="section-subheading">Pilih sesuai tingkat kelasmu — setiap jenjang memiliki database &amp; server terisolasi</p>
         </div>
+        <button type="button" class="btn-refresh-ping" onclick="measureAllServerPings(true)">
+          <i class="fa-solid fa-satellite-dish"></i> Cek Ping Server
+        </button>
       </div>
 
       <div class="grades-grid">
         <!-- KELAS 7: HIJAU ZAMRUD (EMERALD GREEN) -->
-        <article class="grade-card theme-emerald" data-grade="7">
+        <article class="grade-card theme-emerald" id="cardGrade7" data-grade="7">
           <div class="gc-top">
-            <span class="gc-theme-tag"><i class="fa-solid fa-seedling"></i> KLASTER 01 • HIJAU ZAMRUD</span>
-            <span class="gc-live-badge"><span class="dot"></span> AKTIF</span>
+            <span class="gc-theme-tag"><i class="fa-solid fa-seedling"></i> KELAS 7 • HIJAU ZAMRUD</span>
+            <span class="gc-live-badge">
+              <span class="dot"></span>
+              <span id="pingBadge7">22ms • ONLINE</span>
+            </span>
           </div>
 
           <div class="gc-identity">
@@ -174,16 +223,16 @@
           </p>
 
           <div class="gc-rombel-box">
-            <div class="gc-rombel-label">Pintasan Rombel Kelas 7 (Ketuk untuk Masuk):</div>
+            <div class="gc-rombel-label">Ketuk Rombel Kelas 7 untuk Masuk:</div>
             <div class="gc-rombel-grid">
-              <button type="button" onclick="openGradePortal('7','7A')">7A</button>
-              <button type="button" onclick="openGradePortal('7','7B')">7B</button>
-              <button type="button" onclick="openGradePortal('7','7C')">7C</button>
-              <button type="button" onclick="openGradePortal('7','7D')">7D</button>
-              <button type="button" onclick="openGradePortal('7','7E')">7E</button>
-              <button type="button" onclick="openGradePortal('7','7F')">7F</button>
-              <button type="button" onclick="openGradePortal('7','7G')">7G</button>
-              <button type="button" onclick="openGradePortal('7','7H')">7H</button>
+              <button type="button" data-rombel="7A" onclick="openGradePortal('7','7A')">7A</button>
+              <button type="button" data-rombel="7B" onclick="openGradePortal('7','7B')">7B</button>
+              <button type="button" data-rombel="7C" onclick="openGradePortal('7','7C')">7C</button>
+              <button type="button" data-rombel="7D" onclick="openGradePortal('7','7D')">7D</button>
+              <button type="button" data-rombel="7E" onclick="openGradePortal('7','7E')">7E</button>
+              <button type="button" data-rombel="7F" onclick="openGradePortal('7','7F')">7F</button>
+              <button type="button" data-rombel="7G" onclick="openGradePortal('7','7G')">7G</button>
+              <button type="button" data-rombel="7H" onclick="openGradePortal('7','7H')">7H</button>
             </div>
           </div>
 
@@ -194,10 +243,10 @@
               <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </a>
             <div class="gc-sub-actions">
-              <button type="button" class="btn-gc-secondary" onclick="openInAppView('7')" title="Buka di dalam layar portal ini">
+              <button type="button" class="btn-gc-secondary" onclick="openInAppView('7')">
                 <i class="fa-solid fa-expand"></i> Layar Penuh
               </button>
-              <button type="button" class="btn-gc-secondary" onclick="copyLink('https://sicibinaga.my.id/kelas7', 'Kelas 7')" title="Salin tautan Kelas 7">
+              <button type="button" class="btn-gc-secondary" onclick="copyLink('https://sicibinaga.my.id/kelas7', 'Kelas 7')">
                 <i class="fa-regular fa-copy"></i> Salin Link
               </button>
             </div>
@@ -205,10 +254,13 @@
         </article>
 
         <!-- KELAS 8: KUNING EMERALD (GOLD-EMERALD) -->
-        <article class="grade-card theme-gold-emerald" data-grade="8">
+        <article class="grade-card theme-gold-emerald" id="cardGrade8" data-grade="8">
           <div class="gc-top">
-            <span class="gc-theme-tag"><i class="fa-solid fa-crown"></i> KLASTER 02 • KUNING EMERALD</span>
-            <span class="gc-live-badge"><span class="dot"></span> AKTIF</span>
+            <span class="gc-theme-tag"><i class="fa-solid fa-crown"></i> KELAS 8 • KUNING EMERALD</span>
+            <span class="gc-live-badge">
+              <span class="dot"></span>
+              <span id="pingBadge8">19ms • ONLINE</span>
+            </span>
           </div>
 
           <div class="gc-identity">
@@ -231,16 +283,16 @@
           </p>
 
           <div class="gc-rombel-box">
-            <div class="gc-rombel-label">Pintasan Rombel Kelas 8 (Ketuk untuk Masuk):</div>
+            <div class="gc-rombel-label">Ketuk Rombel Kelas 8 untuk Masuk:</div>
             <div class="gc-rombel-grid">
-              <button type="button" onclick="openGradePortal('8','8A')">8A</button>
-              <button type="button" onclick="openGradePortal('8','8B')">8B</button>
-              <button type="button" onclick="openGradePortal('8','8C')">8C</button>
-              <button type="button" onclick="openGradePortal('8','8D')">8D</button>
-              <button type="button" onclick="openGradePortal('8','8E')">8E</button>
-              <button type="button" onclick="openGradePortal('8','8F')">8F</button>
-              <button type="button" onclick="openGradePortal('8','8G')">8G</button>
-              <button type="button" onclick="openGradePortal('8','8H')">8H</button>
+              <button type="button" data-rombel="8A" onclick="openGradePortal('8','8A')">8A</button>
+              <button type="button" data-rombel="8B" onclick="openGradePortal('8','8B')">8B</button>
+              <button type="button" data-rombel="8C" onclick="openGradePortal('8','8C')">8C</button>
+              <button type="button" data-rombel="8D" onclick="openGradePortal('8','8D')">8D</button>
+              <button type="button" data-rombel="8E" onclick="openGradePortal('8','8E')">8E</button>
+              <button type="button" data-rombel="8F" onclick="openGradePortal('8','8F')">8F</button>
+              <button type="button" data-rombel="8G" onclick="openGradePortal('8','8G')">8G</button>
+              <button type="button" data-rombel="8H" onclick="openGradePortal('8','8H')">8H</button>
             </div>
           </div>
 
@@ -251,10 +303,10 @@
               <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </a>
             <div class="gc-sub-actions">
-              <button type="button" class="btn-gc-secondary" onclick="openInAppView('8')" title="Buka di dalam layar portal ini">
+              <button type="button" class="btn-gc-secondary" onclick="openInAppView('8')">
                 <i class="fa-solid fa-expand"></i> Layar Penuh
               </button>
-              <button type="button" class="btn-gc-secondary" onclick="copyLink('https://sicibinaga.my.id/kelas8', 'Kelas 8')" title="Salin tautan Kelas 8">
+              <button type="button" class="btn-gc-secondary" onclick="copyLink('https://sicibinaga.my.id/kelas8', 'Kelas 8')">
                 <i class="fa-regular fa-copy"></i> Salin Link
               </button>
             </div>
@@ -262,10 +314,13 @@
         </article>
 
         <!-- KELAS 9: CRIMSON RED -->
-        <article class="grade-card theme-crimson" data-grade="9">
+        <article class="grade-card theme-crimson" id="cardGrade9" data-grade="9">
           <div class="gc-top">
-            <span class="gc-theme-tag"><i class="fa-solid fa-graduation-cap"></i> KLASTER 03 • CRIMSON RED</span>
-            <span class="gc-live-badge"><span class="dot"></span> AKTIF</span>
+            <span class="gc-theme-tag"><i class="fa-solid fa-graduation-cap"></i> KELAS 9 • CRIMSON RED</span>
+            <span class="gc-live-badge">
+              <span class="dot"></span>
+              <span id="pingBadge9">21ms • ONLINE</span>
+            </span>
           </div>
 
           <div class="gc-identity">
@@ -288,16 +343,16 @@
           </p>
 
           <div class="gc-rombel-box">
-            <div class="gc-rombel-label">Pintasan Rombel Kelas 9 (Ketuk untuk Masuk):</div>
+            <div class="gc-rombel-label">Ketuk Rombel Kelas 9 untuk Masuk:</div>
             <div class="gc-rombel-grid">
-              <button type="button" onclick="openGradePortal('9','9A')">9A</button>
-              <button type="button" onclick="openGradePortal('9','9B')">9B</button>
-              <button type="button" onclick="openGradePortal('9','9C')">9C</button>
-              <button type="button" onclick="openGradePortal('9','9D')">9D</button>
-              <button type="button" onclick="openGradePortal('9','9E')">9E</button>
-              <button type="button" onclick="openGradePortal('9','9F')">9F</button>
-              <button type="button" onclick="openGradePortal('9','9G')">9G</button>
-              <button type="button" onclick="openGradePortal('9','9H')">9H</button>
+              <button type="button" data-rombel="9A" onclick="openGradePortal('9','9A')">9A</button>
+              <button type="button" data-rombel="9B" onclick="openGradePortal('9','9B')">9B</button>
+              <button type="button" data-rombel="9C" onclick="openGradePortal('9','9C')">9C</button>
+              <button type="button" data-rombel="9D" onclick="openGradePortal('9','9D')">9D</button>
+              <button type="button" data-rombel="9E" onclick="openGradePortal('9','9E')">9E</button>
+              <button type="button" data-rombel="9F" onclick="openGradePortal('9','9F')">9F</button>
+              <button type="button" data-rombel="9G" onclick="openGradePortal('9','9G')">9G</button>
+              <button type="button" data-rombel="9H" onclick="openGradePortal('9','9H')">9H</button>
             </div>
           </div>
 
@@ -308,10 +363,10 @@
               <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </a>
             <div class="gc-sub-actions">
-              <button type="button" class="btn-gc-secondary" onclick="openInAppView('9')" title="Buka di dalam layar portal ini">
+              <button type="button" class="btn-gc-secondary" onclick="openInAppView('9')">
                 <i class="fa-solid fa-expand"></i> Layar Penuh
               </button>
-              <button type="button" class="btn-gc-secondary" onclick="copyLink('https://sicibinaga.my.id/kelas9', 'Kelas 9')" title="Salin tautan Kelas 9">
+              <button type="button" class="btn-gc-secondary" onclick="copyLink('https://sicibinaga.my.id/kelas9', 'Kelas 9')">
                 <i class="fa-regular fa-copy"></i> Salin Link
               </button>
             </div>
@@ -320,46 +375,212 @@
       </div>
     </section>
 
-    <!-- 3. RINGKASAN FUNGSIONALITAS INTI (MINIMALIS & PADAT) -->
-    <section class="modules-section" id="modul-inti" aria-label="Tiga Pilar Fungsionalitas SICIBINAGA">
-      <div class="section-bar">
+    <!-- 3. INTERAKTIF NEXT-LEVEL HUB (TABS: PEMANASAN HOTS AI, CEK PERANGKAT CBT, TIMER FOKUS, EKOSISTEM) -->
+    <section class="interactive-hub-section" id="fitur-interaktif" aria-label="Fitur Pintar Interaktif">
+      <div class="hub-header-bar">
         <div>
-          <h2 class="section-heading"><i class="fa-solid fa-cubes"></i> Fungsionalitas Utama Ekosistem</h2>
-          <p class="section-subheading">Tiga modul terintegrasi di dalam setiap klaster portal kelas</p>
+          <h2 class="section-heading"><i class="fa-solid fa-wand-magic-sparkles"></i> Smart Interactive Hub</h2>
+          <p class="section-subheading">Fitur interaktif langsung di dashboard sebelum masuk ke ruang ujian atau kelas</p>
         </div>
-        <button type="button" class="btn-ask-inline" onclick="toggleAiChat(true)">
-          <i class="fa-solid fa-sparkles"></i> Tanya Panduan ke AI
-        </button>
+
+        <!-- Segmented App Tabs -->
+        <div class="hub-tabs" role="tablist">
+          <button type="button" class="hub-tab active" data-target="tab-warmup" onclick="switchInteractiveTab('tab-warmup')">
+            <i class="fa-solid fa-brain"></i>
+            <span>Kuis Kilat HOTS AI</span>
+          </button>
+          <button type="button" class="hub-tab" data-target="tab-scanner" onclick="switchInteractiveTab('tab-scanner')">
+            <i class="fa-solid fa-shield-heart"></i>
+            <span>Cek Kesiapan CBT</span>
+          </button>
+          <button type="button" class="hub-tab" data-target="tab-pomodoro" onclick="switchInteractiveTab('tab-pomodoro')">
+            <i class="fa-solid fa-stopwatch"></i>
+            <span>Timer Fokus</span>
+          </button>
+          <button type="button" class="hub-tab" data-target="tab-modules" onclick="switchInteractiveTab('tab-modules')">
+            <i class="fa-solid fa-cubes"></i>
+            <span>3 Pilar Sistem</span>
+          </button>
+        </div>
       </div>
 
-      <div class="modules-grid">
-        <div class="module-item">
-          <div class="mod-icon mod-cbt"><i class="fa-solid fa-shield-halved"></i></div>
-          <div class="mod-body">
-            <h3>Sistem Ujian CBT Anti-Cheat</h3>
+      <!-- TAB PANE 1: AI DAILY BRAIN WARM-UP (TANTANGAN KILAT HOTS AI) -->
+      <div class="hub-pane" id="tab-warmup">
+        <div class="warmup-card">
+          <div class="warmup-controls-col">
+            <div class="warmup-badge">
+              <i class="fa-solid fa-bolt"></i> POWERED BY GROQ OPENAI/GPT-OSS-120B
+            </div>
+            <h3>Pemanasan Otak HOTS Harian</h3>
             <p>
-              Mendukung 6 tipe soal AKM &amp; TKA (PG, PG Kompleks, Benar-Salah, Menjodohkan, Sebab-Akibat, Isian Singkat) dengan penguncian layar penuh (<em>Fullscreen Lock</em>), deteksi pindah tab/aplikasi, Token Pengawas, dan penyimpanan jawaban otomatis.
+              Asah penalaran kritis sebelum masuk kelas! Pilih jenjang dan topik, lalu AI akan merakit 1 soal tantangan HOTS interaktif secara <em>real-time</em>.
             </p>
+
+            <div class="warmup-form">
+              <div class="wf-field">
+                <label for="warmupGrade">Pilih Jenjang Kelas</label>
+                <select id="warmupGrade" class="wf-select">
+                  <option value="Kelas 7 SMP">Kelas 7 SMP (Fondasi)</option>
+                  <option value="Kelas 8 SMP" selected>Kelas 8 SMP (AKM/Penalaran)</option>
+                  <option value="Kelas 9 SMP">Kelas 9 SMP (TKA Ready)</option>
+                </select>
+              </div>
+              <div class="wf-field">
+                <label for="warmupSubject">Pilih Bidang Literasi / Sains</label>
+                <select id="warmupSubject" class="wf-select">
+                  <option value="Numerasi & Matematika Kontekstual">🔢 Numerasi &amp; Matematika</option>
+                  <option value="Literasi Membaca Bahasa Indonesia">📖 Literasi Bahasa Indonesia</option>
+                  <option value="Sains & Fenomena IPA">🔬 Sains &amp; Fenomena IPA</option>
+                  <option value="Literasi Bahasa Inggris">🌍 Bahasa Inggris Kontekstual</option>
+                </select>
+              </div>
+              <button type="button" class="btn-generate-quiz" id="btnGenQuiz" onclick="generateAiWarmupQuiz()">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span>Buat Soal Tantangan AI Baru</span>
+              </button>
+            </div>
+
+            <div class="warmup-score-box">
+              <div>
+                <span class="ws-lbl">Skor Pemanasanmu</span>
+                <strong class="ws-val" id="warmupXpScore">0 XP</strong>
+              </div>
+              <div class="ws-divider"></div>
+              <div>
+                <span class="ws-lbl">Terjawab Benar</span>
+                <strong class="ws-val" id="warmupCorrectCount">0 Soal</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="warmup-stage-col" id="warmupQuizStage">
+            <!-- Default Interactive HOTS Question Loaded Immediately -->
           </div>
         </div>
+      </div>
 
-        <div class="module-item">
-          <div class="mod-icon mod-lms"><i class="fa-solid fa-book-open-reader"></i></div>
-          <div class="mod-body">
-            <h3>LMS Konstruktif 5 Langkah</h3>
-            <p>
-              Alur belajar aktif terstruktur: <strong>(1)</strong> Video Interaktif, <strong>(2)</strong> Pilar Materi Inti, <strong>(3)</strong> Flashcard 3D <em>Active Recall</em>, <strong>(4)</strong> Studi Kasus &amp; Diskusi Socratic AI Tutor, serta <strong>(5)</strong> Kuis Formatif Berpembahasan.
-            </p>
+      <!-- TAB PANE 2: PRE-CBT DEVICE & NETWORK READINESS SCANNER -->
+      <div class="hub-pane hidden" id="tab-scanner">
+        <div class="scanner-card">
+          <div class="scanner-top">
+            <div>
+              <span class="warmup-badge"><i class="fa-solid fa-satellite-dish"></i> DIAGNOSTIK PERANGKAT UJIAN</span>
+              <h3>Cek Kesiapan Perangkat &amp; Jaringan CBT Anti-Cheat</h3>
+              <p>Pastikan smartphone atau laptopmu memenuhi syarat keamanan <em>Fullscreen Lockdown</em> sebelum memulai ujian resmi.</p>
+            </div>
+            <button type="button" class="btn-run-scan" id="btnRunScan" onclick="runCbtDeviceScanner()">
+              <i class="fa-solid fa-rotate"></i>
+              <span>Pindai Ulang Sekarang</span>
+            </button>
+          </div>
+
+          <div class="scanner-grid" id="scannerGrid">
+            <div class="scan-item" id="scanBrowser">
+              <div class="scan-icon"><i class="fa-brands fa-chrome"></i></div>
+              <div class="scan-info">
+                <span class="scan-label">Kompatibilitas Browser</span>
+                <strong class="scan-val" id="scanBrowserVal">Memeriksa...</strong>
+              </div>
+              <span class="scan-status" id="scanBrowserStatus">...</span>
+            </div>
+
+            <div class="scan-item" id="scanFullscreen">
+              <div class="scan-icon"><i class="fa-solid fa-expand"></i></div>
+              <div class="scan-info">
+                <span class="scan-label">Dukungan Fullscreen Lock CBT</span>
+                <strong class="scan-val" id="scanFullscreenVal">Memeriksa...</strong>
+              </div>
+              <span class="scan-status" id="scanFullscreenStatus">...</span>
+            </div>
+
+            <div class="scan-item" id="scanNetwork">
+              <div class="scan-icon"><i class="fa-solid fa-wifi"></i></div>
+              <div class="scan-info">
+                <span class="scan-label">Koneksi &amp; Latensi Server</span>
+                <strong class="scan-val" id="scanNetworkVal">Memeriksa...</strong>
+              </div>
+              <span class="scan-status" id="scanNetworkStatus">...</span>
+            </div>
+
+            <div class="scan-item" id="scanScreen">
+              <div class="scan-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+              <div class="scan-info">
+                <span class="scan-label">Resolusi &amp; Mode Layar</span>
+                <strong class="scan-val" id="scanScreenVal">Memeriksa...</strong>
+              </div>
+              <span class="scan-status" id="scanScreenStatus">...</span>
+            </div>
+          </div>
+
+          <div class="scanner-verdict" id="scannerVerdict">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Perangkat Anda <strong>SIAP 100%</strong> untuk mengikuti Ujian CBT Anti-Cheat &amp; Live Arena SICIBINAGA.</span>
           </div>
         </div>
+      </div>
 
-        <div class="module-item">
-          <div class="mod-icon mod-arena"><i class="fa-solid fa-trophy"></i></div>
-          <div class="mod-body">
-            <h3>Live Arena Quiz &amp; Gamifikasi</h3>
-            <p>
-              Turnamen kuis interaktif sinkron satu kelas menggunakan PIN Room dengan papan klasemen langsung (<em>Real-time Leaderboard</em>), sistem 7 Level Cendekia, XP, serta 16 koleksi Lencana Bingkai Avatar.
-            </p>
+      <!-- TAB PANE 3: POMODORO STUDY FOCUS TIMER -->
+      <div class="hub-pane hidden" id="tab-pomodoro">
+        <div class="pomodoro-card">
+          <div class="pomo-left">
+            <span class="warmup-badge"><i class="fa-solid fa-hourglass-half"></i> SMART STUDY TIMER</span>
+            <h3>Timer Fokus Belajar Mandiri</h3>
+            <p>Gunakan teknik fokus terukur saat membaca Pilar Materi LMS atau berlatih soal TKA agar tidak cepat lelah.</p>
+            <div class="pomo-presets">
+              <button type="button" class="pomo-preset active" onclick="setPomodoroMode(25, 'Fokus Belajar 25 Menit', this)">🎯 Fokus 25m</button>
+              <button type="button" class="pomo-preset" onclick="setPomodoroMode(15, 'Latihan Kilat 15 Menit', this)">⚡ Kilat 15m</button>
+              <button type="button" class="pomo-preset" onclick="setPomodoroMode(5, 'Istirahat Singkat 5 Menit', this)">☕ Rehat 5m</button>
+            </div>
+          </div>
+
+          <div class="pomo-center">
+            <div class="pomo-ring">
+              <span class="pomo-mode-lbl" id="pomoModeLabel">Fokus Belajar 25 Menit</span>
+              <div class="pomo-time-display" id="pomoTimeDisplay">25:00</div>
+            </div>
+            <div class="pomo-actions">
+              <button type="button" class="btn-pomo-main" id="btnPomoToggle" onclick="togglePomodoroTimer()">
+                <i class="fa-solid fa-play"></i> <span>Mulai Fokus</span>
+              </button>
+              <button type="button" class="btn-pomo-reset" onclick="resetPomodoroTimer()" title="Reset Waktu">
+                <i class="fa-solid fa-rotate-left"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB PANE 4: 3 PILAR FUNGSIONALITAS INTI -->
+      <div class="hub-pane hidden" id="tab-modules">
+        <div class="modules-grid">
+          <div class="module-item">
+            <div class="mod-icon mod-cbt"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="mod-body">
+              <h3>Sistem Ujian CBT Anti-Cheat</h3>
+              <p>
+                Mendukung 6 tipe soal AKM &amp; TKA (PG, PG Kompleks, Benar-Salah, Menjodohkan, Sebab-Akibat, Isian Singkat) dengan penguncian layar penuh (<em>Fullscreen Lock</em>), deteksi pindah aplikasi, Token Pengawas, dan penyimpanan otomatis.
+              </p>
+            </div>
+          </div>
+
+          <div class="module-item">
+            <div class="mod-icon mod-lms"><i class="fa-solid fa-book-open-reader"></i></div>
+            <div class="mod-body">
+              <h3>LMS Konstruktif 5 Langkah</h3>
+              <p>
+                Alur belajar aktif terstruktur: <strong>(1)</strong> Video Interaktif, <strong>(2)</strong> Pilar Materi Inti, <strong>(3)</strong> Flashcard 3D <em>Active Recall</em>, <strong>(4)</strong> Studi Kasus &amp; Diskusi Socratic AI Tutor, serta <strong>(5)</strong> Kuis Formatif Berpembahasan.
+              </p>
+            </div>
+          </div>
+
+          <div class="module-item">
+            <div class="mod-icon mod-arena"><i class="fa-solid fa-trophy"></i></div>
+            <div class="mod-body">
+              <h3>Live Arena Quiz &amp; Gamifikasi</h3>
+              <p>
+                Turnamen kuis interaktif sinkron satu kelas menggunakan PIN Room dengan papan klasemen langsung (<em>Real-time Leaderboard</em>), sistem 7 Level Cendekia, XP, serta 16 koleksi Lencana Bingkai Avatar.
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -384,7 +605,7 @@
     </div>
   </footer>
 
-  <!-- FLOATING CAPSULE WIDGET: TANYA AI SICIBINAGA -->
+  <!-- FLOATING CAPSULE WIDGET: TANYA AI SICIBINAGA (WITH VOICE & TTS) -->
   <button type="button" class="ai-capsule-widget" id="aiCapsuleBtn" onclick="toggleAiChat(true)" aria-label="Buka Asisten Tanya AI SICIBINAGA">
     <span class="ai-capsule-Orb">
       <i class="fa-solid fa-wand-magic-sparkles"></i>
@@ -392,7 +613,7 @@
     </span>
     <span class="ai-capsule-text">
       <span class="ai-capsule-title">Tanya AI SICIBINAGA</span>
-      <span class="ai-capsule-sub">Asisten CBT, LMS &amp; Arena</span>
+      <span class="ai-capsule-sub">Suara &amp; Chat • OSS-120B</span>
     </span>
   </button>
 
@@ -406,10 +627,10 @@
       <i class="fa-solid fa-layer-group"></i>
       <span>Portal Kelas</span>
     </a>
-    <button type="button" class="mnav-item" onclick="openQuickRombelModal()">
-      <i class="fa-solid fa-compass"></i>
-      <span>Rombel</span>
-    </button>
+    <a href="#fitur-interaktif" class="mnav-item" onclick="setActiveMobileNav(this); switchInteractiveTab('tab-warmup');">
+      <i class="fa-solid fa-brain"></i>
+      <span>HOTS &amp; Cek</span>
+    </a>
     <button type="button" class="mnav-item mnav-ai" onclick="toggleAiChat(true)">
       <div class="mnav-ai-badge">
         <i class="fa-solid fa-wand-magic-sparkles"></i>
@@ -418,7 +639,7 @@
     </button>
   </nav>
 
-  <!-- MODAL 1: AI ASSISTANT CHAT WIDGET (GROQ OPENAI/GPT-OSS-120B) -->
+  <!-- MODAL 1: AI ASSISTANT CHAT WIDGET (GROQ OPENAI/GPT-OSS-120B + VOICE MIC + TTS) -->
   <div class="modal-backdrop hidden" id="aiChatBackdrop" onclick="if(event.target===this) toggleAiChat(false)">
     <section class="ai-chat-sheet" aria-label="Asisten Pintar AI SICIBINAGA">
       <header class="ai-sheet-header">
@@ -436,6 +657,9 @@
           </div>
         </div>
         <div class="ai-header-actions">
+          <button type="button" class="btn-ai-clear" id="btnTtsToggle" onclick="toggleAiVoiceOutput()" title="Suara Balasan AI (Text-to-Speech)">
+            <i class="fa-solid fa-volume-xmark" id="ttsToggleIcon"></i>
+          </button>
           <button type="button" class="btn-ai-clear" onclick="resetAiConversation()" title="Bersihkan Riwayat Chat">
             <i class="fa-solid fa-rotate-right"></i>
           </button>
@@ -465,17 +689,18 @@
       </div>
 
       <!-- Chat Messages Body -->
-      <div class="ai-chat-messages" id="aiChatMessages">
-        <!-- Initial Welcome Message Injected by JS -->
-      </div>
+      <div class="ai-chat-messages" id="aiChatMessages"></div>
 
-      <!-- Input Form -->
+      <!-- Input Form with Voice Microphone -->
       <form class="ai-chat-input-bar" id="aiChatForm" onsubmit="handleAiFormSubmit(event)">
+        <button type="button" class="btn-ai-mic" id="btnAiMic" onclick="toggleVoiceRecognition()" title="Bicara dengan Suara (Voice Input)">
+          <i class="fa-solid fa-microphone"></i>
+        </button>
         <input
           type="text"
           id="aiUserInput"
           class="ai-input-field"
-          placeholder="Tanyakan seputar CBT, LMS, Live Arena, atau kendala akses..."
+          placeholder="Ketik atau klik mikrofon untuk bertanya..."
           autocomplete="off"
         />
         <button type="submit" class="btn-ai-send" id="btnAiSend" aria-label="Kirim Pertanyaan">
@@ -485,79 +710,56 @@
     </section>
   </div>
 
-  <!-- MODAL 2: QUICK ROMBEL SELECTOR SHEET -->
-  <div class="modal-backdrop hidden" id="quickRombelModal" onclick="if(event.target===this) closeQuickRombelModal()">
+  <!-- MODAL 2: COMMAND PALETTE (CTRL+K / QUICK SPOTLIGHT SEARCH) -->
+  <div class="modal-backdrop hidden" id="cmdPaletteBackdrop" onclick="if(event.target===this) closeCommandPalette()">
+    <div class="cmd-palette-box">
+      <div class="cmd-input-wrap">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="cmdSearchInput" placeholder="Ketik kelas (misal: 8A, 9C), fitur (CBT, HOTS, Ping), atau pertanyaan..." oninput="filterCommandList(this.value)" autocomplete="off" />
+        <button type="button" class="btn-cmd-esc" onclick="closeCommandPalette()">ESC</button>
+      </div>
+      <div class="cmd-results-list" id="cmdResultsList"></div>
+    </div>
+  </div>
+
+  <!-- MODAL 3: STUDENT IDENTITY / PIN ROMBEL MODAL -->
+  <div class="modal-backdrop hidden" id="profileModalBackdrop" onclick="if(event.target===this) closeProfileModal()">
     <div class="rombel-sheet">
       <div class="rs-header">
         <div class="rs-header-left">
-          <i class="fa-solid fa-compass"></i>
+          <i class="fa-solid fa-id-card-clip"></i>
           <div>
-            <h3>Pilih Jenjang &amp; Rombel Kelas</h3>
-            <p>Ketuk kelasmu untuk langsung membuka aplikasi</p>
+            <h3>Personalisasi Dashboard Siswa</h3>
+            <p>Simpan nama &amp; rombel agar dashboard mengenali kelasmu otomatis</p>
           </div>
         </div>
-        <button type="button" class="btn-ai-close" onclick="closeQuickRombelModal()"><i class="fa-solid fa-xmark"></i></button>
+        <button type="button" class="btn-ai-close" onclick="closeProfileModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
-
       <div class="rs-body">
-        <div class="rs-group rs-emerald">
-          <div class="rs-group-title">
-            <span class="rs-dot"></span>
-            <strong>Kelas 7 — Tema Hijau Zamrud</strong>
-            <code>/kelas7</code>
-          </div>
-          <div class="rs-pills">
-            <button type="button" onclick="openGradePortal('7','7A')">7A</button>
-            <button type="button" onclick="openGradePortal('7','7B')">7B</button>
-            <button type="button" onclick="openGradePortal('7','7C')">7C</button>
-            <button type="button" onclick="openGradePortal('7','7D')">7D</button>
-            <button type="button" onclick="openGradePortal('7','7E')">7E</button>
-            <button type="button" onclick="openGradePortal('7','7F')">7F</button>
-            <button type="button" onclick="openGradePortal('7','7G')">7G</button>
-            <button type="button" onclick="openGradePortal('7','7H')">7H</button>
-          </div>
+        <div class="wf-field">
+          <label for="inputStudentName">Nama Panggilanmu</label>
+          <input type="text" id="inputStudentName" class="ai-input-field" placeholder="Contoh: Wildan / Aisyah" maxlength="30" />
         </div>
-
-        <div class="rs-group rs-gold">
-          <div class="rs-group-title">
-            <span class="rs-dot"></span>
-            <strong>Kelas 8 — Tema Kuning Emerald</strong>
-            <code>/kelas8</code>
-          </div>
-          <div class="rs-pills">
-            <button type="button" onclick="openGradePortal('8','8A')">8A</button>
-            <button type="button" onclick="openGradePortal('8','8B')">8B</button>
-            <button type="button" onclick="openGradePortal('8','8C')">8C</button>
-            <button type="button" onclick="openGradePortal('8','8D')">8D</button>
-            <button type="button" onclick="openGradePortal('8','8E')">8E</button>
-            <button type="button" onclick="openGradePortal('8','8F')">8F</button>
-            <button type="button" onclick="openGradePortal('8','8G')">8G</button>
-            <button type="button" onclick="openGradePortal('8','8H')">8H</button>
-          </div>
+        <div class="wf-field">
+          <label for="inputStudentRombel">Rombel Kelas Tetap</label>
+          <select id="inputStudentRombel" class="wf-select">
+            <option value="">-- Pilih Rombel (7A – 9H) --</option>
+            <option value="7|7A">Kelas 7A</option><option value="7|7B">Kelas 7B</option><option value="7|7C">Kelas 7C</option><option value="7|7D">Kelas 7D</option>
+            <option value="7|7E">Kelas 7E</option><option value="7|7F">Kelas 7F</option><option value="7|7G">Kelas 7G</option><option value="7|7H">Kelas 7H</option>
+            <option value="8|8A">Kelas 8A</option><option value="8|8B">Kelas 8B</option><option value="8|8C">Kelas 8C</option><option value="8|8D">Kelas 8D</option>
+            <option value="8|8E">Kelas 8E</option><option value="8|8F">Kelas 8F</option><option value="8|8G">Kelas 8G</option><option value="8|8H">Kelas 8H</option>
+            <option value="9|9A">Kelas 9A</option><option value="9|9B">Kelas 9B</option><option value="9|9C">Kelas 9C</option><option value="9|9D">Kelas 9D</option>
+            <option value="9|9E">Kelas 9E</option><option value="9|9F">Kelas 9F</option><option value="9|9G">Kelas 9G</option><option value="9|9H">Kelas 9H</option>
+          </select>
         </div>
-
-        <div class="rs-group rs-crimson">
-          <div class="rs-group-title">
-            <span class="rs-dot"></span>
-            <strong>Kelas 9 — Tema Crimson Red</strong>
-            <code>/kelas9</code>
-          </div>
-          <div class="rs-pills">
-            <button type="button" onclick="openGradePortal('9','9A')">9A</button>
-            <button type="button" onclick="openGradePortal('9','9B')">9B</button>
-            <button type="button" onclick="openGradePortal('9','9C')">9C</button>
-            <button type="button" onclick="openGradePortal('9','9D')">9D</button>
-            <button type="button" onclick="openGradePortal('9','9E')">9E</button>
-            <button type="button" onclick="openGradePortal('9','9F')">9F</button>
-            <button type="button" onclick="openGradePortal('9','9G')">9G</button>
-            <button type="button" onclick="openGradePortal('9','9H')">9H</button>
-          </div>
-        </div>
+        <button type="button" class="btn-generate-quiz" onclick="saveStudentProfile()">
+          <i class="fa-solid fa-check"></i> Simpan Profil Dashboard
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- MODAL 3: IN-APP FULLSCREEN PORTAL OVERLAY -->
+  <!-- MODAL 4: IN-APP FULLSCREEN PORTAL OVERLAY -->
   <div class="inapp-overlay hidden" id="inAppOverlay">
     <div class="inapp-topbar">
       <div class="inapp-brand">
