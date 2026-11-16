@@ -147,50 +147,87 @@
 
           <!-- Split Body: Left Green Striped Chart Box + Right Overview Stats -->
           <div class="overview-split-body">
-            <!-- Left Deep Emerald Striped Chart Box -->
-            <div class="emerald-chart-stage">
-              <div class="chart-stage-top">
-                <span class="chart-tag-orange" id="chartActiveTag">3 Server Aktif</span>
-                <span class="chart-caption-right">Trafik &amp; Stabilitas Klaster</span>
+            <!-- Left Deep Emerald Real-Time Visitor Statistics & Traffic Analytics Widget -->
+            <div class="emerald-chart-stage visitor-stats-widget" id="visitorStatsWidget">
+              <!-- Header Bar: Live Indicator + View Mode Switcher -->
+              <div class="chart-stage-top visitor-stage-top">
+                <div class="visitor-live-badge" title="Terhubung ke Counter API &amp; Telemetri Real-Time">
+                  <span class="visitor-pulse-dot"></span>
+                  <span id="visitorLiveStatusText">LIVE REALTIME</span>
+                </div>
+
+                <div class="visitor-mode-tabs" role="tablist" aria-label="Mode Grafik Statistik Pengunjung">
+                  <button type="button" class="vmode-btn active" id="btnModeDaily" onclick="switchVisitorChartMode('daily')">
+                    7 Hari
+                  </button>
+                  <button type="button" class="vmode-btn" id="btnModeCluster" onclick="switchVisitorChartMode('cluster')">
+                    Per Klaster
+                  </button>
+                  <button type="button" class="vmode-btn vmode-refresh" onclick="refreshVisitorStats(true)" title="Segarkan Data Pengunjung Real-Time">
+                    <i class="fa-solid fa-rotate" id="visitorRefreshIcon"></i>
+                  </button>
+                </div>
               </div>
 
-              <div class="chart-bars-layout">
-                <div class="chart-y-axis">
-                  <span>100%</span>
-                  <span>75%</span>
-                  <span>50%</span>
-                  <span>0%</span>
+              <!-- 4 Key Real-Time Visitor KPI Metrics -->
+              <div class="visitor-kpi-grid">
+                <div class="vkpi-card">
+                  <span class="vkpi-label"><i class="fa-solid fa-bolt"></i> Online</span>
+                  <strong class="vkpi-val vkpi-online" id="statOnlineNow">--</strong>
+                  <span class="vkpi-sub" id="statOnlineDevice">Aktif Saat Ini</span>
+                </div>
+                <div class="vkpi-card">
+                  <span class="vkpi-label"><i class="fa-solid fa-calendar-day"></i> Hari Ini</span>
+                  <strong class="vkpi-val" id="statTodayVisits">--</strong>
+                  <span class="vkpi-sub" id="statTodayDate">Pengunjung</span>
+                </div>
+                <div class="vkpi-card">
+                  <span class="vkpi-label"><i class="fa-solid fa-users"></i> Total Akses</span>
+                  <strong class="vkpi-val" id="statTotalVisits">--</strong>
+                  <span class="vkpi-sub" id="statTotalGrowth">Akumulasi</span>
+                </div>
+                <div class="vkpi-card">
+                  <span class="vkpi-label"><i class="fa-solid fa-user-check"></i> Sesi Anda</span>
+                  <strong class="vkpi-val" id="statMyVisits">1x</strong>
+                  <span class="vkpi-sub" id="statMyDeviceTag">Terverifikasi</span>
+                </div>
+              </div>
+
+              <!-- Dynamic Interactive Bar Chart (7-Day Daily Visits OR Cluster Breakdown) -->
+              <div class="chart-bars-layout visitor-bars-layout">
+                <div class="chart-y-axis" id="visitorChartYAxis">
+                  <span>300</span>
+                  <span>200</span>
+                  <span>100</span>
+                  <span>0</span>
                 </div>
 
                 <div class="chart-columns-wrap" id="telemetryBarsWrap">
-                  <div class="bar-col-item" onclick="openGradePortal('7','7A')">
-                    <div class="bar-fill striped-bar" style="height: 68%;" title="Klaster 7A-7D: Stabil"></div>
-                    <span class="bar-day">K7-A</span>
-                  </div>
-                  <div class="bar-col-item" onclick="openGradePortal('7','7E')">
-                    <div class="bar-fill striped-bar" style="height: 54%;" title="Klaster 7E-7H: Stabil"></div>
-                    <span class="bar-day">K7-B</span>
-                  </div>
-                  <div class="bar-col-item" onclick="openGradePortal('8','8A')">
-                    <div class="bar-fill striped-bar" style="height: 76%;" title="Klaster 8A-8D: Aktif"></div>
-                    <span class="bar-day">K8-A</span>
-                  </div>
-                  <div class="bar-col-item active-yellow-bar" onclick="openGradePortal('8')">
-                    <div class="bar-fill yellow-highlight-bar" style="height: 96%;" title="Puncak Performa Multi-Server 100%"></div>
-                    <span class="bar-day">OPTIMAL</span>
-                  </div>
-                  <div class="bar-col-item" onclick="openGradePortal('8','8E')">
-                    <div class="bar-fill striped-bar" style="height: 84%;" title="Klaster 8E-8H: Aktif"></div>
-                    <span class="bar-day">K8-B</span>
-                  </div>
-                  <div class="bar-col-item" onclick="openGradePortal('9','9A')">
-                    <div class="bar-fill striped-bar" style="height: 72%;" title="Klaster 9A-9D TKA: Stabil"></div>
-                    <span class="bar-day">K9-A</span>
-                  </div>
-                  <div class="bar-col-item" onclick="openGradePortal('9','9E')">
-                    <div class="bar-fill striped-bar" style="height: 80%;" title="Klaster 9E-9H TKA: Stabil"></div>
-                    <span class="bar-day">K9-B</span>
-                  </div>
+                  <!-- Populated dynamically with real visitor counts by script.js -->
+                </div>
+              </div>
+
+              <!-- Bottom Cluster Distribution Bar & Live Activity Ticker -->
+              <div class="visitor-cluster-footer">
+                <div class="vcluster-bar-head">
+                  <span id="visitorChartSelectedInfo">Distribusi Akses Klaster: K7 • K8 • K9</span>
+                  <span id="visitorLastSyncTime">Sinkronisasi...</span>
+                </div>
+                <div class="vcluster-progress-track" title="Proporsi Pengunjung Kelas 7, Kelas 8, dan Kelas 9">
+                  <div class="vcluster-seg seg-k7" id="segBarK7" style="width: 33.3%"></div>
+                  <div class="vcluster-seg seg-k8" id="segBarK8" style="width: 33.4%"></div>
+                  <div class="vcluster-seg seg-k9" id="segBarK9" style="width: 33.3%"></div>
+                </div>
+                <div class="vcluster-legend-row">
+                  <span class="vleg-item" onclick="openGradePortal('7')">
+                    <i class="vleg-dot dot-k7"></i> K7: <strong id="statClusterK7">--</strong>
+                  </span>
+                  <span class="vleg-item" onclick="openGradePortal('8')">
+                    <i class="vleg-dot dot-k8"></i> K8: <strong id="statClusterK8">--</strong>
+                  </span>
+                  <span class="vleg-item" onclick="openGradePortal('9')">
+                    <i class="vleg-dot dot-k9"></i> K9: <strong id="statClusterK9">--</strong>
+                  </span>
                 </div>
               </div>
             </div>
