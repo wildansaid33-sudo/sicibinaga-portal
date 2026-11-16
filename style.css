@@ -2278,3 +2278,278 @@ body.dark-theme .bento-footer-links a {
     font-size: 17px;
   }
 }
+
+
+/* =========================================================================
+   13. MOBILE VIDEO TUTORIAL FIX (ANTI-CLIPPING / ANTI-TERPOTONG SMARTPHONE)
+   ========================================================================= */
+.card-video-tutorials,
+.vw-bento-body,
+.vw-stage-col,
+.vw-player-frame,
+.vw-active-meta,
+.vw-active-text,
+.vw-playlist-col,
+.vw-playlist-items,
+.vw-card-item,
+.vw-item-info {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.vw-bento-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: stretch;
+  width: 100%;
+}
+
+.vw-player-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #041611;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 2px solid var(--border-light);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
+}
+
+.vw-player-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  border: none;
+  display: block;
+}
+
+.vw-active-title,
+.vw-active-desc,
+.vw-item-title,
+.vw-item-sub {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+@media (max-width: 1120px) {
+  .bento-row-top,
+  .vw-bento-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .bento-grid-container,
+  .bento-row-top,
+  .bento-row-bottom,
+  .overview-split-body,
+  .vw-bento-body,
+  .quiz-options-list {
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .bento-card,
+  .card-video-tutorials {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 13px !important;
+    border-radius: 18px !important;
+    overflow: hidden;
+  }
+
+  .video-widget-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-bottom: 12px;
+    width: 100%;
+  }
+
+  .vw-quick-tabs {
+    width: 100%;
+    max-width: 100%;
+    padding: 4px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 4px;
+    border-radius: 14px;
+  }
+
+  .vw-tab-pill {
+    justify-content: center;
+    padding: 7px 3px;
+    font-size: 10px;
+    line-height: 1.15;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .vw-tab-pill i {
+    display: none;
+  }
+
+  .vw-player-frame {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 14px;
+  }
+
+  .vw-active-meta {
+    width: 100%;
+    padding: 12px;
+    border-radius: 14px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .vw-active-text {
+    width: 100%;
+    min-width: 0 !important;
+  }
+
+  .vw-meta-tags {
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+
+  .vw-step-badge {
+    font-size: 9px;
+    padding: 2.5px 7px;
+  }
+
+  .vw-cat-tag {
+    font-size: 10.5px;
+  }
+
+  .vw-active-title {
+    font-size: 13px;
+    line-height: 1.35;
+    margin-bottom: 4px;
+  }
+
+  .vw-active-desc {
+    font-size: 11.2px;
+    line-height: 1.45;
+  }
+
+  .vw-active-actions {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-vw-yt {
+    flex: 1;
+    justify-content: center;
+    padding: 9px 10px;
+    font-size: 11.5px;
+  }
+
+  .vw-playlist-col {
+    width: 100%;
+    padding: 10px;
+    border-radius: 15px;
+    gap: 8px;
+  }
+
+  .vw-playlist-head {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 4px;
+    font-size: 11px;
+    padding: 0 2px;
+  }
+
+  .vw-playlist-hint {
+    font-size: 10px;
+  }
+
+  .vw-card-item {
+    width: 100%;
+    padding: 8px;
+    gap: 9px;
+    border-radius: 12px;
+    align-items: flex-start;
+  }
+
+  .vw-card-item:hover {
+    transform: none;
+  }
+
+  .vw-thumb-wrap {
+    width: 76px;
+    height: 50px;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  .vw-item-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .vw-item-top {
+    width: 100%;
+    gap: 4px;
+    margin-bottom: 2px;
+  }
+
+  .vw-item-num {
+    font-size: 9px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .vw-playing-dot {
+    font-size: 8.5px;
+    padding: 1px 6px;
+    flex-shrink: 0;
+  }
+
+  .vw-item-title {
+    font-size: 11.2px;
+    line-height: 1.28;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    white-space: normal;
+  }
+
+  .vw-item-sub {
+    font-size: 10px;
+    line-height: 1.3;
+    white-space: normal !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Sembunyikan kapsul melayang di smartphone karena sudah ada tombol Tanya AI di Bottom Nav */
+  .ai-capsule-widget {
+    display: none !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .vw-tab-pill {
+    font-size: 9.2px;
+    padding: 6px 2px;
+  }
+  .vw-thumb-wrap {
+    width: 68px;
+    height: 46px;
+  }
+}

@@ -185,10 +185,10 @@ function selectTutorialVideo(index, scrollToWidget = false) {
     card.classList.toggle('active', idx === safeIndex);
   });
 
-  if (scrollToWidget) {
-    const section = document.getElementById('panduan-video');
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (scrollToWidget || window.innerWidth <= 768) {
+    const playerContainer = document.getElementById('vwPlayerContainer') || document.getElementById('panduan-video');
+    if (playerContainer) {
+      playerContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   }
 }
