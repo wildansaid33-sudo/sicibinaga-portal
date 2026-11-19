@@ -30,6 +30,7 @@ const PORTAL_SERVERS = {
 const TUTORIAL_VIDEOS = [
   {
     id: '-qMBiGZ7oR4',
+    isShort: true,
     title: 'TUTORIAL LOGIN AKUN SICIBINAGA (USERNAME + PASWORD)',
     badge: 'VIDEO 1 DARI 4 • SHORTS',
     category: 'Panduan Akses & Kredensial Siswa',
@@ -39,6 +40,7 @@ const TUTORIAL_VIDEOS = [
   },
   {
     id: 'H8kwynV-aq0',
+    isShort: false,
     title: 'TUTORIAL PENGERJAAN LMS (KELAS ONLINE) APLIKASI SICIBINAGA',
     badge: 'VIDEO 2 DARI 4 • KELAS ONLINE',
     category: 'Alur Belajar Konstruktif 5 Langkah',
@@ -48,6 +50,7 @@ const TUTORIAL_VIDEOS = [
   },
   {
     id: '6OAgxNdDHqI',
+    isShort: false,
     title: 'TUTORIAL PENGERJAAN UJIAN CBT APLIKASI SICIBINAGA',
     badge: 'VIDEO 3 DARI 4 • UJIAN CBT',
     category: 'Sistem Evaluasi & Keamanan Anti-Cheat',
@@ -57,6 +60,7 @@ const TUTORIAL_VIDEOS = [
   },
   {
     id: 'kvkWpvvrJ3M',
+    isShort: false,
     title: 'TUTORIAL PENGERJAAN LIVE ARENA (GAME) QUIS APLIKASI SICIBINAGA',
     badge: 'VIDEO 4 DARI 4 • LIVE ARENA',
     category: 'Turnamen Kuis Interaktif & Gamifikasi',
@@ -160,8 +164,13 @@ function selectTutorialVideo(index, scrollToWidget = false) {
   currentTutorialIndex = safeIndex;
   const vid = TUTORIAL_VIDEOS[safeIndex];
 
+  const stageEl = document.getElementById('vwPlayerStage');
+  const frameEl = document.getElementById('vwPlayerContainer');
   const iframe = document.getElementById('tutorialYoutubeIframe');
   const badgeEl = document.getElementById('activeVideoBadge');
+
+  if (stageEl) stageEl.classList.toggle('is-shorts', Boolean(vid.isShort));
+  if (frameEl) frameEl.classList.toggle('is-shorts', Boolean(vid.isShort));
   const catEl = document.getElementById('activeVideoCategory');
   const titleEl = document.getElementById('activeVideoTitle');
   const descEl = document.getElementById('activeVideoDesc');
