@@ -886,12 +886,13 @@
     </div>
   </div>
 
-  <!-- MODAL 4: IN-APP FULLSCREEN PORTAL OVERLAY -->
+  <!-- MODAL 4: IN-APP FULLSCREEN PORTAL OVERLAY (SYNCED WITH WRAPPER & GAS V100) -->
   <div class="inapp-overlay hidden" id="inAppOverlay">
     <div class="inapp-topbar">
       <div class="inapp-brand">
         <img src="favicon.png" alt="Logo" />
         <span id="inAppTitle">SICIBINAGA Kelas 7</span>
+        <span id="inAppSessionPill" class="inapp-session-pill hidden">Sesi Aktif</span>
       </div>
       <div class="inapp-switcher">
         <button type="button" id="inAppTab7" class="inapp-tab" onclick="openInAppView('7')">Kelas 7</button>
@@ -903,14 +904,41 @@
           <i class="fa-solid fa-arrow-up-right-from-square"></i>
           <span>Tab Baru</span>
         </a>
-        <button type="button" class="btn-inapp-close" onclick="closeInAppView()">
+        <button type="button" class="btn-inapp-close" onclick="requestCloseInAppView()">
           <i class="fa-solid fa-xmark"></i>
           <span>Tutup</span>
         </button>
       </div>
     </div>
     <div class="inapp-frame-wrap">
-      <iframe id="inAppIframe" src="about:blank" allow="fullscreen; microphone; camera; autoplay; clipboard-write" title="Aplikasi SICIBINAGA"></iframe>
+      <iframe
+        id="inAppIframe"
+        src="about:blank"
+        scrolling="yes"
+        allow="fullscreen; microphone; camera; autoplay; clipboard-read; clipboard-write"
+        allowfullscreen
+        title="Aplikasi SICIBINAGA">
+      </iframe>
+    </div>
+
+    <!-- POP-UP KONFIRMASI SAAT AKAN MENUTUP PORTAL AKTIF / ANDROID BACK GUARD -->
+    <div class="inapp-confirm-backdrop hidden" id="inAppExitConfirmModal" role="dialog" aria-modal="true" onclick="if(event.target===this) stayInsideInAppOverlay()">
+      <div class="inapp-confirm-card">
+        <div class="inapp-confirm-icon" id="inAppConfirmIcon">
+          <i class="fa-solid fa-shield-halved" id="inAppConfirmGlyph"></i>
+        </div>
+        <h3 id="inAppConfirmTitle">Ingin Meninggalkan Portal Kelas?</h3>
+        <div class="inapp-confirm-chip" id="inAppConfirmUserChip">Sesi Aktif</div>
+        <p id="inAppConfirmDesc">Sesi Anda di dalam aplikasi SICIBINAGA masih aktif. Tetap di portal agar fokus terjaga dan tidak perlu login ulang.</p>
+        <div class="inapp-confirm-btns">
+          <button type="button" class="btn-inapp-stay" id="btnInAppStay" onclick="stayInsideInAppOverlay()">
+            <i class="fa-solid fa-circle-check"></i> <span id="inAppStayLabel">Tetap di Portal SICIBINAGA</span>
+          </button>
+          <button type="button" class="btn-inapp-leave" id="btnInAppLeave" onclick="confirmInAppPendingAction()">
+            <i class="fa-solid fa-right-from-bracket"></i> <span id="inAppLeaveLabel">Ya, Kembali ke Dashboard Utama</span>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 

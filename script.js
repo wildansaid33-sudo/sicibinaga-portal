@@ -375,7 +375,11 @@ function openGradePortal(grade, rombel = '') {
   const label = rombel ? `Kelas ${rombel} (${srv.name})` : srv.name;
   showToast(`Mengarahkan ke ${label}...`);
 
-  const targetUrl = rombel ? `${srv.url}?rombel=${encodeURIComponent(rombel)}` : srv.url;
+  const gpParams = new URLSearchParams();
+  if (rombel) gpParams.set('rombel', rombel);
+  if (document.body.classList.contains('dark-theme')) gpParams.set('theme', 'dark');
+  const qStr = gpParams.toString();
+  const targetUrl = qStr ? `${srv.url}?${qStr}` : srv.url;
   const win = window.open(targetUrl, '_blank');
   if (!win) {
     window.location.href = targetUrl;
@@ -977,37 +981,212 @@ function toggleTheme() {
   try { localStorage.setItem('sicibinaga_theme', isDark ? 'dark' : 'light'); } catch (e) {}
 }
 
-function openInAppView(grade) {
+// State Sinkronisasi In-App Fullscreen Overlay <-> Wrapper Kelas 7/8/9 <-> GAS V100
+const inAppPortalState = {
+  isOpen: false,
+  grade: '',
+  loggedIn: false,
+  isExamActive: false,
+  name: '',
+  kelas: '',
+  role: 'GUEST',
+  pendingAction: null
+};
+
+function getPinnedRombelForGrade(grade) {
+  try {
+    const p = JSON.parse(localStorage.getItem('sicibinaga_student_profile') || '{}');
+    if (p && p.rombel) {
+      const [pg, pr] = String(p.rombel).split('|');
+      if (pg === String(grade) && pr) return pr;
+    }
+  } catch (e) {}
+  return '';
+}
+
+function updateInAppSessionPillUI() {
+  const pill = document.getElementById('inAppSessionPill');
+  if (!pill) return;
+  if (!inAppPortalState.loggedIn) {
+    pill.classList.add('hidden');
+    pill.classList.remove('is-exam');
+    return;
+  }
+  pill.classList.remove('hidden');
+  if (inAppPortalState.isExamActive) {
+    pill.classList.add('is-exam');
+    pill.textContent = 'CBT AKTIF • Terkunci';
+  } else {
+    pill.classList.remove('is-exam');
+    const who = inAppPortalState.name ? inAppPortalState.name.split(' ')[0] : 'Siswa';
+    const kls = inAppPortalState.kelas ? ` (${inAppPortalState.kelas})` : '';
+    pill.textContent = `● ${who}${kls}`;
+  }
+}
+
+function showInAppExitConfirmModal(actionFn, leaveBtnText) {
+  const modal = document.getElementById('inAppExitConfirmModal');
+  const iconBox = document.getElementById('inAppConfirmIcon');
+  const glyph = document.getElementById('inAppConfirmGlyph');
+  const titleEl = document.getElementById('inAppConfirmTitle');
+  const chipEl = document.getElementById('inAppConfirmUserChip');
+  const descEl = document.getElementById('inAppConfirmDesc');
+  const stayLbl = document.getElementById('inAppStayLabel');
+  const leaveBtn = document.getElementById('btnInAppLeave');
+  const leaveLbl = document.getElementById('inAppLeaveLabel');
+  if (!modal) {
+    if (typeof actionFn === 'function') actionFn();
+    return;
+  }
+
+  inAppPortalState.pendingAction = actionFn || null;
+
+  if (inAppPortalState.isExamActive) {
+    iconBox?.classList.add('is-exam');
+    if (glyph) glyph.className = 'fa-solid fa-lock';
+    if (titleEl) titleEl.textContent = 'Ujian CBT Sedang Berlangsung!';
+    if (chipEl) chipEl.textContent = `${inAppPortalState.name || 'Peserta'} • Ujian Aktif`;
+    if (descEl) descEl.textContent = 'Anda sedang mengerjakan ujian CBT aktif. Tetap di dalam portal hingga ujian selesai dikumpulkan agar jawaban aman.';
+    if (stayLbl) stayLbl.textContent = 'Lanjutkan Mengerjakan Ujian';
+    if (leaveBtn) leaveBtn.classList.add('hidden');
+  } else {
+    iconBox?.classList.remove('is-exam');
+    if (glyph) glyph.className = 'fa-solid fa-shield-halved';
+    if (titleEl) titleEl.textContent = 'Ingin Meninggalkan Portal SICIBINAGA?';
+    if (chipEl) chipEl.textContent = inAppPortalState.name
+      ? `${inAppPortalState.name}${inAppPortalState.kelas ? ' • Kelas ' + inAppPortalState.kelas : ''}`
+      : `Portal SICIBINAGA Kelas ${inAppPortalState.grade}`;
+    if (descEl) descEl.textContent = 'Sesi Anda di dalam aplikasi masih aktif. Pilih Tetap di Portal agar fokus terjaga dan tidak perlu login ulang.';
+    if (stayLbl) stayLbl.textContent = 'Tetap di Portal SICIBINAGA';
+    if (leaveBtn) leaveBtn.classList.remove('hidden');
+    if (leaveLbl) leaveLbl.textContent = leaveBtnText || 'Ya, Kembali ke Dashboard Utama';
+  }
+  modal.classList.remove('hidden');
+}
+
+function stayInsideInAppOverlay() {
+  playClickSound();
+  inAppPortalState.pendingAction = null;
+  document.getElementById('inAppExitConfirmModal')?.classList.add('hidden');
+  try { history.pushState({ mainInAppGuard: true, ts: Date.now() }, ''); } catch (e) {}
+}
+
+function confirmInAppPendingAction() {
+  playClickSound();
+  document.getElementById('inAppExitConfirmModal')?.classList.add('hidden');
+  const fn = inAppPortalState.pendingAction;
+  inAppPortalState.pendingAction = null;
+  if (typeof fn === 'function') fn();
+}
+
+function openInAppView(grade, rombel = '', forceSwitch = false) {
   playClickSound();
   const g = String(grade);
+  if (!forceSwitch && inAppPortalState.isOpen && inAppPortalState.grade && inAppPortalState.grade !== g && inAppPortalState.loggedIn) {
+    showInAppExitConfirmModal(() => openInAppView(g, rombel, true), `Pindah ke Portal Kelas ${g}`);
+    return;
+  }
+
   const srv = PORTAL_SERVERS[g] || PORTAL_SERVERS['8'];
   const overlay = document.getElementById('inAppOverlay');
   const iframe = document.getElementById('inAppIframe');
   const titleEl = document.getElementById('inAppTitle');
   const extLink = document.getElementById('inAppNewTabLink');
-
   if (!overlay || !iframe) return;
+
+  const activeRombel = rombel || getPinnedRombelForGrade(g);
+  const qParams = new URLSearchParams();
+  qParams.set('embedded', '1');
+  if (activeRombel) qParams.set('rombel', activeRombel);
+  if (document.body.classList.contains('dark-theme')) qParams.set('theme', 'dark');
+
+  const embedSrc = `${srv.url}?${qParams.toString()}`;
+  const extHref = activeRombel ? `${srv.url}?rombel=${encodeURIComponent(activeRombel)}` : srv.url;
+
+  inAppPortalState.isOpen = true;
+  inAppPortalState.grade = g;
+  inAppPortalState.loggedIn = false;
+  inAppPortalState.isExamActive = false;
+  inAppPortalState.name = '';
+  inAppPortalState.kelas = activeRombel || '';
+  updateInAppSessionPillUI();
+
   overlay.classList.remove('hidden');
+  document.getElementById('inAppExitConfirmModal')?.classList.add('hidden');
   document.body.style.overflow = 'hidden';
 
-  if (titleEl) titleEl.textContent = srv.name;
-  if (extLink) extLink.href = srv.url;
-  iframe.src = srv.url;
+  if (titleEl) titleEl.textContent = activeRombel ? `${srv.name.split('(')[0].trim()} • ${activeRombel}` : srv.name;
+  if (extLink) extLink.href = extHref;
+  iframe.src = embedSrc;
 
   ['7', '8', '9'].forEach(k => {
     const tab = document.getElementById('inAppTab' + k);
     if (tab) tab.className = 'inapp-tab' + (k === g ? ` active-k${k}` : '');
   });
-  saveLastVisit(g);
+  saveLastVisit(g, activeRombel);
+
+  try { history.pushState({ mainInAppGuard: true, grade: g, ts: Date.now() }, ''); } catch (e) {}
+}
+
+function requestCloseInAppView() {
+  if (inAppPortalState.loggedIn || inAppPortalState.isExamActive) {
+    showInAppExitConfirmModal(() => closeInAppView(), 'Ya, Tutup & Kembali ke Dashboard Utama');
+    return;
+  }
+  closeInAppView();
 }
 
 function closeInAppView() {
   const overlay = document.getElementById('inAppOverlay');
   const iframe = document.getElementById('inAppIframe');
+  document.getElementById('inAppExitConfirmModal')?.classList.add('hidden');
   if (overlay) overlay.classList.add('hidden');
   if (iframe) iframe.src = 'about:blank';
   document.body.style.overflow = '';
+  inAppPortalState.isOpen = false;
+  inAppPortalState.loggedIn = false;
+  inAppPortalState.isExamActive = false;
+  inAppPortalState.pendingAction = null;
+  updateInAppSessionPillUI();
 }
+
+// Terima status sesi secara real-time dari Wrapper Kelas 7/8/9 & GAS V100
+window.addEventListener('message', (ev) => {
+  if (!ev || !ev.data || typeof ev.data !== 'object') return;
+  if (ev.data.type === 'SICIBINAGA_V99_NAV_STATE' && inAppPortalState.isOpen) {
+    inAppPortalState.loggedIn = !!ev.data.loggedIn;
+    inAppPortalState.isExamActive = !!ev.data.isExamActive;
+    inAppPortalState.name = ev.data.name || '';
+    inAppPortalState.kelas = ev.data.kelas || '';
+    inAppPortalState.role = ev.data.role || 'GUEST';
+    updateInAppSessionPillUI();
+  } else if (ev.data.type === 'SICIBINAGA_GO_DASHBOARD' && inAppPortalState.isOpen) {
+    closeInAppView();
+  }
+});
+
+// Tangkap tombol Back Android saat #inAppOverlay terbuka
+window.addEventListener('popstate', () => {
+  if (!inAppPortalState.isOpen) return;
+  if (inAppPortalState.loggedIn || inAppPortalState.isExamActive) {
+    try { history.pushState({ mainInAppGuard: true, ts: Date.now() }, ''); } catch (e) {}
+    const iframe = document.getElementById('inAppIframe');
+    if (iframe && iframe.contentWindow) {
+      try { iframe.contentWindow.postMessage({ type: 'SICIBINAGA_V99_ANDROID_BACK' }, '*'); } catch (e) {}
+    }
+    showInAppExitConfirmModal(() => closeInAppView(), 'Ya, Kembali ke Dashboard Utama');
+  } else {
+    closeInAppView();
+  }
+});
+
+window.addEventListener('beforeunload', (e) => {
+  if (inAppPortalState.isOpen && inAppPortalState.loggedIn) {
+    e.preventDefault();
+    e.returnValue = 'Sesi SICIBINAGA Anda masih aktif.';
+    return e.returnValue;
+  }
+});
 
 function setActiveMobileNav(el) {
   playClickSound();
